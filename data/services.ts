@@ -1,3 +1,5 @@
+import { pricingSummary } from "@/data/pricing";
+
 export type Service = {
   id: "web" | "apps" | "retainer";
   number: string;
@@ -15,9 +17,9 @@ export const services: Service[] = [
     number: "01",
     name: "Website Development",
     shortDescription:
-      "Custom websites and web apps that are fast, SEO-ready, and built to grow with your business. No templates.",
+      "Launch and Scale website packages built for businesses that need a polished, mobile-ready online presence without agency confusion.",
     description: [
-      "We design and build websites that make a business look credible quickly. That can mean a sharp landing page, a brochure-style business website, or a custom web experience that needs more structure than a template can give you.",
+      "We design and build websites that make a business look credible quickly. That can mean a focused Launch package for a smaller brochure site or a broader Scale package when the business needs more depth, content, and visibility.",
       "Every build is scoped around clarity and speed. We handle design direction, copy structure, development, deployment, and post-launch support so the project actually ships instead of dragging on.",
     ],
     includes: [
@@ -31,7 +33,7 @@ export const services: Service[] = [
       "1-3 months post-launch support",
     ],
     timeline: "1-3 weeks",
-    startingPrice: "$469",
+    startingPrice: pricingSummary.launchCombined,
   },
   {
     id: "apps",
@@ -54,14 +56,14 @@ export const services: Service[] = [
       "3 months post-launch support",
     ],
     timeline: "3-6 weeks",
-    startingPrice: "$1,699",
+    startingPrice: "Custom quote",
   },
   {
     id: "retainer",
     number: "03",
     name: "Maintenance & Retainer",
     shortDescription:
-      "Monthly retainer plans so your site stays fast, updated, and secure. We're on call.",
+      "Monthly maintenance and support for businesses that need quick updates, monitoring, and a dependable team after launch.",
     description: [
       "Launch is not the end of the project. Clients usually need updates, small edits, monitoring, and someone dependable when something breaks or needs changing.",
       "Our retainer work keeps things stable without forcing you into a large agency relationship. You get quick support, clear reporting, and a team that already knows the product.",
@@ -75,6 +77,6 @@ export const services: Service[] = [
       "Priority support response",
     ],
     timeline: "Ongoing",
-    startingPrice: "$69/month",
+    startingPrice: pricingSummary.monthlyMaintenanceCombined,
   },
 ];

@@ -18,10 +18,10 @@ export const startSchema = z.object({
     "Not sure yet",
   ]),
   budget: z.enum([
-    "Under INR 15,000 / $200",
-    "INR 15,000-INR 35,000 / $200-$450",
-    "INR 35,000-INR 80,000 / $450-$1,000",
-    "INR 80,000+ / $1,000+",
+    "Under INR 25,000 / $800",
+    "INR 25,000-INR 50,000 / $800-$1,500",
+    "INR 50,000-INR 1,00,000 / $1,500-$3,000",
+    "INR 1,00,000+ / $3,000+",
     "Let's discuss",
   ]),
   timeline: z.enum([

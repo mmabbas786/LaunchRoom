@@ -46,7 +46,7 @@ export function ServicesPreview() {
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   <span className="meta-chip">{service.timeline}</span>
-                  <span className="meta-chip border-accent-border bg-accent-dim text-accent">
+                  <span className="preserve-case meta-chip border-accent-border bg-accent-dim text-accent">
                     {service.startingPrice}
                   </span>
                 </div>

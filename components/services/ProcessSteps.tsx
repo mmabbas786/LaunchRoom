@@ -32,40 +32,48 @@ export function ProcessSteps() {
   return (
     <section className="section-shell">
       <AnimatedSection>
-        <SectionHeader eyebrow="Our process" title="A simple pipeline that clients can actually follow." />
+        <SectionHeader
+          eyebrow="Our process"
+          title="A straightforward path from project brief to launch."
+        />
+        <p className="section-copy">
+          The process stays small on purpose: align on scope, approve the plan,
+          build with regular reviews, then launch with a clean handover.
+        </p>
       </AnimatedSection>
 
-      <AnimatedSection className="horizontal-rail mt-8" delay={0.05}>
+      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {steps.map((step, index) => (
-          <article
-            key={step.number}
-            className={[
-              "horizontal-card w-[min(100%,320px)] p-7 sm:w-[360px]",
-              index === 1 ? "panel-accent" : index === 3 ? "panel-lime" : "panel",
-            ].join(" ")}
-          >
-            <p className={`card-label ${index === 0 || index === 2 ? "" : "text-on-dark-muted"}`}>
-              {step.number}
-            </p>
-            <h3
+          <AnimatedSection key={step.number} delay={0.05 * (index + 1)}>
+            <article
               className={[
-                "mt-4 text-[28px] leading-[1.05]",
-                index === 0 || index === 2 ? "text-text-primary" : "text-on-dark",
+                "h-full p-7",
+                index === 1 ? "panel-accent" : index === 3 ? "panel-lime" : "panel",
               ].join(" ")}
             >
-              {step.title}
-            </h3>
-            <p
-              className={[
-                "mt-4 text-[17px] leading-[1.8]",
-                index === 0 || index === 2 ? "text-text-secondary" : "text-on-dark-muted",
-              ].join(" ")}
-            >
-              {step.description}
-            </p>
-          </article>
+              <p className={`card-label ${index === 0 || index === 2 ? "" : "text-on-dark-muted"}`}>
+                {step.number}
+              </p>
+              <h3
+                className={[
+                  "mt-4 text-[28px] leading-[1.05]",
+                  index === 0 || index === 2 ? "text-text-primary" : "text-on-dark",
+                ].join(" ")}
+              >
+                {step.title}
+              </h3>
+              <p
+                className={[
+                  "mt-4 text-[17px] leading-[1.8]",
+                  index === 0 || index === 2 ? "text-text-secondary" : "text-on-dark-muted",
+                ].join(" ")}
+              >
+                {step.description}
+              </p>
+            </article>
+          </AnimatedSection>
         ))}
-      </AnimatedSection>
+      </div>
     </section>
   );
 }

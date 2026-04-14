@@ -1,5 +1,6 @@
+import { Check } from "lucide-react";
+
 import { Button } from "@/components/ui/Button";
-import { Tag } from "@/components/ui/Tag";
 import type { Service } from "@/data/services";
 import { cn } from "@/lib/utils";
 
@@ -35,13 +36,18 @@ export function ServiceDetail({
       <div className={cn("space-y-6", reverse && "lg:order-1")}>
         <div className="rounded-[22px] border border-accent-border bg-surface-3 p-6 text-on-dark shadow-[0_18px_36px_rgba(232,160,32,0.12)]">
           <p className="card-label text-on-dark-muted">What's included</p>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
             {service.includes.map((item) => (
-              <Tag key={item} className="border-accent-border bg-accent-dim text-on-dark">
-                {item}
-              </Tag>
+              <li key={item} className="flex items-start gap-3">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-accent-border bg-accent-dim text-accent">
+                  <Check className="h-3.5 w-3.5" />
+                </span>
+                <span className="text-[15px] leading-[1.75] text-on-dark">
+                  {item}
+                </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
@@ -52,15 +58,15 @@ export function ServiceDetail({
             </p>
           </div>
           <div className="rounded-[22px] border border-accent-border bg-accent p-5 shadow-[0_16px_30px_rgba(232,160,32,0.18)]">
-            <p className="card-label text-[#080808]">Starting from</p>
-            <p className="mt-3 text-[28px] leading-[1.04] text-[#080808]">
+            <p className="card-label text-[#080808]">Pricing</p>
+            <p className="preserve-case mt-3 text-[28px] leading-[1.04] text-[#080808]">
               {service.startingPrice}
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <Button href="/start">Get a quote</Button>
+          <Button href="/start">Start this project</Button>
           <Button href="/contact" variant="outline">
             Ask a question
           </Button>

@@ -44,18 +44,18 @@ const steps = [
     description: "This helps us scope the right version first.",
     field: "budget" as const,
     options: [
-      { value: "Under INR 15,000 / $200", description: "Small starter scope" },
+      { value: "Under INR 25,000 / $800", description: "Close to the Launch package range" },
       {
-        value: "INR 15,000-INR 35,000 / $200-$450",
-        description: "Lean business website range",
+        value: "INR 25,000-INR 50,000 / $800-$1,500",
+        description: "Fits Launch to Scale website packages",
       },
       {
-        value: "INR 35,000-INR 80,000 / $450-$1,000",
-        description: "Stronger website or MVP scope",
+        value: "INR 50,000-INR 1,00,000 / $1,500-$3,000",
+        description: "For larger website builds or app scope",
       },
       {
-        value: "INR 80,000+ / $1,000+",
-        description: "Bigger app or product build",
+        value: "INR 1,00,000+ / $3,000+",
+        description: "For bigger apps or product work",
       },
       { value: "Let's discuss", description: "You want to talk through options" },
     ],
@@ -98,7 +98,7 @@ export function IntakeForm() {
     resolver: zodResolver(startSchema),
     defaultValues: {
       projectType: "Website",
-      budget: "INR 15,000-INR 35,000 / $200-$450",
+      budget: "INR 25,000-INR 50,000 / $800-$1,500",
       timeline: "1 month",
       projectName: "",
       brief: "",

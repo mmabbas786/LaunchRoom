@@ -9,13 +9,23 @@ import type { FAQItem } from "@/data/faqs";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-export function FAQ({ items }: { items: FAQItem[] }) {
+type FAQProps = {
+  items: FAQItem[];
+  eyebrow?: string;
+  title?: string;
+};
+
+export function FAQ({
+  items,
+  eyebrow = "Questions",
+  title = "Things clients usually want clear before they start.",
+}: FAQProps) {
   const [open, setOpen] = useState<string | null>(items[0]?.question ?? null);
 
   return (
     <section className="section-shell">
       <AnimatedSection>
-        <SectionHeader eyebrow="Questions" title="Things clients usually want clear before they start." />
+        <SectionHeader eyebrow={eyebrow} title={title} />
       </AnimatedSection>
 
       <AnimatedSection className="mt-8 space-y-4" delay={0.05}>

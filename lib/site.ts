@@ -10,6 +10,7 @@ export const siteConfig = {
   playStoreUrl: "https://play.google.com/store",
   navLinks: [
     { href: "/services", label: "Services" },
+    { href: "/pricing", label: "Pricing" },
     { href: "/work", label: "Work" },
     { href: "/apps", label: "Apps" },
     { href: "/about", label: "About" },

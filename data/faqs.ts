@@ -1,3 +1,5 @@
+import { pricingSummary } from "@/data/pricing";
+
 export type FAQItem = {
   question: string;
   answer: string;
@@ -27,12 +29,12 @@ export const serviceFaqs: FAQItem[] = [
   {
     question: "Do you offer revisions?",
     answer:
-      "Every project includes 2 rounds of revisions. Additional rounds are billed at INR 2,000/hr (international clients: $30/hr).",
+      `Revisions depend on the selected package or proposal. Scale includes 2 free revisions, and extra revisions are available as an add-on at ${pricingSummary.extraRevisionCombined} each.`,
   },
   {
     question: "What happens after launch?",
     answer:
-      "We offer monthly retainer plans starting at INR 5,000/month. You also receive full source code and credentials at handover - no lock-in.",
+      `Launch includes 1 month of support and Scale includes 3 months. Ongoing monthly maintenance starts at ${pricingSummary.monthlyMaintenance.INR.replace("/mo", " per month")} in India or ${pricingSummary.monthlyMaintenance.USD.replace("/mo", " per month")} internationally, and you receive full source code and credentials at handover.`,
   },
 ];
 
@@ -50,5 +52,38 @@ export const quickContactFaqs: FAQItem[] = [
   {
     question: "Do you sign NDAs?",
     answer: "Yes, always. Mutual NDA available on request.",
+  },
+];
+
+export const pricingFaqs: FAQItem[] = [
+  {
+    question: "Which package is better for a small business website?",
+    answer:
+      "Launch is ideal for a focused brochure-style website up to 5 pages. Scale is better when you want a fuller digital presence with branding, analytics, content support, and longer post-launch help.",
+  },
+  {
+    question: "Can I pay in Indian rupees or US dollars?",
+    answer:
+      "Yes. Indian clients usually pay in Indian rupees, while international clients can be billed in US dollars. The final proposal confirms the agreed billing currency before work starts.",
+  },
+  {
+    question: "Do these prices include domain and hosting?",
+    answer:
+      "The package includes domain and hosting setup. Third-party costs such as domain registration, hosting renewals, premium plugins, or paid tools are billed at actuals unless they are clearly included in the quote.",
+  },
+  {
+    question: "What if I need e-commerce or more than 10 pages?",
+    answer:
+      "That can be added through the listed add-ons or turned into a custom scope if the project grows beyond the standard package limits.",
+  },
+  {
+    question: "How do revisions and support work after launch?",
+    answer:
+      "Scale includes 2 free revisions and 3 months of support. Launch includes 1 month of support, and extra revisions or monthly maintenance can be added separately when needed.",
+  },
+  {
+    question: "Can I upgrade from Launch to Scale later?",
+    answer:
+      "Yes. If the scope expands during the project, we can upgrade the package and adjust the quote before the added work begins.",
   },
 ];

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { pricingSummary } from "@/data/pricing";
+
 export const metadata: Metadata = {
   title: "Terms of Service — Launchroom",
   description: "Terms of service for Launchroom web development, app development, and support work.",
@@ -29,9 +31,10 @@ export default function TermsPage() {
 
         <h2>Revisions</h2>
         <p>
-          Two rounds of revisions are included in standard project pricing.
-          Additional revisions are billed at INR 2,000/hr or $30/hr for
-          international clients.
+          Revisions depend on the selected package or written proposal. Scale
+          includes 2 free revisions. Additional revisions are billed separately
+          at {pricingSummary.extraRevisionCombined} each unless otherwise agreed
+          in writing.
         </p>
 
         <h2>Intellectual Property</h2>
