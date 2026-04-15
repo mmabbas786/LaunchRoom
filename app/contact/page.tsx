@@ -1,22 +1,29 @@
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/contact/ContactForm";
+import { ProjectWhatsAppSelector } from "@/components/contact/ProjectWhatsAppSelector";
+import { Button } from "@/components/ui/Button";
 import { ISTClock } from "@/components/contact/ISTClock";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { quickContactFaqs } from "@/data/faqs";
 import { siteConfig } from "@/lib/site";
+import { getWhatsAppHref } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
-  title: "Contact — Launchroom",
+  title: "Contact — LaunchRoom",
   description:
-    "Contact Launchroom for websites, Android apps, retainers, and project proposals.",
+    "Contact LaunchRoom for websites, Android apps, retainers, and project proposals.",
 };
+
+const whatsappHref = getWhatsAppHref(
+  "Hello LaunchRoom, I want to discuss website or app development.",
+);
 
 export default function ContactPage() {
   return (
     <div className="page-shell">
       <section className="section-shell">
-        <AnimatedSection className="grid gap-5 xl:grid-cols-[1.08fr_0.92fr]">
+        <AnimatedSection className="grid items-start gap-5 xl:grid-cols-[1.08fr_0.92fr]">
           <div className="panel-dark p-7 sm:p-9 lg:p-12">
             <p className="eyebrow eyebrow-invert">
               Contact
@@ -38,7 +45,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="page-card-grid sm:grid-cols-2">
             <InfoCard
               label="Email"
               value={siteConfig.email}
@@ -48,7 +55,7 @@ export default function ContactPage() {
             <InfoCard
               label="WhatsApp"
               value={siteConfig.phone}
-              href={`https://wa.me/${siteConfig.phone.replace(/\D/g, "")}`}
+              href={whatsappHref}
               accent
             />
             <div className="sm:col-span-2">
@@ -59,9 +66,9 @@ export default function ContactPage() {
       </section>
 
       <section className="pb-20 lg:pb-28">
-        <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
+        <div className="grid items-start gap-6 xl:grid-cols-[0.9fr_1.1fr]">
           <AnimatedSection className="space-y-5">
-            <div className="panel p-7">
+            <div className="page-card-roomy panel h-auto">
               <p className="card-label">What to include</p>
               <ul className="mt-5 space-y-3">
                 {[
@@ -78,7 +85,7 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            <div className="panel-lime p-7">
+            <div className="page-card-roomy panel-lime h-auto">
               <p className="card-label text-on-dark-muted">Availability</p>
               <p className="mt-4 text-[18px] leading-[1.8] text-on-dark-muted">
                 Mon-Sat, 10 AM to 8 PM IST. For urgent matters, WhatsApp is usually
@@ -87,7 +94,24 @@ export default function ContactPage() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.05}>
+          <AnimatedSection className="space-y-5" delay={0.05}>
+            <div className="page-card-roomy panel-accent h-auto">
+              <p className="card-label text-text-primary">Primary contact</p>
+              <h2 className="mt-4 text-[clamp(28px,3vw,40px)] leading-[1.06] text-text-primary">
+                Need the fastest reply?
+              </h2>
+              <p className="mt-4 text-[17px] leading-[1.8] text-text-secondary">
+                Pick website development, app development, or both. We&apos;ll open
+                WhatsApp with the right inquiry message already filled in.
+              </p>
+              <ProjectWhatsAppSelector />
+              <div className="mt-6">
+                <Button href="/start" variant="outline" className="w-full justify-center sm:w-auto">
+                  Send a full brief instead
+                </Button>
+              </div>
+            </div>
+
             <ContactForm />
           </AnimatedSection>
         </div>
@@ -125,12 +149,12 @@ function InfoCard({
   accent?: boolean;
   preserveValueCase?: boolean;
 }) {
-  const className = accent ? "panel-accent p-6" : "panel p-6";
+  const className = accent ? "page-card panel-accent" : "page-card panel";
   const textClass = accent ? "text-text-primary" : "text-text-primary";
   const valueClassName = preserveValueCase ? "preserve-case" : "";
 
   return (
-    <div className={className}>
+    <div className={`${className} flex h-full flex-col`}>
       <p className={`card-label ${accent ? "text-text-primary" : ""}`}>{label}</p>
       {href ? (
         <a

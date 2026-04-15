@@ -1,4 +1,5 @@
 import { pricingSummary } from "@/data/pricing";
+import type { CurrencyAmount } from "@/data/pricing";
 
 export type Service = {
   id: "web" | "apps" | "retainer";
@@ -8,7 +9,7 @@ export type Service = {
   description: string[];
   includes: string[];
   timeline: string;
-  startingPrice: string;
+  startingPrice: CurrencyAmount;
 };
 
 export const services: Service[] = [
@@ -33,7 +34,7 @@ export const services: Service[] = [
       "1-3 months post-launch support",
     ],
     timeline: "1-3 weeks",
-    startingPrice: pricingSummary.launchCombined,
+    startingPrice: pricingSummary.launch,
   },
   {
     id: "apps",
@@ -42,7 +43,7 @@ export const services: Service[] = [
     shortDescription:
       "Android apps built with Flutter. From idea to Play Store, fully managed.",
     description: [
-      "Launchroom builds Android/IOS apps for startups, experiments, and businesses that need something practical on the Play Store without hiring a big team.",
+      "LaunchRoom builds Android/IOS apps for startups, experiments, and businesses that need something practical on the Play Store without hiring a big team.",
       "We help with product framing, UI, development, release setup, monetisation, and handover. The goal is to launch a version people can actually use and iterate on, not to overbuild before day one.",
     ],
     includes: [
@@ -56,7 +57,10 @@ export const services: Service[] = [
       "3 months post-launch support",
     ],
     timeline: "3-6 weeks",
-    startingPrice: "Custom quote",
+    startingPrice: {
+      INR: "Custom quote",
+      USD: "Custom quote",
+    },
   },
   {
     id: "retainer",
@@ -77,6 +81,6 @@ export const services: Service[] = [
       "Priority support response",
     ],
     timeline: "Ongoing",
-    startingPrice: pricingSummary.monthlyMaintenanceCombined,
+    startingPrice: pricingSummary.monthlyMaintenance,
   },
 ];

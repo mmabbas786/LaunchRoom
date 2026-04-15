@@ -15,12 +15,16 @@ export function WorkPreview() {
         </h2>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-10 grid gap-5 lg:grid-cols-3" delay={0.05}>
+      <AnimatedSection className="page-card-grid mt-10 lg:grid-cols-3" delay={0.05}>
         {projects.map((project, index) => (
           <Link
             key={project.slug}
             href={`/work/${project.slug}`}
-            className={index === 1 ? "panel-accent panel-hover overflow-hidden" : "panel panel-hover overflow-hidden"}
+            className={
+              index === 1
+                ? "panel-accent panel-hover equal-height-card overflow-hidden"
+                : "panel panel-hover equal-height-card overflow-hidden"
+            }
           >
             <div className="p-4">
               <div
@@ -33,7 +37,7 @@ export function WorkPreview() {
             <div className="px-6 pb-7">
               <p className="card-label">{project.category}</p>
               <h3 className="mt-3 text-[28px] leading-[1.08]">{project.name}</h3>
-              <p className="mt-3 text-[15px] leading-[1.8] text-text-secondary">
+              <p className="mt-3 flex-1 text-[15px] leading-[1.8] text-text-secondary">
                 {project.desc}
               </p>
             </div>

@@ -1,5 +1,6 @@
 import { Layers3, MonitorSmartphone, ShieldCheck } from "lucide-react";
 
+import type { SupportedCurrency } from "@/data/pricing";
 import { services } from "@/data/services";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
@@ -11,7 +12,7 @@ const icons = {
   retainer: ShieldCheck,
 };
 
-export function ServicesPreview() {
+export function ServicesPreview({ currency }: { currency: SupportedCurrency }) {
   return (
     <section className="page-shell section-shell">
       <AnimatedSection className="text-center">
@@ -21,14 +22,18 @@ export function ServicesPreview() {
         </h2>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-10 grid gap-5 lg:grid-cols-3" delay={0.05}>
+      <AnimatedSection className="page-card-grid mt-10 lg:grid-cols-3" delay={0.05}>
         {services.map((service, index) => {
           const Icon = icons[service.id];
 
           return (
             <article
               key={service.id}
-              className={index === 1 ? "panel-accent relative overflow-hidden p-7" : "panel relative overflow-hidden p-7"}
+              className={
+                index === 1
+                  ? "page-card-roomy panel-accent relative overflow-hidden"
+                  : "page-card-roomy panel relative overflow-hidden"
+              }
             >
               <div className="pointer-events-none absolute right-[-42px] top-[-42px] h-28 w-28 rounded-full bg-[rgba(232,160,32,0.08)] blur-[10px]" />
               <div className="relative">
@@ -40,14 +45,14 @@ export function ServicesPreview() {
                 </div>
 
                 <h3 className="mt-6 text-[28px] leading-[1.08]">{service.name}</h3>
-                <p className="mt-4 min-h-[110px] text-[15px] leading-[1.8] text-text-secondary">
+                <p className="mt-4 flex-1 text-[15px] leading-[1.8] text-text-secondary">
                   {service.shortDescription}
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   <span className="meta-chip">{service.timeline}</span>
                   <span className="preserve-case meta-chip border-accent-border bg-accent-dim text-accent">
-                    {service.startingPrice}
+                    {service.startingPrice[currency]}
                   </span>
                 </div>
               </div>

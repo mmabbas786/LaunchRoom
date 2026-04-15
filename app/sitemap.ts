@@ -1,15 +1,17 @@
 import type { MetadataRoute } from "next";
 
 import { projects } from "@/data/projects";
+import { demos } from "@/lib/demos";
 import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
+    "/blog",
     "/services",
     "/pricing",
     "/work",
-    "/apps",
+    "/demos",
     "/about",
     "/contact",
     "/start",
@@ -25,5 +27,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  return [...routes, ...projectRoutes];
+  const demoRoutes = demos.map((demo) => ({
+    url: `${siteConfig.url}/demos/${demo.slug}`,
+    lastModified: new Date(),
+  }));
+
+  return [...routes, ...projectRoutes, ...demoRoutes];
 }

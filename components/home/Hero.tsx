@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles, Wand2 } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
+import { services } from "@/data/services";
+import { demos } from "@/lib/demos";
+import { siteConfig } from "@/lib/site";
 
 const item = {
   hidden: { opacity: 0, y: 28 },
@@ -14,11 +17,13 @@ const item = {
   }),
 };
 
+const websiteService = services.find((service) => service.id === "web");
+
 const stats = [
-  { value: "8+", label: "Apps On Play Store" },
-  { value: "12+", label: "Happy Clients" },
   { value: "2", label: "Founders" },
-  { value: "100%", label: "Remote-Ready" },
+  { value: `${demos.length}`, label: "Niche Demos Built" },
+  { value: websiteService?.timeline ?? "1-3 weeks", label: "Website Launch Range" },
+  { value: "<24h", label: "Weekday Reply Goal" },
 ];
 
 export function Hero() {
@@ -43,7 +48,7 @@ export function Hero() {
             variants={item}
             custom={0.1}
           >
-            Web &amp; App Studio · West Bengal, India
+            {siteConfig.studioLabel}
           </motion.p>
 
           <motion.h1

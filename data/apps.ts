@@ -10,6 +10,15 @@ export type AppItem = {
   playUrl: string | null;
 };
 
+export const pdfVaultFeatures = [
+  "Compress",
+  "Merge",
+  "Split",
+  "Scan",
+  "Sign",
+  "Convert",
+] as const;
+
 export const apps: AppItem[] = [
   {
     name: "PDF Vault",
@@ -18,7 +27,7 @@ export const apps: AppItem[] = [
     status: "live",
     iconBg: "#1a1f2e",
     iconEmoji: "📄",
-    playUrl: "https://play.google.com/store",
+    playUrl: "https://play.google.com/store/apps/developer?id=Launchroom",
   },
   {
     name: "Roast My IPL",
@@ -27,15 +36,6 @@ export const apps: AppItem[] = [
     status: "soon",
     iconBg: "#1f1a0a",
     iconEmoji: "🏏",
-    playUrl: null,
-  },
-  {
-    name: "Your next app",
-    category: "Utility",
-    desc: "Next app in the pipeline. Stay tuned.",
-    status: "dev",
-    iconBg: "#0a1f14",
-    iconEmoji: "⚡",
     playUrl: null,
   },
 ];

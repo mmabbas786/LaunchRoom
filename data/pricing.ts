@@ -1,6 +1,7 @@
 import { siteConfig } from "@/lib/site";
 
 export type SupportedCurrency = "INR" | "USD";
+export type CurrencyAmount = Record<SupportedCurrency, string>;
 
 export type PricingPlan = {
   name: string;
@@ -28,19 +29,16 @@ export const pricingData: Record<SupportedCurrency, PricingCurrencyData> = {
     launch: {
       name: "LAUNCH",
       price: "₹24,999",
-      tagline: "Get Your Business Online Today",
+      tagline: "A focused website package for a clean first launch",
       features: [
-        "Upto 5 Pages",
-        "Mobile Responsive Design",
-        "Contact Form",
-        "WhatsApp Button Integration",
-        "Google Maps Integration",
+        "5 Pages Website",
+        "Mobile-Optimized Design",
+        "Lead Capture System",
+        "WhatsApp Integration",
         "Basic SEO Setup",
-        "Social Media Links",
-        "SSL Certificate",
-        "Fast Loading Website",
-        "1 Month Free Support",
+        "Fast, Secure Website",
         "Domain + Hosting Setup",
+        "1 Month Support",
       ],
       whatsapp:
         "Hi, I am interested in the Launch package (₹24,999). Please share more details.",
@@ -49,21 +47,18 @@ export const pricingData: Record<SupportedCurrency, PricingCurrencyData> = {
     scale: {
       name: "SCALE",
       price: "₹44,999",
-      tagline: "Complete Digital Presence",
+      tagline: "A stronger package for visibility, branding, and growth",
       popular: true,
       features: [
-        "Upto 10 Pages",
         "Everything in Launch",
-        "Logo Design",
-        "Google My Business Setup",
-        "Advanced SEO Setup",
-        "Google Analytics Setup",
+        "Up to 10 Pages",
+        "Logo + Branding",
+        "Google Business Setup",
+        "Analytics + Tracking",
+        "Advanced SEO",
+        "Conversion Strategy",
         "Speed Optimization",
-        "Basic Content Writing",
-        "3 Months Free Support",
-        "2 Free Revisions",
-        "Social Media Setup",
-        "Priority Support",
+        "3 Months Priority Support",
       ],
       whatsapp:
         "Hi, I am interested in the Scale package (₹44,999). Please share more details.",
@@ -85,19 +80,16 @@ export const pricingData: Record<SupportedCurrency, PricingCurrencyData> = {
     launch: {
       name: "LAUNCH",
       price: "$799",
-      tagline: "Get Your Business Online Today",
+      tagline: "A focused website package for a clean first launch",
       features: [
-        "Upto 5 Pages",
-        "Mobile Responsive Design",
-        "Contact Form",
-        "WhatsApp Button Integration",
-        "Google Maps Integration",
+        "5 Pages Website",
+        "Mobile-Optimized Design",
+        "Lead Capture System",
+        "WhatsApp Integration",
         "Basic SEO Setup",
-        "Social Media Links",
-        "SSL Certificate",
-        "Fast Loading Website",
-        "1 Month Free Support",
+        "Fast, Secure Website",
         "Domain + Hosting Setup",
+        "1 Month Support",
       ],
       whatsapp:
         "Hi, I am interested in the Launch package ($799). Please share more details.",
@@ -106,21 +98,18 @@ export const pricingData: Record<SupportedCurrency, PricingCurrencyData> = {
     scale: {
       name: "SCALE",
       price: "$1,499",
-      tagline: "Complete Digital Presence",
+      tagline: "A stronger package for visibility, branding, and growth",
       popular: true,
       features: [
-        "Upto 10 Pages",
         "Everything in Launch",
-        "Logo Design",
-        "Google My Business Setup",
-        "Advanced SEO Setup",
-        "Google Analytics Setup",
+        "Up to 10 Pages",
+        "Logo + Branding",
+        "Google Business Setup",
+        "Analytics + Tracking",
+        "Advanced SEO",
+        "Conversion Strategy",
         "Speed Optimization",
-        "Basic Content Writing",
-        "3 Months Free Support",
-        "2 Free Revisions",
-        "Social Media Setup",
-        "Priority Support",
+        "3 Months Priority Support",
       ],
       whatsapp:
         "Hi, I am interested in the Scale package ($1,499). Please share more details.",
@@ -154,23 +143,23 @@ export const pricingSummary = {
   launch: {
     INR: pricingData.INR.launch.price,
     USD: pricingData.USD.launch.price,
-  },
+  } satisfies CurrencyAmount,
   scale: {
     INR: pricingData.INR.scale.price,
     USD: pricingData.USD.scale.price,
-  },
+  } satisfies CurrencyAmount,
   monthlyMaintenance: {
     INR: getAddonPrice("INR", "Monthly Maintenance"),
     USD: getAddonPrice("USD", "Monthly Maintenance"),
-  },
+  } satisfies CurrencyAmount,
   extraRevision: {
     INR: getAddonPrice("INR", "Extra Revision"),
     USD: getAddonPrice("USD", "Extra Revision"),
-  },
-  launchCombined: `${pricingData.INR.launch.price} / ${pricingData.USD.launch.price}`,
-  scaleCombined: `${pricingData.INR.scale.price} / ${pricingData.USD.scale.price}`,
-  monthlyMaintenanceCombined: `${getAddonPrice("INR", "Monthly Maintenance")} / ${getAddonPrice("USD", "Monthly Maintenance")}`,
-  extraRevisionCombined: `${getAddonPrice("INR", "Extra Revision")} / ${getAddonPrice("USD", "Extra Revision")}`,
+  } satisfies CurrencyAmount,
 };
 
 export const whatsappNumber = siteConfig.phone.replace(/\D/g, "");
+
+export function formatRecurringPrice(price: string) {
+  return price.replace("/mo", " per month");
+}

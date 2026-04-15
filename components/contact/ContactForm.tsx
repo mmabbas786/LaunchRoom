@@ -1,25 +1,20 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Loader2, MessageCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/Button";
-import {
-  buildContactWhatsAppMessage,
-  getWhatsAppHref,
-} from "@/lib/whatsapp";
 import type { ContactInput } from "@/lib/validation";
 import { contactSchema } from "@/lib/validation";
 
-type SubmitState = "idle" | "success" | "whatsapp" | "error";
+type SubmitState = "idle" | "success" | "error";
 
 export function ContactForm() {
   const [state, setState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [whatsappHref, setWhatsappHref] = useState("");
 
   const {
     register,
@@ -48,28 +43,25 @@ export function ContactForm() {
         body: JSON.stringify(values),
       });
 
+      const result = (await response.json()) as {
+        success?: boolean;
+        error?: string;
+      };
+
       if (!response.ok) {
-        throw new Error("Request failed");
+        throw new Error(result.error || "Request failed");
       }
 
       setState("success");
       reset();
-    } catch {
+    } catch (error) {
       setState("error");
-      setErrorMessage("Something went wrong. Please email us directly.");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
     }
-  });
-
-  const onWhatsApp = handleSubmit((values) => {
-    setState("idle");
-    setErrorMessage("");
-
-    const href = getWhatsAppHref(buildContactWhatsAppMessage(values));
-    setWhatsappHref(href);
-
-    window.open(href, "_blank", "noopener,noreferrer");
-    setState("whatsapp");
-    reset();
   });
 
   return (
@@ -124,52 +116,34 @@ export function ContactForm() {
           )}
         </Button>
 
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full justify-center"
-          onClick={onWhatsApp}
-          disabled={isSubmitting}
-        >
-          <MessageCircle className="h-4 w-4" />
-          Send on WhatsApp
-        </Button>
-
         {state === "success" ? (
           <div className="rounded-[18px] border border-accent-border bg-accent-dim px-4 py-3 text-[15px] font-semibold text-text-primary">
             <div className="flex items-start gap-3">
               <CheckCircle2 className="mt-0.5 h-5 w-5" />
-              <span>We got your message. We&apos;ll reply within 24 hours.</span>
-            </div>
-          </div>
-        ) : null}
-
-        {state === "whatsapp" ? (
-          <div className="rounded-[18px] border border-accent-border bg-accent-dim px-4 py-3 text-[15px] font-semibold text-text-primary">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-0.5 h-5 w-5" />
-              <div>
-                <span className="block">
-                  WhatsApp opened with your prefilled message. Hit send there and
-                  we&apos;ll pick it up.
-                </span>
-                {whatsappHref ? (
-                  <a
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-flex text-[14px] font-medium text-accent"
-                  >
-                    Open WhatsApp again
-                  </a>
-                ) : null}
-              </div>
+              <span>Message sent! We&apos;ll reply within 24 hours.</span>
             </div>
           </div>
         ) : null}
 
         {state === "error" ? (
-          <p className="text-sm text-red-500">{errorMessage}</p>
+          <div className="rounded-[18px] border border-[rgba(255,107,107,0.28)] bg-[rgba(255,107,107,0.08)] px-4 py-3 text-[15px] text-text-primary">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="mt-0.5 h-5 w-5 text-[#ff8f8f]" />
+              <div className="space-y-3">
+                <p>{errorMessage}</p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setState("idle");
+                    setErrorMessage("");
+                  }}
+                  className="text-[14px] font-semibold text-accent hover:text-text-primary"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
+          </div>
         ) : null}
       </div>
     </form>

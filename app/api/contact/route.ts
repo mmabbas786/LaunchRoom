@@ -23,14 +23,14 @@ export async function POST(req: Request) {
 
     if (!parsed.success) {
       return Response.json(
-        { ok: false, error: "Invalid contact form payload." },
+        { error: "Please fill in all required contact form fields." },
         { status: 400 },
       );
     }
 
     if (!resend) {
       return Response.json(
-        { ok: false, error: "Email service not configured." },
+        { error: "RESEND_API_KEY is not configured on the server." },
         { status: 500 },
       );
     }
@@ -38,11 +38,12 @@ export async function POST(req: Request) {
     const { name, email, company, subject, message } = parsed.data;
 
     await resend.emails.send({
-      from: "Launchroom Website <noreply@launchroom.in>",
+      from: process.env.RESEND_FROM_EMAIL || "LaunchRoom Contact <onboarding@resend.dev>",
       to: siteConfig.email,
+      reply_to: email,
       subject: `New contact: ${subject} from ${name}`,
       html: `
-        <h2>New Launchroom contact form submission</h2>
+        <h2>New LaunchRoom contact form submission</h2>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Company:</strong> ${escapeHtml(company || "N/A")}</p>
@@ -52,10 +53,15 @@ export async function POST(req: Request) {
       `,
     });
 
-    return Response.json({ ok: true });
-  } catch {
+    return Response.json({ success: true });
+  } catch (error) {
     return Response.json(
-      { ok: false, error: "Something went wrong." },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong while sending the email.",
+      },
       { status: 500 },
     );
   }

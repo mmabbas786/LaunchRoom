@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import type { SupportedCurrency } from "@/data/pricing";
+
 export const contactSchema = z.object({
   name: z.string().min(2, "Please enter your name."),
   email: z.string().email("Please enter a valid email address."),
@@ -10,6 +12,70 @@ export const contactSchema = z.object({
 
 export type ContactInput = z.infer<typeof contactSchema>;
 
+export const startBudgetOptionsByCurrency: Record<
+  SupportedCurrency,
+  ReadonlyArray<{ value: StartBudget; description: string }>
+> = {
+  INR: [
+    {
+      value: "Under INR 25,000",
+      description: "Close to the Launch package range",
+    },
+    {
+      value: "INR 25,000-INR 50,000",
+      description: "Fits Launch to Scale website packages",
+    },
+    {
+      value: "INR 50,000-INR 1,00,000",
+      description: "For larger website builds or app scope",
+    },
+    {
+      value: "INR 1,00,000+",
+      description: "For bigger apps or product work",
+    },
+    {
+      value: "Let's discuss",
+      description: "You want to talk through options",
+    },
+  ],
+  USD: [
+    {
+      value: "Under $800",
+      description: "Close to the Launch package range",
+    },
+    {
+      value: "$800-$1,500",
+      description: "Fits Launch to Scale website packages",
+    },
+    {
+      value: "$1,500-$3,000",
+      description: "For larger website builds or app scope",
+    },
+    {
+      value: "$3,000+",
+      description: "For bigger apps or product work",
+    },
+    {
+      value: "Let's discuss",
+      description: "You want to talk through options",
+    },
+  ],
+};
+
+export const startBudgetValues = [
+  "Under INR 25,000",
+  "INR 25,000-INR 50,000",
+  "INR 50,000-INR 1,00,000",
+  "INR 1,00,000+",
+  "Under $800",
+  "$800-$1,500",
+  "$1,500-$3,000",
+  "$3,000+",
+  "Let's discuss",
+] as const;
+
+export type StartBudget = (typeof startBudgetValues)[number];
+
 export const startSchema = z.object({
   projectType: z.enum([
     "Website",
@@ -17,13 +83,7 @@ export const startSchema = z.object({
     "Both website + app",
     "Not sure yet",
   ]),
-  budget: z.enum([
-    "Under INR 25,000 / $800",
-    "INR 25,000-INR 50,000 / $800-$1,500",
-    "INR 50,000-INR 1,00,000 / $1,500-$3,000",
-    "INR 1,00,000+ / $3,000+",
-    "Let's discuss",
-  ]),
+  budget: z.enum(startBudgetValues),
   timeline: z.enum([
     "ASAP (within 2 weeks)",
     "1 month",
@@ -53,11 +113,14 @@ export const startSchema = z.object({
   referralSource: z.enum([
     "Google",
     "Referral",
+    "Demo library",
     "Social media",
     "Upwork",
     "Fiverr",
     "Other",
   ]),
+  demoNiche: z.string().optional(),
+  sourceRef: z.string().optional(),
 });
 
 export type StartInput = z.infer<typeof startSchema>;

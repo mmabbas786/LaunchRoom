@@ -18,7 +18,7 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <>
       <FilterBar active={activeFilter} onChange={setActiveFilter} />
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="equal-height-grid lg:grid-cols-2">
         {filteredProjects.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}

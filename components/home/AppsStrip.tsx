@@ -40,8 +40,8 @@ export function AppsStrip() {
               View all apps on Google Play
             </a>
 
-            <Button href="/apps" variant="ghost">
-              See all apps
+            <Button href="/work" variant="ghost">
+              See app work
             </Button>
           </div>
         </AnimatedSection>

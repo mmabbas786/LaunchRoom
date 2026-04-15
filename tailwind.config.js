@@ -16,6 +16,7 @@ module.exports = {
         "surface-2": "var(--surface-2)",
         "surface-3": "var(--surface-3)",
         accent: "var(--accent)",
+        gold: "#d4a843",
         "accent-dim": "var(--accent-dim)",
         support: "var(--support)",
         "on-dark": "var(--on-dark)",

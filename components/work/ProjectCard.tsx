@@ -9,7 +9,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="panel panel-hover block overflow-hidden"
+      className="panel panel-hover equal-height-card block"
     >
       <div
         className="flex h-[220px] items-center justify-center border-b-2 border-black text-6xl"
@@ -18,7 +18,7 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.thumbEmoji}
       </div>
 
-      <div className="p-7 sm:p-8">
+      <div className="equal-height-card-body">
         <Badge className="mb-5">{project.category}</Badge>
         <h3 className="text-[30px] leading-[1.04]">{project.name}</h3>
         <p className="mt-4 text-[17px] leading-[1.8]">{project.desc}</p>
@@ -27,7 +27,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <Tag key={tag}>{tag}</Tag>
           ))}
         </div>
-        <span className="mt-7 inline-flex text-[15px] font-semibold text-accent">
+        <span className="mt-auto pt-7 inline-flex text-[15px] font-semibold text-accent">
           View case study →
         </span>
       </div>

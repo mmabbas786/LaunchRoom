@@ -51,7 +51,7 @@ export function AppCard({
 
       <div className="mt-6 flex flex-wrap gap-2">
         <span className="meta-chip">Android-first</span>
-        <span className="meta-chip">Launchroom build</span>
+        <span className="meta-chip">LaunchRoom build</span>
       </div>
 
       {!compact && app.playUrl ? (

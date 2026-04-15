@@ -48,8 +48,8 @@ export const projects: Project[] = [
     ],
     summary:
       "A fast, credible web presence for a Kolkata ship chandling business serving international buyers.",
-    liveUrl: null,
-    liveLabel: "Project available on request",
+    liveUrl: "https://newindiastores.com/",
+    liveLabel: "Visit live website",
   },
   {
     slug: "pdf-vault",
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     role: "Full development & Play Store management",
     tech: ["Flutter", "Dart", "AdMob", "MediaStore API", "Android"],
     overview:
-      "PDF Vault is a personal product and one of Launchroom's strongest proof points for Android shipping. It combines six common PDF actions into one straightforward utility app.",
+      "PDF Vault is a personal product and one of LaunchRoom's strongest proof points for Android shipping. It combines six common PDF actions into one straightforward utility app.",
     problem:
       "Many PDF apps on the Play Store are bloated, overly aggressive with ads, or lock basic features behind subscriptions. Users need a simple, useful PDF tool that feels practical on Android.",
     solution:
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     ],
     summary:
       "A utility-first Android product built around real PDF workflows and repeatable Play Store shipping.",
-    liveUrl: "https://play.google.com/store",
+    liveUrl: "https://play.google.com/store/apps/developer?id=Launchroom",
     liveLabel: "View on Play Store",
   },
   {
@@ -93,7 +93,7 @@ export const projects: Project[] = [
     role: "Concept, product direction & frontend",
     tech: ["Next.js", "AI APIs", "Tailwind CSS"],
     overview:
-      "Roast My IPL is an internal Launchroom experiment exploring fast-moving sports content, shareable interactions, and lightweight AI entertainment products.",
+      "Roast My IPL is an internal LaunchRoom experiment exploring fast-moving sports content, shareable interactions, and lightweight AI entertainment products.",
     problem:
       "Seasonal content projects move quickly. The challenge is creating something fun enough to spread while still being cheap and fast to build.",
     solution:

@@ -1,14 +1,17 @@
 import { Check } from "lucide-react";
 
+import type { SupportedCurrency } from "@/data/pricing";
 import { Button } from "@/components/ui/Button";
 import type { Service } from "@/data/services";
 import { cn } from "@/lib/utils";
 
 export function ServiceDetail({
   service,
+  currency,
   reverse = false,
 }: {
   service: Service;
+  currency: SupportedCurrency;
   reverse?: boolean;
 }) {
   return (
@@ -50,24 +53,24 @@ export function ServiceDetail({
           </ul>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-[22px] border border-border bg-surface-2 p-5 shadow-[0_16px_30px_rgba(0,0,0,0.22)]">
+        <div className="equal-height-grid sm:grid-cols-2">
+          <div className="flex h-full flex-col rounded-[22px] border border-border bg-surface-2 p-5 shadow-[0_16px_30px_rgba(0,0,0,0.22)]">
             <p className="card-label text-on-dark-muted">Timeline</p>
             <p className="mt-3 text-[28px] leading-[1.04] text-on-dark">
               {service.timeline}
             </p>
           </div>
-          <div className="rounded-[22px] border border-accent-border bg-accent p-5 shadow-[0_16px_30px_rgba(232,160,32,0.18)]">
+          <div className="flex h-full flex-col rounded-[22px] border border-accent-border bg-accent p-5 shadow-[0_16px_30px_rgba(232,160,32,0.18)]">
             <p className="card-label text-[#080808]">Pricing</p>
             <p className="preserve-case mt-3 text-[28px] leading-[1.04] text-[#080808]">
-              {service.startingPrice}
+              {service.startingPrice[currency]}
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap gap-4">
           <Button href="/start">Start this project</Button>
-          <Button href="/contact" variant="outline">
+          <Button href="/start" variant="outline">
             Ask a question
           </Button>
         </div>

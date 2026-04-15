@@ -3,16 +3,15 @@ import type { ReactNode } from "react";
 
 import "@/app/globals.css";
 
-import { Footer } from "@/components/layout/Footer";
-import { Nav } from "@/components/layout/Nav";
-import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { SiteChrome } from "@/components/layout/SiteChrome";
+import { VisitorPreferencesProvider } from "@/components/providers/VisitorPreferencesProvider";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Launchroom — Web & App Studio, Kolkata",
-    template: "%s | Launchroom",
+    default: "LaunchRoom Tech Solutions, India",
+    template: "%s | LaunchRoom",
   },
   description: siteConfig.description,
   keywords: [
@@ -45,13 +44,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="site-copy-capitalize min-h-screen bg-bg text-text-primary">
-        <div className="flex min-h-screen flex-col">
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <WhatsAppButton />
-          <Footer />
-        </div>
+      <body className="min-h-screen bg-bg text-text-primary">
+        <VisitorPreferencesProvider>
+          <SiteChrome>{children}</SiteChrome>
+        </VisitorPreferencesProvider>
       </body>
     </html>
   );

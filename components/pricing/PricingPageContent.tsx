@@ -2,9 +2,9 @@
 
 import { pricingFaqs } from "@/data/faqs";
 import { pricingData } from "@/data/pricing";
-import { useCurrency } from "@/hooks/useCurrency";
 
 import { CTABand } from "@/components/layout/CTABand";
+import { useVisitorPreferences } from "@/components/providers/VisitorPreferencesProvider";
 import { AddonsSection } from "@/components/pricing/AddonsSection";
 import { PricingCard } from "@/components/pricing/PricingCard";
 import { PricingHero } from "@/components/pricing/PricingHero";
@@ -40,7 +40,12 @@ const paymentTerms = [
 ];
 
 export function PricingPageContent() {
-  const { currency, isLoading, setCurrency } = useCurrency();
+  const {
+    currency,
+    locationPricingStatus,
+    currencyPreferenceSource,
+    setCurrencyPreference,
+  } = useVisitorPreferences();
   const currentPricing = pricingData[currency];
 
   return (
@@ -49,8 +54,9 @@ export function PricingPageContent() {
         currency={currency}
         launchPrice={currentPricing.launch.price}
         scalePrice={currentPricing.scale.price}
-        isLoading={isLoading}
-        onCurrencyChange={setCurrency}
+        locationPricingStatus={locationPricingStatus}
+        currencyPreferenceSource={currencyPreferenceSource}
+        onCurrencyChange={setCurrencyPreference}
       />
 
       <section className="page-shell section-shell-tight">
@@ -66,7 +72,7 @@ export function PricingPageContent() {
           </p>
         </AnimatedSection>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
+        <div className="equal-height-grid mt-8 lg:grid-cols-2">
           <AnimatedSection delay={0.05}>
             <PricingCard plan={currentPricing.launch} currency={currency} />
           </AnimatedSection>
@@ -91,13 +97,13 @@ export function PricingPageContent() {
           </p>
         </AnimatedSection>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="equal-height-grid mt-8 md:grid-cols-2">
           {paymentTerms.map((term, index) => (
             <AnimatedSection key={term.label} delay={0.05 * (index + 1)}>
-              <article className="panel p-6 sm:p-7">
+              <article className="page-card-roomy panel">
                 <p className="card-label">{term.label}</p>
                 <h3 className="mt-4 text-[30px] leading-[1.08]">{term.title}</h3>
-                <p className="mt-4 text-[16px] leading-[1.8]">{term.description}</p>
+                <p className="mt-4 flex-1 text-[16px] leading-[1.8]">{term.description}</p>
               </article>
             </AnimatedSection>
           ))}

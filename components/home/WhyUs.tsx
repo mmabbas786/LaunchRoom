@@ -25,8 +25,8 @@ export function WhyUs() {
         </h2>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-10 grid gap-5 lg:grid-cols-2" delay={0.05}>
-        <article className="panel-accent p-6 sm:p-7">
+      <AnimatedSection className="page-card-grid mt-10 lg:grid-cols-2" delay={0.05}>
+        <article className="page-card-roomy panel-accent">
           <p className="card-label">Strategy map</p>
           <div className="mt-5 rounded-[22px] border border-border bg-surface-1 p-5">
             <div className="grid gap-3 sm:grid-cols-[1.1fr_0.9fr]">
@@ -70,7 +70,7 @@ export function WhyUs() {
           </p>
         </article>
 
-        <article className="panel p-6 sm:p-7">
+        <article className="page-card-roomy panel">
           <p className="card-label">Frontend execution</p>
           <div className="mt-5 rounded-[22px] border border-border bg-[#0d0d0d] p-5">
             <div className="flex items-center gap-2">
@@ -101,12 +101,12 @@ export function WhyUs() {
         </article>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-5 grid gap-5 md:grid-cols-3" delay={0.08}>
+      <AnimatedSection className="page-card-grid mt-5 md:grid-cols-3" delay={0.08}>
         {pillars.map((pillar) => (
-          <article key={pillar.title} className="panel-lime p-6">
-            <p className="card-label">Launchroom system</p>
+          <article key={pillar.title} className="page-card panel-lime">
+            <p className="card-label">LaunchRoom system</p>
             <h3 className="mt-4 text-[24px] leading-[1.08]">{pillar.title}</h3>
-            <p className="mt-3 text-[15px] leading-[1.78] text-text-secondary">
+            <p className="mt-3 flex-1 text-[15px] leading-[1.78] text-text-secondary">
               {pillar.description}
             </p>
           </article>

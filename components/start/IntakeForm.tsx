@@ -2,76 +2,68 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckCircle2, Loader2, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/Button";
+import type { SupportedCurrency } from "@/data/pricing";
 import {
   buildStartWhatsAppMessage,
   getWhatsAppHref,
 } from "@/lib/whatsapp";
 import type { StartInput } from "@/lib/validation";
-import { startSchema } from "@/lib/validation";
+import { startBudgetOptionsByCurrency, startSchema } from "@/lib/validation";
 
-const steps = [
+const projectTypeOptions = [
   {
-    title: "What do you need built?",
-    description: "Choose the best fit for the project you have in mind.",
-    field: "projectType" as const,
-    options: [
-      {
-        value: "Website",
-        description: "Landing page, business site, e-commerce",
-      },
-      {
-        value: "Mobile App",
-        description: "Android app, Play Store launch",
-      },
-      {
-        value: "Both website + app",
-        description: "A combined product and web presence",
-      },
-      {
-        value: "Not sure yet",
-        description: "You need help deciding what to build first",
-      },
-    ],
+    value: "Website",
+    description: "Landing page, business site, e-commerce",
   },
   {
-    title: "What's your budget?",
-    description: "This helps us scope the right version first.",
-    field: "budget" as const,
-    options: [
-      { value: "Under INR 25,000 / $800", description: "Close to the Launch package range" },
-      {
-        value: "INR 25,000-INR 50,000 / $800-$1,500",
-        description: "Fits Launch to Scale website packages",
-      },
-      {
-        value: "INR 50,000-INR 1,00,000 / $1,500-$3,000",
-        description: "For larger website builds or app scope",
-      },
-      {
-        value: "INR 1,00,000+ / $3,000+",
-        description: "For bigger apps or product work",
-      },
-      { value: "Let's discuss", description: "You want to talk through options" },
-    ],
+    value: "Mobile App",
+    description: "Android app, Play Store launch",
   },
   {
-    title: "When do you need it?",
-    description: "Timeline helps us plan availability and delivery approach.",
-    field: "timeline" as const,
-    options: [
-      { value: "ASAP (within 2 weeks)", description: "Fast turnaround" },
-      { value: "1 month", description: "A near-term launch target" },
-      { value: "2-3 months", description: "A more deliberate schedule" },
-      { value: "Flexible / no rush", description: "Exploration first" },
-    ],
+    value: "Both website + app",
+    description: "A combined product and web presence",
   },
-];
+  {
+    value: "Not sure yet",
+    description: "You need help deciding what to build first",
+  },
+] as const;
+
+const timelineOptions = [
+  { value: "ASAP (within 2 weeks)", description: "Fast turnaround" },
+  { value: "1 month", description: "A near-term launch target" },
+  { value: "2-3 months", description: "A more deliberate schedule" },
+  { value: "Flexible / no rush", description: "Exploration first" },
+] as const;
+
+function getSteps(currency: SupportedCurrency) {
+  return [
+    {
+      title: "What do you need built?",
+      description: "Choose the best fit for the project you have in mind.",
+      field: "projectType" as const,
+      options: projectTypeOptions,
+    },
+    {
+      title: "What's your budget?",
+      description: "This helps us scope the right version first.",
+      field: "budget" as const,
+      options: startBudgetOptionsByCurrency[currency],
+    },
+    {
+      title: "When do you need it?",
+      description: "Timeline helps us plan availability and delivery approach.",
+      field: "timeline" as const,
+      options: timelineOptions,
+    },
+  ];
+}
 
 const detailFields: Array<keyof StartInput> = [
   "projectName",
@@ -80,11 +72,55 @@ const detailFields: Array<keyof StartInput> = [
   "referenceUrl",
 ];
 
-export function IntakeForm() {
+type DemoPrefill = {
+  slug: string;
+  niche: string;
+  ref?: string;
+} | null;
+
+function buildPrefilledBrief(prefillDemo: Exclude<DemoPrefill, null>) {
+  return `I'm interested in a website with the same level of polish, clarity, and conversion flow as the ${prefillDemo.niche.toLowerCase()} demo. Please tailor that direction for my business and suggest the strongest first version to launch.`;
+}
+
+function getDefaultValues(
+  currency: SupportedCurrency,
+  prefillDemo: DemoPrefill = null,
+): StartInput {
+  return {
+    projectType: "Website",
+    budget: startBudgetOptionsByCurrency[currency][1]?.value ?? "Let's discuss",
+    timeline: "1 month",
+    projectName: prefillDemo ? `${prefillDemo.niche} website` : "",
+    brief: prefillDemo ? buildPrefilledBrief(prefillDemo) : "",
+    brandAssets: "Partial",
+    referenceUrl: "",
+    fullName: "",
+    email: "",
+    company: "",
+    country: "India",
+    referralSource: prefillDemo?.ref === "demo" ? "Demo library" : "Google",
+    demoNiche: prefillDemo?.niche ?? "",
+    sourceRef: prefillDemo?.ref ?? "",
+  };
+}
+
+export function IntakeForm({
+  currency,
+  prefillDemo = null,
+}: {
+  currency: SupportedCurrency;
+  prefillDemo?: DemoPrefill;
+}) {
   const [step, setStep] = useState(1);
-  const [status, setStatus] = useState<"idle" | "success" | "whatsapp" | "error">("idle");
-  const [serverError, setServerError] = useState("");
+  const [status, setStatus] = useState<"idle" | "whatsapp">("idle");
   const [whatsappHref, setWhatsappHref] = useState("");
+  const steps = useMemo(() => getSteps(currency), [currency]);
+  const prefillKey = `${prefillDemo?.slug ?? ""}:${prefillDemo?.ref ?? ""}`;
+  const previousPrefillKey = useRef(prefillKey);
+  const defaultValues = useMemo(
+    () => getDefaultValues(currency, prefillDemo),
+    [currency, prefillDemo],
+  );
 
   const {
     register,
@@ -93,26 +129,34 @@ export function IntakeForm() {
     watch,
     setValue,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<StartInput>({
     resolver: zodResolver(startSchema),
-    defaultValues: {
-      projectType: "Website",
-      budget: "INR 25,000-INR 50,000 / $800-$1,500",
-      timeline: "1 month",
-      projectName: "",
-      brief: "",
-      brandAssets: "Partial",
-      referenceUrl: "",
-      fullName: "",
-      email: "",
-      company: "",
-      country: "India",
-      referralSource: "Google",
-    },
+    defaultValues,
   });
 
   const progress = useMemo(() => (step / 5) * 100, [step]);
+  const selectedBudget = watch("budget");
+
+  useEffect(() => {
+    const availableBudgets = startBudgetOptionsByCurrency[currency].map((option) => option.value);
+
+    if (!availableBudgets.includes(selectedBudget)) {
+      setValue("budget", availableBudgets[1] ?? "Let's discuss", {
+        shouldValidate: true,
+      });
+    }
+  }, [currency, selectedBudget, setValue]);
+
+  useEffect(() => {
+    if (previousPrefillKey.current === prefillKey) {
+      return;
+    }
+
+    previousPrefillKey.current = prefillKey;
+    setStep(1);
+    reset(getDefaultValues(currency, prefillDemo));
+  }, [currency, prefillDemo, prefillKey, reset]);
 
   const nextStep = async () => {
     if (step <= 3) {
@@ -129,57 +173,15 @@ export function IntakeForm() {
 
   const previousStep = () => setStep((value) => Math.max(1, value - 1));
 
-  const onSubmit = handleSubmit(async (values) => {
-    setStatus("idle");
-    setServerError("");
-
-    try {
-      const response = await fetch("/api/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit");
-      }
-
-      setStatus("success");
-    } catch {
-      setStatus("error");
-      setServerError("Something Went Wrong. Please Email Us Directly.");
-    }
-  });
-
   const onWhatsApp = handleSubmit((values) => {
-    setStatus("idle");
-    setServerError("");
-
     const href = getWhatsAppHref(buildStartWhatsAppMessage(values));
     setWhatsappHref(href);
 
     window.open(href, "_blank", "noopener,noreferrer");
     setStatus("whatsapp");
     setStep(1);
-    reset();
+    reset(getDefaultValues(currency, prefillDemo));
   });
-
-  if (status === "success") {
-    return (
-      <div className="panel-lime p-8 text-center md:p-12">
-        <CheckCircle2 className="mx-auto h-14 w-14 text-text-primary" />
-        <h2 className="mt-6 text-[clamp(32px,3vw,46px)] leading-[1.04] text-text-primary">
-          Your brief is with us.
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-[18px] leading-[1.8] text-text-secondary">
-          We&apos;ll review it and send a proposal within 48 hours.
-        </p>
-        <div className="mt-8 flex justify-center">
-          <Button href="/work">While you wait, check out our work</Button>
-        </div>
-      </div>
-    );
-  }
 
   if (status === "whatsapp") {
     return (
@@ -189,8 +191,8 @@ export function IntakeForm() {
           Your brief is ready in WhatsApp.
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-[18px] leading-[1.8] text-text-secondary">
-          We opened a prefilled WhatsApp message for you. Send it there and we&apos;ll
-          review the brief quickly.
+          We opened a prefilled WhatsApp message for you. Send it there and
+          we&apos;ll review the brief and reply with next steps.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
           {whatsappHref ? (
@@ -205,7 +207,10 @@ export function IntakeForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="panel p-6 md:p-8">
+    <form onSubmit={onWhatsApp} className="panel flex h-full flex-col p-6 md:p-8">
+      <input type="hidden" {...register("demoNiche")} />
+      <input type="hidden" {...register("sourceRef")} />
+
       <div className="mb-8">
         <div className="flex items-center justify-between text-[13px] font-semibold uppercase tracking-[0.08em] text-text-muted">
           <span>Step {step} of 5</span>
@@ -219,140 +224,143 @@ export function IntakeForm() {
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={step}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.25 }}
-        >
-          {step <= 3 ? (
-            <OptionStep
-              title={steps[step - 1].title}
-              description={steps[step - 1].description}
-              options={steps[step - 1].options}
-              selected={watch(steps[step - 1].field)}
-              onSelect={(value) =>
-                setValue(steps[step - 1].field, value as never, {
-                  shouldValidate: true,
-                })
-              }
-            />
-          ) : null}
+      <div className="flex-1">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.25 }}
+          >
+            {step <= 3 ? (
+              <OptionStep
+                title={steps[step - 1].title}
+                description={steps[step - 1].description}
+                options={steps[step - 1].options}
+                selected={watch(steps[step - 1].field)}
+                onSelect={(value) =>
+                  setValue(steps[step - 1].field, value as never, {
+                    shouldValidate: true,
+                  })
+                }
+              />
+            ) : null}
 
-          {step === 4 ? (
-            <div>
-              <h2 className="text-[clamp(32px,3vw,46px)] leading-[1.04]">
-                Describe your project
-              </h2>
-              <p className="mt-3 max-w-2xl text-[17px] leading-[1.82]">
-                Tell us enough that we can understand what you are building and
-                what a first version should look like.
-              </p>
+            {step === 4 ? (
+              <div>
+                <h2 className="text-[clamp(32px,3vw,46px)] leading-[1.04]">
+                  Describe your project
+                </h2>
+                <p className="mt-3 max-w-2xl text-[17px] leading-[1.82]">
+                  Tell us enough that we can understand what you are building and
+                  what a first version should look like.
+                </p>
 
-              <div className="mt-8 grid gap-5">
-                <Field label="Project name / working title" error={errors.projectName?.message}>
-                  <input
-                    {...register("projectName")}
-                    placeholder="Launchroom v2, PDF app, company website..."
-                  />
-                </Field>
+                <div className="mt-8 grid gap-5">
+                  <Field label="Project name / working title" error={errors.projectName?.message}>
+                    <input
+                      {...register("projectName")}
+                      placeholder="LaunchRoom v2, PDF app, company website..."
+                    />
+                  </Field>
 
-                <Field label="Brief description" error={errors.brief?.message}>
-                  <textarea
-                    {...register("brief")}
-                    rows={7}
-                    placeholder="What are you building, who is it for, and what should it do?"
-                  />
-                </Field>
-
-                <Field
-                  label="Do you have existing brand assets?"
-                  error={errors.brandAssets?.message}
-                >
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {["Yes", "No", "Partial"].map((option) => (
-                      <SelectorCard
-                        key={option}
-                        active={watch("brandAssets") === option}
-                        label={option}
-                        description=""
-                        onClick={() =>
-                          setValue("brandAssets", option as StartInput["brandAssets"], {
-                            shouldValidate: true,
-                          })
-                        }
-                      />
-                    ))}
-                  </div>
-                </Field>
-
-                <Field label="Website or app reference" error={errors.referenceUrl?.message}>
-                  <input {...register("referenceUrl")} placeholder="https://example.com" />
-                </Field>
-              </div>
-            </div>
-          ) : null}
-
-          {step === 5 ? (
-            <div>
-              <h2 className="text-[clamp(32px,3vw,46px)] leading-[1.04]">Almost there.</h2>
-              <p className="mt-3 max-w-2xl text-[17px] leading-[1.82]">
-                Add your contact details and we will send a tailored proposal
-                within 48 hours.
-              </p>
-
-              <div className="mt-8 grid gap-5">
-                <Field label="Full name" error={errors.fullName?.message}>
-                  <input {...register("fullName")} placeholder="Your name" />
-                </Field>
-
-                <Field label="Email" error={errors.email?.message}>
-                  <input {...register("email")} type="email" placeholder="you@example.com" />
-                </Field>
-
-                <Field label="Company / organisation" error={errors.company?.message}>
-                  <input {...register("company")} placeholder="Optional" />
-                </Field>
-
-                <div className="grid gap-5 md:grid-cols-2">
-                  <Field label="Country" error={errors.country?.message}>
-                    <select {...register("country")}>
-                      <option>India</option>
-                      <option>United Kingdom</option>
-                      <option>Germany</option>
-                      <option>Canada</option>
-                      <option>Other</option>
-                    </select>
+                  <Field label="Brief description" error={errors.brief?.message}>
+                    <textarea
+                      {...register("brief")}
+                      rows={7}
+                      placeholder="What are you building, who is it for, and what should it do?"
+                    />
                   </Field>
 
                   <Field
-                    label="How did you hear about us?"
-                    error={errors.referralSource?.message}
+                    label="Do you have existing brand assets?"
+                    error={errors.brandAssets?.message}
                   >
-                    <select {...register("referralSource")}>
-                      <option>Google</option>
-                      <option>Referral</option>
-                      <option>Social media</option>
-                      <option>Upwork</option>
-                      <option>Fiverr</option>
-                      <option>Other</option>
-                    </select>
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {["Yes", "No", "Partial"].map((option) => (
+                        <SelectorCard
+                          key={option}
+                          active={watch("brandAssets") === option}
+                          label={option}
+                          description=""
+                          onClick={() =>
+                            setValue("brandAssets", option as StartInput["brandAssets"], {
+                              shouldValidate: true,
+                            })
+                          }
+                        />
+                      ))}
+                    </div>
+                  </Field>
+
+                  <Field label="Website or app reference" error={errors.referenceUrl?.message}>
+                    <input {...register("referenceUrl")} placeholder="https://example.com" />
                   </Field>
                 </div>
               </div>
-            </div>
-          ) : null}
-        </motion.div>
-      </AnimatePresence>
+            ) : null}
+
+            {step === 5 ? (
+              <div>
+                <h2 className="text-[clamp(32px,3vw,46px)] leading-[1.04]">Almost there.</h2>
+                <p className="mt-3 max-w-2xl text-[17px] leading-[1.82]">
+                  Add your contact details and we will send a tailored proposal
+                  within 48 hours.
+                </p>
+
+                <div className="mt-8 grid gap-5">
+                  <Field label="Full name" error={errors.fullName?.message}>
+                    <input {...register("fullName")} placeholder="Your name" />
+                  </Field>
+
+                  <Field label="Email" error={errors.email?.message}>
+                    <input {...register("email")} type="email" placeholder="you@example.com" />
+                  </Field>
+
+                  <Field label="Company / organisation" error={errors.company?.message}>
+                    <input {...register("company")} placeholder="Optional" />
+                  </Field>
+
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <Field label="Country" error={errors.country?.message}>
+                      <select {...register("country")}>
+                        <option>India</option>
+                        <option>United Kingdom</option>
+                        <option>Germany</option>
+                        <option>Canada</option>
+                        <option>Other</option>
+                      </select>
+                    </Field>
+
+                    <Field
+                      label="How did you hear about us?"
+                      error={errors.referralSource?.message}
+                    >
+                      <select {...register("referralSource")}>
+                        <option>Google</option>
+                        <option>Referral</option>
+                        <option>Demo library</option>
+                        <option>Social media</option>
+                        <option>Upwork</option>
+                        <option>Fiverr</option>
+                        <option>Other</option>
+                      </select>
+                    </Field>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Button
           type="button"
           variant="outline"
           onClick={previousStep}
-          disabled={step === 1 || isSubmitting}
+          disabled={step === 1}
           className="justify-center"
         >
           Back
@@ -363,43 +371,14 @@ export function IntakeForm() {
             Next
           </Button>
         ) : (
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Button
-              type="button"
-              variant="outline"
-              className="justify-center"
-              onClick={onWhatsApp}
-              disabled={isSubmitting}
-            >
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-end">
+            <Button type="submit" className="justify-center">
               <MessageCircle className="h-4 w-4" />
-              Send on WhatsApp
-            </Button>
-
-            <Button type="submit" className="justify-center" disabled={isSubmitting}>
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Sending...
-                </>
-              ) : (
-                "Submit project brief"
-              )}
+              Send brief on WhatsApp
             </Button>
           </div>
         )}
       </div>
-
-      {status === "error" ? (
-        <div className="mt-5 space-y-2">
-          <p className="text-sm text-red-500">{serverError}</p>
-          <a
-            href="mailto:hello@launchroom.in"
-            className="preserve-case inline-flex text-sm font-medium text-red-400 hover:text-red-300"
-          >
-            hello@launchroom.in
-          </a>
-        </div>
-      ) : null}
     </form>
   );
 }
@@ -413,7 +392,7 @@ function OptionStep({
 }: {
   title: string;
   description: string;
-  options: Array<{ value: string; description: string }>;
+  options: ReadonlyArray<{ value: string; description: string }>;
   selected?: string;
   onSelect: (value: string) => void;
 }) {
@@ -422,7 +401,7 @@ function OptionStep({
       <h2 className="text-[clamp(32px,3vw,46px)] leading-[1.04]">{title}</h2>
       <p className="mt-3 max-w-2xl text-[17px] leading-[1.82]">{description}</p>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <div className="equal-height-grid mt-8 md:grid-cols-2">
         {options.map((option) => (
           <SelectorCard
             key={option.value}
@@ -452,16 +431,29 @@ function SelectorCard({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={[
-        "rounded-[22px] border-2 p-5 text-left shadow-[5px_5px_0_rgba(0,0,0,0.18)] transition-all duration-200",
+        "flex h-full flex-col rounded-[22px] border-2 p-5 text-left shadow-[5px_5px_0_rgba(0,0,0,0.18)] transition-all duration-200",
         active
-          ? "border-black bg-accent text-text-primary"
+          ? "border-[#8f5d10] bg-[linear-gradient(135deg,#f4c86d_0%,#e8a020_48%,#8f5d10_100%)] text-[#080808] shadow-[10px_10px_0_rgba(143,93,16,0.22)]"
           : "border-black bg-surface-1 hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none",
       ].join(" ")}
     >
-      <span className="block text-[22px] leading-[1.1] text-text-primary">{label}</span>
+      <span
+        className={[
+          "block text-[22px] leading-[1.1]",
+          active ? "text-[#080808]" : "text-text-primary",
+        ].join(" ")}
+      >
+        {label}
+      </span>
       {description ? (
-        <span className="mt-3 block text-[15px] leading-[1.72] text-text-secondary">
+        <span
+          className={[
+            "mt-3 block text-[15px] leading-[1.72]",
+            active ? "text-[rgba(8,8,8,0.76)]" : "text-text-secondary",
+          ].join(" ")}
+        >
           {description}
         </span>
       ) : null}

@@ -1,42 +1,45 @@
-import { pricingSummary } from "@/data/pricing";
+import { formatRecurringPrice, pricingSummary } from "@/data/pricing";
+import type { SupportedCurrency } from "@/data/pricing";
 
 export type FAQItem = {
   question: string;
   answer: string;
 };
 
-export const serviceFaqs: FAQItem[] = [
-  {
-    question: "Do you work with international clients?",
-    answer:
-      "Yes. We work with clients from the UK, Germany, Canada, and beyond. Payments accepted via Wise, bank transfer, and PayPal. Invoices issued in your preferred currency.",
-  },
-  {
-    question: "How long does a typical project take?",
-    answer:
-      "A standard 5-page website takes 1-2 weeks. A CMS-powered business site takes 2-3 weeks. Android apps take 3-6 weeks. Complex projects are scoped individually.",
-  },
-  {
-    question: "Do you sign NDAs?",
-    answer:
-      "Absolutely. We sign client NDAs before discussing sensitive project details. We also have our own mutual NDA available.",
-  },
-  {
-    question: "What do I need to provide to get started?",
-    answer:
-      "A brief describing what you need, your budget range, and a timeline. We handle everything else - design, copy structure, development, and deployment.",
-  },
-  {
-    question: "Do you offer revisions?",
-    answer:
-      `Revisions depend on the selected package or proposal. Scale includes 2 free revisions, and extra revisions are available as an add-on at ${pricingSummary.extraRevisionCombined} each.`,
-  },
-  {
-    question: "What happens after launch?",
-    answer:
-      `Launch includes 1 month of support and Scale includes 3 months. Ongoing monthly maintenance starts at ${pricingSummary.monthlyMaintenance.INR.replace("/mo", " per month")} in India or ${pricingSummary.monthlyMaintenance.USD.replace("/mo", " per month")} internationally, and you receive full source code and credentials at handover.`,
-  },
-];
+export function getServiceFaqs(currency: SupportedCurrency): FAQItem[] {
+  return [
+    {
+      question: "Do you work with international clients?",
+      answer:
+        "Yes. We work with clients from the UK, Germany, Canada, and beyond. Payments accepted via Wise, bank transfer, and PayPal. Invoices issued in your preferred currency.",
+    },
+    {
+      question: "How long does a typical project take?",
+      answer:
+        "A standard 5-page website takes 1-2 weeks. A CMS-powered business site takes 2-3 weeks. Android apps take 3-6 weeks. Complex projects are scoped individually.",
+    },
+    {
+      question: "Do you sign NDAs?",
+      answer:
+        "Absolutely. We sign client NDAs before discussing sensitive project details. We also have our own mutual NDA available.",
+    },
+    {
+      question: "What do I need to provide to get started?",
+      answer:
+        "A brief describing what you need, your budget range, and a timeline. We handle everything else - design, copy structure, development, and deployment.",
+    },
+    {
+      question: "Do you offer revisions?",
+      answer:
+        `Revisions depend on the selected package or proposal. Scale includes 2 free revisions, and extra revisions are available as an add-on at ${pricingSummary.extraRevision[currency]} each.`,
+    },
+    {
+      question: "What happens after launch?",
+      answer:
+        `Launch includes 1 month of support and Scale includes 3 months. Ongoing monthly maintenance starts at ${formatRecurringPrice(pricingSummary.monthlyMaintenance[currency])}, and you receive full source code and credentials at handover.`,
+    },
+  ];
+}
 
 export const quickContactFaqs: FAQItem[] = [
   {

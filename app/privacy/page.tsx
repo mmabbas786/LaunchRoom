@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Launchroom",
-  description: "Privacy policy for Launchroom enquiries, proposals, and website data handling.",
+  title: "Privacy Policy — LaunchRoom",
+  description: "Privacy policy for LaunchRoom enquiries, proposals, and website data handling.",
 };
 
 export default function PrivacyPage() {

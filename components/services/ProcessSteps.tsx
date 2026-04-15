@@ -42,12 +42,12 @@ export function ProcessSteps() {
         </p>
       </AnimatedSection>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="equal-height-grid mt-8 md:grid-cols-2 xl:grid-cols-4">
         {steps.map((step, index) => (
           <AnimatedSection key={step.number} delay={0.05 * (index + 1)}>
             <article
               className={[
-                "h-full p-7",
+                "page-card-roomy",
                 index === 1 ? "panel-accent" : index === 3 ? "panel-lime" : "panel",
               ].join(" ")}
             >
@@ -64,7 +64,7 @@ export function ProcessSteps() {
               </h3>
               <p
                 className={[
-                  "mt-4 text-[17px] leading-[1.8]",
+                  "mt-4 flex-1 text-[17px] leading-[1.8]",
                   index === 0 || index === 2 ? "text-text-secondary" : "text-on-dark-muted",
                 ].join(" ")}
               >

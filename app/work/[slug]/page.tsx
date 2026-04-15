@@ -10,9 +10,12 @@ import { projects } from "@/data/projects";
 
 type Params = { slug: string };
 type RouteProps = { params: Promise<Params> };
+const customCaseStudySlugs = new Set(["new-india-stores", "pdf-vault"]);
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return projects
+    .filter((project) => !customCaseStudySlugs.has(project.slug))
+    .map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
@@ -26,7 +29,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${project.name} — Launchroom`,
+    title: `${project.name} — LaunchRoom`,
     description: project.summary,
   };
 }
@@ -82,7 +85,7 @@ export default async function CaseStudyPage({ params }: RouteProps) {
             >
               {project.thumbEmoji}
             </div>
-            <div className="grid gap-4 p-7 sm:grid-cols-2">
+            <div className="equal-height-grid p-7 sm:grid-cols-2">
               <MetaCard label="Client" value={project.client} />
               <MetaCard label="Timeline" value={project.timeline} />
               <MetaCard label="Role" value={project.role} />
@@ -116,20 +119,20 @@ export default async function CaseStudyPage({ params }: RouteProps) {
           </div>
         </AnimatedSection>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-[1fr_1fr]">
-          <AnimatedSection className="panel p-7" delay={0.06}>
+        <div className="page-card-grid mt-8 lg:grid-cols-[1fr_1fr]">
+          <AnimatedSection className="page-card-roomy panel" delay={0.06}>
             <p className="card-label">The brief</p>
             <p className="mt-4 text-[17px] leading-[1.84]">{project.overview}</p>
           </AnimatedSection>
 
-          <AnimatedSection className="panel-lime p-7" delay={0.08}>
+          <AnimatedSection className="page-card-roomy panel-lime" delay={0.08}>
             <p className="card-label text-on-dark-muted">The challenge</p>
-            <p className="mt-4 text-[17px] leading-[1.84] text-on-dark-muted">
+            <p className="mt-4 flex-1 text-[17px] leading-[1.84] text-on-dark-muted">
               {project.problem}
             </p>
           </AnimatedSection>
 
-          <AnimatedSection className="panel lg:col-span-2 p-7" delay={0.1}>
+          <AnimatedSection className="page-card-roomy panel lg:col-span-2" delay={0.1}>
             <p className="card-label">The solution</p>
             <p className="mt-4 max-w-4xl text-[17px] leading-[1.84]">
               {project.solution}
@@ -186,7 +189,7 @@ export default async function CaseStudyPage({ params }: RouteProps) {
 
 function MetaCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[18px] border-2 border-black bg-surface-1 p-5 shadow-[4px_4px_0_rgba(0,0,0,0.12)]">
+    <div className="flex h-full flex-col rounded-[18px] border-2 border-black bg-surface-1 p-5 shadow-[4px_4px_0_rgba(0,0,0,0.12)]">
       <p className="card-label">{label}</p>
       <p className="mt-3 text-[20px] leading-[1.15] text-text-primary">{value}</p>
     </div>

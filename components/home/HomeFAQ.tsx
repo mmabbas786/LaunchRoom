@@ -4,12 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-import { serviceFaqs } from "@/data/faqs";
+import type { FAQItem } from "@/data/faqs";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
-export function HomeFAQ() {
-  const items = serviceFaqs.slice(0, 5);
+export function HomeFAQ({ items }: { items: FAQItem[] }) {
   const [open, setOpen] = useState<string | null>(items[0]?.question ?? null);
 
   return (

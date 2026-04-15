@@ -37,14 +37,17 @@ export function InsightsPreview() {
         </h2>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3" delay={0.05}>
+      <AnimatedSection className="page-card-grid mt-10 md:grid-cols-2 xl:grid-cols-3" delay={0.05}>
         {features.map((feature, index) => (
-          <article key={feature.title} className={index === 1 || index === 5 ? "panel-accent p-6" : "panel p-6"}>
+          <article
+            key={feature.title}
+            className={index === 1 || index === 5 ? "page-card panel-accent" : "page-card panel"}
+          >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-dim text-[12px] font-medium text-accent">
               0{index + 1}
             </div>
             <h3 className="mt-5 text-[24px] leading-[1.08]">{feature.title}</h3>
-            <p className="mt-3 text-[15px] leading-[1.78] text-text-secondary">
+            <p className="mt-3 flex-1 text-[15px] leading-[1.78] text-text-secondary">
               {feature.description}
             </p>
           </article>

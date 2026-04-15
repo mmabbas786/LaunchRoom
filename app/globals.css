@@ -359,6 +359,66 @@
     font-family: "IBM Plex Mono", monospace;
   }
 
+  .balanced-card-grid {
+    @apply grid items-start gap-4;
+    grid-auto-rows: max-content;
+  }
+
+  .balanced-card {
+    @apply flex flex-col justify-start p-5 sm:p-6;
+  }
+
+  .balanced-card-title {
+    @apply mt-3 text-[20px] leading-[1.14] text-text-primary;
+  }
+
+  .balanced-card-copy {
+    @apply mt-4 text-[15px] leading-[1.76] text-text-secondary;
+  }
+
+  .balanced-card-list {
+    @apply mt-4 grid gap-2;
+  }
+
+  .balanced-card-list-item {
+    @apply rounded-[16px] border px-4 py-2.5 text-[14px] leading-[1.65];
+    border-color: var(--border);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .equal-height-grid {
+    @apply grid items-stretch gap-5;
+    grid-auto-rows: 1fr;
+  }
+
+  .equal-height-grid > * {
+    @apply h-full;
+  }
+
+  .equal-height-card {
+    @apply flex h-full flex-col overflow-hidden;
+  }
+
+  .equal-height-card-body {
+    @apply flex flex-1 flex-col p-6 sm:p-7;
+  }
+
+  .page-card-grid {
+    @apply equal-height-grid;
+  }
+
+  .page-card {
+    @apply flex h-full flex-col p-6 sm:p-7;
+  }
+
+  .page-card-roomy {
+    @apply flex h-full flex-col p-6 sm:p-7;
+  }
+
+  .page-card-roomy-lg {
+    @apply flex h-full flex-col p-6 sm:p-7;
+  }
+
   .hero-kicker {
     @apply inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.14em];
     color: #080808;

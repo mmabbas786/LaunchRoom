@@ -6,11 +6,11 @@ export function StackGrid({
   groups: Array<{ label: string; items: string[] }>;
 }) {
   return (
-    <div className="grid gap-5 md:grid-cols-2">
+    <div className="page-card-grid md:grid-cols-2">
       {groups.map((group, index) => (
         <article
           key={group.label}
-          className={index % 2 === 0 ? "panel p-7" : "panel-lime p-7"}
+          className={index % 2 === 0 ? "page-card-roomy panel" : "page-card-roomy panel-lime"}
         >
           <p className={`card-label ${index % 2 === 0 ? "" : "text-on-dark-muted"}`}>
             Toolkit block

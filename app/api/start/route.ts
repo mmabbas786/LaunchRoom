@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 
 import { siteConfig } from "@/lib/site";
+import { getProjectInquiryLabel } from "@/lib/whatsapp";
 import { startSchema } from "@/lib/validation";
 
 const resend = process.env.RESEND_API_KEY
@@ -36,15 +37,19 @@ export async function POST(req: Request) {
     }
 
     const data = parsed.data;
+    const inquiryLabel = getProjectInquiryLabel(data.projectType);
 
     await resend.emails.send({
-      from: "Launchroom Website <noreply@launchroom.in>",
+      from: "LaunchRoom Website <noreply@launchroom.in>",
       to: siteConfig.email,
-      subject: `New project brief: ${data.projectName} from ${data.fullName}`,
+      subject: `${inquiryLabel}: ${data.projectName} from ${data.fullName}`,
       html: `
-        <h2>New Launchroom project brief</h2>
+        <h2>New LaunchRoom project brief</h2>
         <h3>Project snapshot</h3>
+        <p><strong>Inquiry type:</strong> ${escapeHtml(inquiryLabel)}</p>
         <p><strong>Project type:</strong> ${escapeHtml(data.projectType)}</p>
+        <p><strong>Demo inspiration:</strong> ${escapeHtml(data.demoNiche || "N/A")}</p>
+        <p><strong>Source reference:</strong> ${escapeHtml(data.sourceRef || "N/A")}</p>
         <p><strong>Budget:</strong> ${escapeHtml(data.budget)}</p>
         <p><strong>Timeline:</strong> ${escapeHtml(data.timeline)}</p>
         <p><strong>Project name:</strong> ${escapeHtml(data.projectName)}</p>

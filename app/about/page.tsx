@@ -4,12 +4,13 @@ import { StackGrid } from "@/components/about/StackGrid";
 import { TeamCard } from "@/components/about/TeamCard";
 import { CTABand } from "@/components/layout/CTABand";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { PageHeroGrid } from "@/components/ui/PageHeroGrid";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export const metadata: Metadata = {
-  title: "About Us — Launchroom",
+  title: "About Us — LaunchRoom",
   description:
-    "Meet the two-person team behind Launchroom and the principles, tools, and process behind the studio.",
+    "Meet the two-person team behind LaunchRoom and the principles, tools, and process behind the studio.",
 };
 
 const stackGroups = [
@@ -53,84 +54,101 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
+      <PageHeroGrid
+        label="About us"
+        heading="Two builders, one room, zero fake agency energy."
+        description="LaunchRoom started as a way to turn freelance shipping habits into a sharper studio. We build things that go live and make clients look more credible."
+        topLeftCard={{
+          label: "Origin story",
+          content: (
+            <p className="text-[17px] leading-[1.82]">
+              LaunchRoom began in 2024 between two CSE students from Kolkata.
+              Mirza was already building Android apps and freelance websites,
+              and Arsh was focused on frontend and design direction.
+            </p>
+          ),
+        }}
+        topRightCard={{
+          label: "Why it exists",
+          content: (
+            <p className="text-[17px] leading-[1.82] text-text-secondary">
+              Too many small businesses had weak digital presence, and too many
+              founders were paying big-agency prices for slower, less personal work.
+            </p>
+          ),
+        }}
+        bottomCard={{
+          label: "Where we work",
+          content: (
+            <p className="text-[17px] leading-[1.82] text-on-dark-muted">
+              Kolkata-based, remote-ready, and set up to work with India, the
+              UK, Germany, Canada, and wherever else a clear brief comes from.
+            </p>
+          ),
+        }}
+      />
+
       <div className="page-shell">
-        <section className="section-shell">
-          <AnimatedSection className="grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
-            <div className="panel-dark p-7 sm:p-9 lg:p-12">
-              <p className="eyebrow eyebrow-invert">
-                About us
-              </p>
-              <h1 className="page-hero-title mt-6 max-w-[9ch] text-on-dark">
-                Two builders, one room, zero fake agency energy.
-              </h1>
-              <p className="mt-6 max-w-3xl text-[19px] leading-[1.82] text-on-dark-muted">
-                Launchroom started as a way to turn freelance shipping habits into
-                a sharper studio. We build things that go live and make clients look
-                more credible.
-              </p>
-            </div>
-
-            <div className="grid gap-5">
-              <article className="panel p-7">
-                <p className="card-label">Origin story</p>
-                <p className="mt-4 text-[17px] leading-[1.82]">
-                  Launchroom began in 2024 between two CSE students from Kolkata.
-                  Mirza was already building Android apps and freelance websites,
-                  and Arsh was focused on frontend and design direction.
-                </p>
-              </article>
-              <article className="panel-accent p-7">
-                <p className="card-label text-text-primary">Why it exists</p>
-                <p className="mt-4 text-[17px] leading-[1.82] text-text-secondary">
-                  Too many small businesses had weak digital presence, and too many
-                  founders were paying big-agency prices for slower, less personal work.
-                </p>
-              </article>
-              <article className="panel-lime p-7">
-                <p className="card-label text-on-dark-muted">Where we work</p>
-                <p className="mt-4 text-[17px] leading-[1.82] text-on-dark-muted">
-                  Kolkata-based, remote-ready, and set up to work with India, the
-                  UK, Germany, Canada, and wherever else a clear brief comes from.
-                </p>
-              </article>
-            </div>
-          </AnimatedSection>
-        </section>
-
         <section className="section-shell-tight">
           <AnimatedSection>
             <SectionHeader eyebrow="Team" title="Meet the founders." />
           </AnimatedSection>
-          <AnimatedSection className="mt-8 grid gap-5 md:grid-cols-2" delay={0.05}>
+          <AnimatedSection className="page-card-grid mt-8 md:grid-cols-2" delay={0.05}>
             <TeamCard
               name="Mirza"
               role="Lead Developer & Co-founder"
-              bio="CSE student turned indie developer. I build apps, acquire clients, and make sure everything we ship is something we're proud of."
+              bio="Full-stack developer and Computer Science student from Kolkata, West Bengal. Founded LaunchRoom with a clear vision: make professional web development accessible to Indian businesses without the typical agency confusion and markup. Currently specializes in React, Next.js, and Flutter development. Has successfully shipped 1 production app to the Play Store (PDF Vault) and completed 1 client website project (New India Stores, a Kolkata-based ship chandling business). Building in public, learning every day, and scaling systematically. Believes in founder-friendly processes: fewer meetings, faster decisions, and direct access to the person actually building your product."
               skills={[
-                "React Native",
+                "React",
                 "Flutter",
                 "Next.js",
-                "Supabase",
-                "Claude API",
+                "TypeScript",
+                "GitHub",
                 "Product Strategy",
+                "Play Store Shipping",
               ]}
               avatarLabel="M"
-              avatarClassName="bg-accent text-text-primary"
+              avatarClassName="bg-[linear-gradient(135deg,#f4c86d_0%,#e8a020_48%,#8f5d10_100%)] text-[#080808]"
+              socialLinks={[
+                {
+                  href: "https://github.com/mmabbas786",
+                  label: "Mirza on GitHub",
+                  platform: "github",
+                },
+                {
+                  href: "https://www.linkedin.com/",
+                  label: "Mirza on LinkedIn",
+                  platform: "linkedin",
+                },
+              ]}
             />
             <TeamCard
               name="Arsh"
-              role="Design & Frontend · Co-founder"
-              bio="I turn briefs into interfaces. If Mirza builds the engine, I build what people actually see and touch."
+              role="Design Lead & Co-founder"
+              bio="Client relations and visual communication specialist at LaunchRoom. Handles discovery calls, project scoping, and ongoing client communication. Background in basic design work and brand identity — creates logos and promotional content for projects. Ensures every client engagement starts with clear expectations and ends with smooth handover. Manages partner-sourced projects from first contact through final delivery, acting as the bridge between technical execution and business goals."
               skills={[
                 "Figma",
+                "Brand Identity",
                 "Tailwind CSS",
-                "React",
+                "Client Discovery",
                 "UI Design",
-                "Framer Motion",
-                "Frontend",
+                "Project Scoping",
+                "Creative Direction",
               ]}
               avatarLabel="A"
-              avatarClassName="bg-support text-on-dark"
+              avatarClassName="bg-[linear-gradient(135deg,#f0bd57_0%,#b07811_100%)] text-[#080808]"
+              socialLinks={[
+                {
+                  href: "https://www.linkedin.com/",
+                  label: "Arsh on LinkedIn",
+                  platform: "linkedin",
+                },
+                {
+                  href: "https://www.figma.com/",
+                  label: "Arsh on Figma",
+                  platform: "figma",
+                },
+              ]}
             />
           </AnimatedSection>
         </section>
