@@ -18,9 +18,9 @@ export const services: Service[] = [
     number: "01",
     name: "Website Development",
     shortDescription:
-      "Launch and Scale website packages built for businesses that need a polished, mobile-ready online presence without agency confusion.",
+      "Basic, Launch, and Scale website packages built for businesses that need a polished, mobile-ready online presence without agency confusion.",
     description: [
-      "We design and build websites that make a business look credible quickly. That can mean a focused Launch package for a smaller brochure site or a broader Scale package when the business needs more depth, content, and visibility.",
+      "We design and build websites that make a business look credible quickly. That can mean a focused Basic package for a one-page presence, a stronger Launch package for a fuller brochure site, or a broader Scale package when the business needs more depth, content, and visibility.",
       "Every build is scoped around clarity and speed. We handle design direction, copy structure, development, deployment, and post-launch support so the project actually ships instead of dragging on.",
     ],
     includes: [
@@ -34,7 +34,7 @@ export const services: Service[] = [
       "1-3 months post-launch support",
     ],
     timeline: "1-3 weeks",
-    startingPrice: pricingSummary.launch,
+    startingPrice: pricingSummary.basic,
   },
   {
     id: "apps",

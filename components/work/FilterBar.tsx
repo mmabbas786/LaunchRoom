@@ -2,13 +2,13 @@
 
 import type { ProjectCategory } from "@/data/projects";
 
-const filters: ProjectCategory[] = ["All", "Web", "Apps", "Ongoing"];
-
 export function FilterBar({
   active,
+  filters,
   onChange,
 }: {
   active: ProjectCategory;
+  filters: ProjectCategory[];
   onChange: (filter: ProjectCategory) => void;
 }) {
   return (

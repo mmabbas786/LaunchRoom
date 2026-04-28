@@ -65,8 +65,8 @@ export function TermsPageContent() {
         <h2>Contact</h2>
         <p>
           For any questions about these terms, contact{" "}
-          <a className="preserve-case text-accent" href="mailto:hello@launchroom.in">
-            hello@launchroom.in
+          <a className="preserve-case text-accent" href="mailto:infolaunchroom@gmail.com">
+            infolaunchroom@gmail.com
           </a>
           .
         </p>

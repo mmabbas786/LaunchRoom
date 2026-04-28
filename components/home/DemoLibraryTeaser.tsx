@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
@@ -29,7 +30,7 @@ export function DemoLibraryTeaser() {
           href="/demos"
           className="inline-flex min-h-[52px] items-center justify-center rounded-full border border-accent-border bg-accent-dim px-6 py-3 text-[15px] font-semibold text-text-primary hover:-translate-y-0.5 hover:border-accent"
         >
-          View all 12 demos
+          View all {demos.length} demos
         </Link>
       </AnimatedSection>
 
@@ -46,26 +47,38 @@ export function DemoLibraryTeaser() {
                 background: `linear-gradient(145deg, ${hexToRgba(demo.accentColor, 0.42)} 0%, rgba(10,10,10,0.98) 68%)`,
               }}
             >
+              {demo.thumbnailSrc ? (
+                <Image
+                  src={demo.thumbnailSrc}
+                  alt={demo.thumbnailAlt ?? `${demo.niche} website demo`}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  className="object-cover object-top"
+                />
+              ) : null}
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,6,6,0.12),rgba(6,6,6,0.7)_100%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.18),transparent_34%)]" />
-              <div className="relative flex items-center justify-between gap-4">
-                <div>
+              <div className="relative flex items-start justify-between gap-5">
+                <div className="min-w-0">
                   <p className="card-label text-white/65">{demo.industry}</p>
-                  <h3 className="mt-3 text-[30px] leading-[1.02] text-white">
+                  <h3 className="mt-3 text-[30px] leading-[1.08] text-white">
                     {demo.niche}
                   </h3>
                 </div>
-                <span className="text-[42px]">{demo.coverEmoji}</span>
+                {!demo.thumbnailSrc ? (
+                  <span className="shrink-0 text-[44px] leading-none">{demo.coverEmoji}</span>
+                ) : null}
               </div>
             </div>
 
-            <div className="p-6">
+            <div className="p-7">
               <Badge variant="success" className="border-gold/20 bg-gold/10 text-gold">
                 Live demo
               </Badge>
-              <p className="mt-4 text-[16px] leading-[1.82] text-text-secondary">
+              <p className="mt-5 text-[16px] leading-[1.88] text-text-secondary">
                 {demo.tagline}
               </p>
-              <p className="mt-5 inline-flex items-center gap-2 text-[15px] font-medium text-accent group-hover:text-text-primary">
+              <p className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-accent group-hover:text-text-primary">
                 Explore demo
                 <span aria-hidden="true">→</span>
               </p>

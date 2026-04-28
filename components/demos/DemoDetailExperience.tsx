@@ -28,6 +28,7 @@ function emitDemoEvent(eventName: string, payload: Record<string, string>) {
 export function DemoDetailExperience({ demo }: { demo: Demo }) {
   const startHref = `/start?niche=${demo.slug}&ref=demo`;
   const previewHref = `/demos/${demo.slug}/preview`;
+  const usesExternalPreview = Boolean(demo.externalUrl);
 
   useEffect(() => {
     emitDemoEvent("demo_view", {
@@ -119,13 +120,13 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
 
             <div className="page-card-grid sm:grid-cols-2">
               <AnimatedSection className="page-card-roomy panel" delay={0.04}>
-                <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent-dim text-accent">
-                    <MonitorSmartphone className="h-5 w-5" />
+                <div className="flex flex-col items-start gap-4">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-[18px] border border-accent-border bg-accent-dim text-accent shadow-[0_18px_34px_rgba(0,0,0,0.18)]">
+                    <MonitorSmartphone className="h-6 w-6" />
                   </span>
-                  <div>
+                  <div className="max-w-[28ch]">
                     <p className="card-label">Preview mode</p>
-                    <p className="mt-1 text-[19px] leading-[1.12] text-text-primary">
+                    <p className="mt-2 text-[20px] leading-[1.28] text-text-primary sm:text-[22px]">
                       Desktop shows a focused live preview.
                     </p>
                   </div>
@@ -133,13 +134,13 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
               </AnimatedSection>
 
               <AnimatedSection className="page-card-roomy panel-accent" delay={0.08}>
-                <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/10 text-gold">
-                    <Sparkles className="h-5 w-5" />
+                <div className="flex flex-col items-start gap-4">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-[18px] border border-gold/25 bg-gold/10 text-gold shadow-[0_18px_34px_rgba(0,0,0,0.18)]">
+                    <Sparkles className="h-6 w-6" />
                   </span>
-                  <div>
+                  <div className="max-w-[28ch]">
                     <p className="card-label text-text-primary">Lead path</p>
-                    <p className="mt-1 text-[19px] leading-[1.12] text-text-primary">
+                    <p className="mt-2 text-[20px] leading-[1.28] text-text-primary sm:text-[22px]">
                       CTA flows straight into a demo-aware brief.
                     </p>
                   </div>
@@ -192,7 +193,17 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
               Full-width preview
             </span>
           </div>
-          <DemoSite demo={demo} navStickyOffsetClass="top-[66px]" compact />
+          {usesExternalPreview ? (
+            <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[#050505] shadow-[0_28px_88px_rgba(0,0,0,0.48)]">
+              <iframe
+                src={previewHref}
+                title={`${demo.niche} website demo mobile preview`}
+                className="block h-[78vh] min-h-[680px] w-full border-0 bg-[#050505]"
+              />
+            </div>
+          ) : (
+            <DemoSite demo={demo} navStickyOffsetClass="top-[66px]" compact />
+          )}
         </AnimatedSection>
       </section>
 

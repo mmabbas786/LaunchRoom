@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { DemoDetailExperience } from "@/components/demos/DemoDetailExperience";
 import { demos, getDemoBySlug } from "@/lib/demos";
+import { siteConfig } from "@/lib/site";
 
 type Params = { slug: string };
 type RouteProps = { params: Promise<Params> };
@@ -22,6 +23,26 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
   return {
     title: `${demo.niche} Website Demo`,
     description: demo.description,
+    openGraph: {
+      title: `${demo.niche} Website Demo`,
+      description: demo.description,
+      url: `${siteConfig.url}/demos/${demo.slug}`,
+      type: "website",
+      images: demo.thumbnailSrc
+        ? [
+            {
+              url: `${siteConfig.url}${demo.thumbnailSrc}`,
+              alt: demo.thumbnailAlt ?? `${demo.niche} website demo`,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: demo.thumbnailSrc ? "summary_large_image" : "summary",
+      title: `${demo.niche} Website Demo`,
+      description: demo.description,
+      images: demo.thumbnailSrc ? [`${siteConfig.url}${demo.thumbnailSrc}`] : undefined,
+    },
   };
 }
 

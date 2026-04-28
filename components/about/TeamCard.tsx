@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { ExternalLink, Figma, Github, Linkedin } from "lucide-react";
 
 import { Tag } from "@/components/ui/Tag";
@@ -28,7 +29,7 @@ export function TeamCard({
 }: {
   name: string;
   role: string;
-  bio: string;
+  bio: ReactNode;
   skills: string[];
   avatarLabel: string;
   avatarClassName: string;
@@ -48,7 +49,9 @@ export function TeamCard({
         </div>
       </div>
 
-      <p className="preserve-case mt-6 flex-1 text-[17px] leading-[1.82]">{bio}</p>
+      <div className="preserve-case mt-6 flex-1 space-y-4 text-[17px] leading-[1.82]">
+        {bio}
+      </div>
 
       {socialLinks.length ? (
         <div className="mt-6 flex flex-wrap gap-3">
@@ -62,9 +65,9 @@ export function TeamCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={item.label}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-accent-border bg-accent-dim text-accent hover:-translate-y-0.5 hover:border-accent hover:text-text-primary"
+                className="social-icon-button"
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-[18px] w-[18px]" />
               </a>
             );
           })}

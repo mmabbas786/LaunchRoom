@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { DemoSite } from "@/components/demos/DemoSite";
 import { demos, getDemoBySlug } from "@/lib/demos";
@@ -24,6 +24,10 @@ export default async function DemoPreviewPage({ params }: RouteProps) {
 
   if (!demo) {
     notFound();
+  }
+
+  if (demo.externalUrl) {
+    redirect(demo.externalUrl);
   }
 
   return (

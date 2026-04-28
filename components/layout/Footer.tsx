@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Github, Instagram, Linkedin, MessageCircle, Twitter } from "lucide-react";
 
@@ -24,9 +25,18 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="font-display text-[28px] font-extrabold tracking-[-0.06em] text-text-primary"
+              className="group inline-flex items-center gap-4"
             >
-              Launch<span className="text-accent">Room</span>
+              <Image
+                src="/launchroom-logo.png"
+                alt="LaunchRoom logo"
+                width={56}
+                height={56}
+                className="h-14 w-14 shrink-0 rounded-[18px] object-cover shadow-[0_12px_30px_rgba(0,0,0,0.22)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_0_1px_rgba(232,160,32,0.34),0_0_0_5px_rgba(232,160,32,0.08),0_18px_40px_rgba(232,160,32,0.22)]"
+              />
+              <span className="font-display text-[28px] font-extrabold tracking-[-0.06em] text-text-primary">
+                Launch<span className="text-accent">Room</span>
+              </span>
             </Link>
             <p className="mt-4 max-w-md text-[15px] leading-[1.75] text-text-secondary">
               {siteConfig.studioLabel}
@@ -48,9 +58,9 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-accent-border bg-accent-dim text-accent hover:-translate-y-0.5 hover:border-accent hover:text-text-primary"
+                    className="social-icon-button"
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-[18px] w-[18px]" />
                   </a>
                 );
               })}

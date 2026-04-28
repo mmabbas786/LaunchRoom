@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import type { Project } from "@/data/projects";
@@ -11,11 +12,23 @@ export function ProjectCard({ project }: { project: Project }) {
       href={`/work/${project.slug}`}
       className="panel panel-hover equal-height-card block"
     >
-      <div
-        className="flex h-[220px] items-center justify-center border-b-2 border-black text-6xl"
-        style={{ background: project.thumbGradient }}
-      >
-        {project.thumbEmoji}
+      <div className="relative h-[220px] overflow-hidden border-b-2 border-black bg-surface-2">
+        {project.thumbImageSrc ? (
+          <Image
+            src={project.thumbImageSrc}
+            alt={project.thumbImageAlt ?? `${project.name} thumbnail`}
+            fill
+            sizes="(min-width: 1024px) 48vw, 100vw"
+            className="object-cover object-top"
+          />
+        ) : (
+          <div
+            className="flex h-full items-center justify-center text-6xl"
+            style={{ background: project.thumbGradient }}
+          >
+            {project.thumbEmoji}
+          </div>
+        )}
       </div>
 
       <div className="equal-height-card-body">

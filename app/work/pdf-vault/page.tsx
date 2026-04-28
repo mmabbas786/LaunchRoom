@@ -132,11 +132,11 @@ export default function PdfVaultCaseStudyPage() {
                   key={feature}
                   className="page-card rounded-[22px] border border-border bg-surface-2 shadow-[0_16px_30px_rgba(0,0,0,0.22)]"
                 >
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-accent-border bg-accent-dim text-accent">
-                    <Icon className="h-5 w-5" />
+                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-[18px] border border-accent-border bg-accent-dim text-accent shadow-[0_18px_34px_rgba(0,0,0,0.18)]">
+                    <Icon className="h-6 w-6" />
                   </span>
-                  <h3 className="mt-5 text-[24px] leading-[1.08]">{feature}</h3>
-                  <p className="mt-3 text-[15px] leading-[1.75]">
+                  <h3 className="mt-6 text-[24px] leading-[1.12]">{feature}</h3>
+                  <p className="mt-3 text-[15px] leading-[1.82]">
                     One focused tool inside a tighter Android utility flow.
                   </p>
                 </article>

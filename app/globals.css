@@ -331,10 +331,11 @@
   }
 
   .meta-chip {
-    @apply inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-text-secondary;
+    @apply inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-[11px] font-medium uppercase tracking-[0.11em] text-text-secondary sm:text-[12px];
     background: rgba(255, 255, 255, 0.03);
     border-color: var(--border);
     font-family: "IBM Plex Mono", monospace;
+    line-height: 1.22;
   }
 
   .horizontal-rail {
@@ -355,8 +356,9 @@
   }
 
   .card-label {
-    @apply text-[11px] font-medium uppercase tracking-[0.15em] text-text-muted;
+    @apply text-[11px] font-medium uppercase tracking-[0.14em] text-text-muted sm:text-[12px];
     font-family: "IBM Plex Mono", monospace;
+    line-height: 1.45;
   }
 
   .balanced-card-grid {
@@ -400,7 +402,7 @@
   }
 
   .equal-height-card-body {
-    @apply flex flex-1 flex-col p-6 sm:p-7;
+    @apply flex flex-1 flex-col p-6 sm:p-7 lg:p-8;
   }
 
   .page-card-grid {
@@ -408,15 +410,20 @@
   }
 
   .page-card {
-    @apply flex h-full flex-col p-6 sm:p-7;
+    @apply flex h-full flex-col p-6 sm:p-7 lg:p-8;
   }
 
   .page-card-roomy {
-    @apply flex h-full flex-col p-6 sm:p-7;
+    @apply flex h-full flex-col p-7 sm:p-8 lg:p-9;
   }
 
   .page-card-roomy-lg {
-    @apply flex h-full flex-col p-6 sm:p-7;
+    @apply flex h-full flex-col p-7 sm:p-8 lg:p-9;
+  }
+
+  .social-icon-button {
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent-border bg-accent-dim text-accent transition-all duration-200 hover:-translate-y-0.5 hover:border-accent hover:text-text-primary;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
   }
 
   .hero-kicker {

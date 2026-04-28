@@ -37,19 +37,19 @@ export function ServicesPreview({ currency }: { currency: SupportedCurrency }) {
             >
               <div className="pointer-events-none absolute right-[-42px] top-[-42px] h-28 w-28 rounded-full bg-[rgba(232,160,32,0.08)] blur-[10px]" />
               <div className="relative">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-dim text-accent">
-                    <Icon className="h-5 w-5" />
+                <div className="flex items-start justify-between gap-4">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-accent-border bg-accent-dim text-accent shadow-[0_18px_34px_rgba(0,0,0,0.18)]">
+                    <Icon className="h-6 w-6" />
                   </span>
-                  <span className="meta-chip">{service.number}</span>
+                  <span className="meta-chip shrink-0">{service.number}</span>
                 </div>
 
-                <h3 className="mt-6 text-[28px] leading-[1.08]">{service.name}</h3>
-                <p className="mt-4 flex-1 text-[15px] leading-[1.8] text-text-secondary">
+                <h3 className="mt-7 text-[28px] leading-[1.12]">{service.name}</h3>
+                <p className="mt-4 flex-1 text-[15px] leading-[1.86] text-text-secondary">
                   {service.shortDescription}
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-2">
+                <div className="mt-7 flex flex-wrap gap-2.5">
                   <span className="meta-chip">{service.timeline}</span>
                   <span className="preserve-case meta-chip border-accent-border bg-accent-dim text-accent">
                     {service.startingPrice[currency]}

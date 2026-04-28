@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
@@ -10,7 +11,7 @@ import { demos, hexToRgba } from "@/lib/demos";
 export const metadata: Metadata = {
   title: "Demo Websites by Niche",
   description:
-    "See LaunchRoom's live website demos for restaurants, clinics, law firms, gyms, and more. Find your niche and start a project with context already attached.",
+    "See LaunchRoom's live website demos for clinics, law firms, CA firms, gyms, and more. Find your niche and start a project with context already attached.",
 };
 
 const statCards = [
@@ -60,18 +61,18 @@ export default function DemosPage() {
                 <article
                   key={item.label}
                   className={[
-                    "flex h-full min-h-[220px] flex-col rounded-xl",
+                    "flex h-full min-h-[236px] flex-col rounded-xl",
                     index === 1 ? "panel-accent" : "panel",
-                    "p-6 sm:p-7",
+                    "p-7 sm:p-8",
                   ].join(" ")}
                 >
                   <p className="card-label">{item.label}</p>
-                  <div className="mt-4 min-h-[3.5rem]">
+                  <div className="mt-5 min-h-[3.75rem]">
                     <h2 className="text-[28px] leading-[1.04] text-text-primary">
                       {item.value}
                     </h2>
                   </div>
-                  <p className="mt-auto pt-5 text-[15px] leading-[1.8] text-text-secondary">
+                  <p className="mt-auto max-w-[28ch] pt-6 text-[15px] leading-[1.84] text-text-secondary">
                     {item.copy}
                   </p>
                 </article>
@@ -109,6 +110,16 @@ export default function DemosPage() {
                   background: `linear-gradient(145deg, ${hexToRgba(demo.accentColor, 0.42)} 0%, rgba(10,10,10,0.98) 68%)`,
                 }}
               >
+                {demo.thumbnailSrc ? (
+                  <Image
+                    src={demo.thumbnailSrc}
+                    alt={demo.thumbnailAlt ?? `${demo.niche} website demo`}
+                    fill
+                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top"
+                  />
+                ) : null}
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,6,6,0.12),rgba(6,6,6,0.74)_100%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.2),transparent_34%)]" />
                 <div className="relative flex min-h-[188px] items-start justify-between gap-5">
                   <div className="flex min-h-[124px] flex-1 flex-col">
@@ -120,31 +131,33 @@ export default function DemosPage() {
                       {demo.businessName}
                     </p>
                   </div>
-                  <span className="pt-1 text-[48px] leading-none">{demo.coverEmoji}</span>
+                  {!demo.thumbnailSrc ? (
+                    <span className="pt-1 text-[48px] leading-none">{demo.coverEmoji}</span>
+                  ) : null}
                 </div>
               </div>
 
-              <div className="flex flex-1 flex-col p-6">
-                <div className="flex min-h-[44px] items-start justify-between gap-3">
-                  <Badge variant="success" className="border-gold/20 bg-gold/10 text-gold">
-                    Live demo
+            <div className="flex flex-1 flex-col p-7">
+              <div className="flex min-h-[44px] items-start justify-between gap-3">
+                <Badge variant="success" className="border-gold/20 bg-gold/10 text-gold">
+                  Live demo
                   </Badge>
                   <span className="max-w-[13ch] text-right text-[12px] uppercase tracking-[0.18em] text-text-muted">
                     {demo.location}
                   </span>
                 </div>
 
-                <p className="mt-4 min-h-[5.6rem] text-[16px] leading-[1.82] text-text-secondary">
+                <p className="mt-5 min-h-[5.8rem] text-[16px] leading-[1.88] text-text-secondary">
                   {demo.tagline}
                 </p>
 
-                <div className="mt-6 flex min-h-[76px] flex-wrap content-start gap-2">
+                <div className="mt-7 flex min-h-[84px] flex-wrap content-start gap-2.5">
                   {demo.tags.slice(0, 3).map((tag) => (
                     <Tag key={tag}>{tag}</Tag>
                   ))}
                 </div>
 
-                <p className="mt-auto pt-6 inline-flex items-center gap-2 text-[15px] font-medium text-accent group-hover:text-text-primary">
+                <p className="mt-auto pt-7 inline-flex items-center gap-2 text-[15px] font-medium text-accent group-hover:text-text-primary">
                   View demo
                   <span aria-hidden="true">→</span>
                 </p>

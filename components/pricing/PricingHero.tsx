@@ -10,6 +10,7 @@ import { CurrencyToggle } from "@/components/pricing/CurrencyToggle";
 
 type PricingHeroProps = {
   currency: SupportedCurrency;
+  basicPrice: string;
   launchPrice: string;
   scalePrice: string;
   locationPricingStatus: "idle" | "detecting" | "granted" | "denied" | "unsupported";
@@ -22,6 +23,7 @@ const heroMessage =
 
 export function PricingHero({
   currency,
+  basicPrice,
   launchPrice,
   scalePrice,
   locationPricingStatus,
@@ -47,14 +49,14 @@ export function PricingHero({
     <PageHeroGrid
       label="Pricing"
       heading="Clear website packages that keep launch decisions simple."
-      description="Choose a lean launch package or a wider digital presence package. Scope, support, and optional add-ons are visible upfront so you can approve with confidence."
+      description="Choose from a lean BASIC one-page website, a broader LAUNCH package, or the wider SCALE build. Scope, support, and add-ons are visible upfront so you can approve with confidence."
       ctaButtons={
         <div className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-[18px] border border-white/10 bg-white/[0.04] p-4">
               <p className="card-label text-white/40">Packages</p>
               <p className="mt-2 text-[15px] leading-[1.68] text-on-dark">
-                2 ready website packages with clear starting points.
+                3 ready website packages with clear starting points.
               </p>
             </div>
             <div className="rounded-[18px] border border-white/10 bg-white/[0.04] p-4">
@@ -88,6 +90,21 @@ export function PricingHero({
         </div>
       }
       topLeftCard={{
+        label: "Basic",
+        content: (
+          <>
+            <p className="preserve-case text-[24px] leading-none text-text-primary">
+              {basicPrice}
+            </p>
+            <p className="mt-3 text-[15px] leading-[1.72] text-text-secondary">
+              Best for a focused one-page business website with mobile-ready
+              design, fast setup, hosting support, and 1 month of post-launch help.
+            </p>
+            <span className="meta-chip meta-chip-dark mt-4 w-fit">1-page website</span>
+          </>
+        ),
+      }}
+      topRightCard={{
         label: "Launch",
         content: (
           <>
@@ -95,35 +112,21 @@ export function PricingHero({
               {launchPrice}
             </p>
             <p className="mt-3 text-[15px] leading-[1.72] text-text-secondary">
-              Best for a focused 5-page website with mobile-ready design, lead
-              capture, WhatsApp integration, SEO basics, and support after launch.
+              Best for a fuller brochure site with lead capture, WhatsApp
+              integration, SEO basics, and a stronger first web presence.
             </p>
-            <span className="meta-chip meta-chip-dark mt-4 w-fit">5-page website</span>
-          </>
-        ),
-      }}
-      topRightCard={{
-        label: "Scale",
-        content: (
-          <>
-            <p className="preserve-case text-[24px] leading-none text-text-primary">
-              {scalePrice}
-            </p>
-            <p className="mt-3 text-[15px] leading-[1.72] text-text-secondary">
-              Better for a broader launch: up to 10 pages plus branding, Google
-              Business, analytics, stronger SEO, conversion thinking, and longer
-              support.
-            </p>
-            <span className="meta-chip mt-4 w-fit">Up to 10 pages</span>
+            <span className="meta-chip mt-4 w-fit">5-page website</span>
           </>
         ),
       }}
       bottomCard={{
-        label: "Before kickoff",
+        label: "Scale",
         content: (
           <>
             <p className="text-[26px] leading-[1.08] text-text-primary">
-              You choose a package first, then we lock the final scope in writing.
+              SCALE starts at <span className="preserve-case">{scalePrice}</span> for
+              broader websites that need branding, analytics, stronger SEO, and
+              longer post-launch support.
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <div className="rounded-[18px] border border-white/10 bg-white/[0.04] p-4">
@@ -141,7 +144,7 @@ export function PricingHero({
               <div className="rounded-[18px] border border-white/10 bg-white/[0.04] p-4">
                 <p className="card-label text-white/40">Support</p>
                 <p className="mt-2 text-[15px] leading-[1.72] text-text-secondary">
-                  Launch and Scale both include post-launch help.
+                  Every package includes post-launch help.
                 </p>
               </div>
             </div>

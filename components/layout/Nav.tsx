@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -51,7 +52,14 @@ export function Nav() {
                 : "border-transparent bg-transparent shadow-none",
             )}
           >
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="group flex items-center gap-3">
+              <Image
+                src="/launchroom-logo.png"
+                alt="LaunchRoom logo"
+                width={48}
+                height={48}
+                className="h-11 w-11 shrink-0 rounded-[14px] object-cover shadow-[0_12px_28px_rgba(0,0,0,0.24)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_0_1px_rgba(232,160,32,0.34),0_0_0_5px_rgba(232,160,32,0.08),0_18px_38px_rgba(232,160,32,0.22)]"
+              />
               <span className="font-display text-[24px] font-extrabold tracking-[-0.06em] text-text-primary">
                 Launch<span className="text-accent">Room</span>
               </span>
@@ -140,9 +148,18 @@ export function Nav() {
               <div className="mb-8 flex items-start justify-between gap-4 border-b border-border pb-5 sm:items-center sm:border-b-0 sm:pb-0">
                 <Link
                   href="/"
-                  className="pr-3 font-display text-[24px] font-extrabold tracking-[-0.06em] text-text-primary"
+                  className="group flex items-center gap-3 pr-3"
                 >
-                  Launch<span className="text-accent">Room</span>
+                  <Image
+                    src="/launchroom-logo.png"
+                    alt="LaunchRoom logo"
+                    width={44}
+                    height={44}
+                    className="h-10 w-10 shrink-0 rounded-[12px] object-cover shadow-[0_10px_24px_rgba(0,0,0,0.22)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_0_1px_rgba(232,160,32,0.34),0_0_0_5px_rgba(232,160,32,0.08),0_16px_34px_rgba(232,160,32,0.22)]"
+                  />
+                  <span className="font-display text-[24px] font-extrabold tracking-[-0.06em] text-text-primary">
+                    Launch<span className="text-accent">Room</span>
+                  </span>
                 </Link>
 
                 <button

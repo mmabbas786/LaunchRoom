@@ -719,7 +719,7 @@ document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 2. `<PageHero>` — eyebrow "Contact", H1 "Let's talk.", sub "We respond within 24 hours."
 3. `<ContactLayout>` — 2-col layout:
    - **Left (40%):** Contact info
-     - Email: hello@launchroom.in
+     - Email: infolaunchroom@gmail.com
      - WhatsApp/phone (optional)
      - Location: Kolkata, India
      - Response time promise

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { projects } from "@/data/projects";
@@ -6,16 +7,28 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
 
 export function WorkPreview() {
+  const hasSingleProject = projects.length === 1;
+
   return (
     <section className="page-shell section-shell-tight">
       <AnimatedSection className="text-center">
-        <p className="eyebrow mx-auto">Complete Projects</p>
+        <p className="eyebrow mx-auto">
+          {hasSingleProject ? "Client Work" : "Complete Projects"}
+        </p>
         <h2 className="section-title mx-auto max-w-[14ch]">
-          Check out our latest complete projects.
+          {hasSingleProject
+            ? "See the live client website we've launched."
+            : "Check out our latest complete projects."}
         </h2>
       </AnimatedSection>
 
-      <AnimatedSection className="page-card-grid mt-10 lg:grid-cols-3" delay={0.05}>
+      <AnimatedSection
+        className={[
+          "page-card-grid mt-10",
+          hasSingleProject ? "mx-auto max-w-[560px]" : "lg:grid-cols-3",
+        ].join(" ")}
+        delay={0.05}
+      >
         {projects.map((project, index) => (
           <Link
             key={project.slug}
@@ -27,11 +40,23 @@ export function WorkPreview() {
             }
           >
             <div className="p-4">
-              <div
-                className="flex h-[220px] items-center justify-center rounded-[18px] border border-border text-[72px]"
-                style={{ background: project.thumbGradient }}
-              >
-                {project.thumbEmoji}
+              <div className="relative h-[220px] overflow-hidden rounded-[18px] border border-border bg-surface-2">
+                {project.thumbImageSrc ? (
+                  <Image
+                    src={project.thumbImageSrc}
+                    alt={project.thumbImageAlt ?? `${project.name} thumbnail`}
+                    fill
+                    sizes="(min-width: 1024px) 32vw, 100vw"
+                    className="object-cover object-top"
+                  />
+                ) : (
+                  <div
+                    className="flex h-full items-center justify-center text-[72px]"
+                    style={{ background: project.thumbGradient }}
+                  >
+                    {project.thumbEmoji}
+                  </div>
+                )}
               </div>
             </div>
             <div className="px-6 pb-7">

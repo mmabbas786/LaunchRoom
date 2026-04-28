@@ -27,6 +27,10 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
+  icons: {
+    icon: "/favicon-round.svg",
+    apple: "/launchroom-logo.png",
+  },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };

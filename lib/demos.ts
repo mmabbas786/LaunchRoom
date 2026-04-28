@@ -31,6 +31,8 @@ export type Demo = {
   description: string;
   accentColor: string;
   coverEmoji: string;
+  thumbnailSrc?: string;
+  thumbnailAlt?: string;
   industry: string;
   tags: string[];
   sections: DemoSection[];
@@ -39,6 +41,7 @@ export type Demo = {
   phone: string;
   email: string;
   whatsapp: string;
+  externalUrl?: string;
 };
 
 export function hexToRgba(hex: string, alpha: number) {
@@ -59,66 +62,19 @@ export function hexToRgba(hex: string, alpha: number) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export const featuredDemoSlugs = ["restaurant", "clinic", "gym"] as const;
+export const featuredDemoSlugs = ["ca-firm", "clinic", "law-firm"] as const;
 
 export const demos: Demo[] = [
-  {
-    slug: "restaurant",
-    niche: "Restaurant",
-    tagline: "A beautiful menu, bookings flow, and location page that feels ready to launch.",
-    description:
-      "A polished restaurant website demo with menu highlights, WhatsApp booking, testimonials, and a clear contact path.",
-    accentColor: "#e05c2a",
-    coverEmoji: "🍽️",
-    industry: "Food & Dining",
-    tags: ["Menu highlights", "Reservations", "WhatsApp orders", "Location section"],
-    businessName: "Spice & Coal",
-    location: "Central Kolkata",
-    phone: "+91 00000 00001",
-    email: "hello@spiceandcoal.example",
-    whatsapp: "910000000001",
-    sections: [
-      {
-        type: "hero",
-        headline: "Bold flavours. Honest fire.",
-        subheadline:
-          "Contemporary Indian dining built around open-fire cooking, weekday lunch sets, and easy WhatsApp reservations.",
-        cta: "Book a Table",
-      },
-      {
-        type: "services",
-        title: "Menu highlights",
-        items: [
-          { name: "Dal Makhani", desc: "Slow-cooked black lentils with butter and cream.", price: "₹320" },
-          { name: "Coal-roasted chicken", desc: "House marinade, charred finish, mint chutney.", price: "₹580" },
-          { name: "Peshwari naan", desc: "Soft naan stuffed with almond and coconut.", price: "₹120" },
-          { name: "Kulfi brulee", desc: "Pistachio kulfi with a crackling caramel top.", price: "₹180" },
-        ],
-      },
-      {
-        type: "gallery",
-        title: "Inside the experience",
-        images: ["Open-fire kitchen", "Warm dining room", "Signature dessert pass"],
-      },
-      {
-        type: "testimonials",
-        items: [
-          { name: "Priya M.", text: "The menu feels premium and the reservation flow is wonderfully simple.", rating: 5 },
-          { name: "Rahul S.", text: "Exactly the kind of restaurant site that makes you want to visit tonight.", rating: 5 },
-          { name: "Ananya K.", text: "The visuals, menu cards, and contact details feel launch-ready.", rating: 4 },
-        ],
-      },
-      { type: "contact" },
-    ],
-  },
   {
     slug: "law-firm",
     niche: "Law Firm",
     tagline: "A credible legal website that builds trust before the first consultation call.",
     description:
       "A clean law firm website demo with practice areas, proof points, consultation CTA, and a strong professional tone.",
-    accentColor: "#1a3a5c",
+    accentColor: "#d4a843",
     coverEmoji: "⚖️",
+    thumbnailSrc: "/law-firm-thumbnail.png",
+    thumbnailAlt: "Homepage screenshot of the Bose & Partners law firm demo website",
     industry: "Legal Services",
     tags: ["Practice areas", "Consultation CTA", "Trust signals", "Professional layout"],
     businessName: "Bose & Partners",
@@ -126,6 +82,7 @@ export const demos: Demo[] = [
     phone: "+91 00000 00002",
     email: "contact@bosepartners.example",
     whatsapp: "910000000002",
+    externalUrl: "https://law-firm-demo-site.netlify.app/",
     sections: [
       {
         type: "hero",
@@ -161,6 +118,58 @@ export const demos: Demo[] = [
     ],
   },
   {
+    slug: "ca-firm",
+    niche: "CA Firm",
+    tagline: "A modern chartered accountant website that feels credible before the first consultation.",
+    description:
+      "A polished CA firm website demo with service clarity, trust-focused sections, and a clean consultation flow.",
+    accentColor: "#0f766e",
+    coverEmoji: "📊",
+    thumbnailSrc: "/ca-firm-thumbnail.png",
+    thumbnailAlt: "Homepage screenshot of the CA Firm chartered accountant demo website",
+    industry: "Finance & Compliance",
+    tags: ["Service clarity", "Trust signals", "Consultation CTA", "Professional positioning"],
+    businessName: "CA FIRM",
+    location: "Kolkata",
+    phone: "+91 00000 00013",
+    email: "hello@ledgerpeak.example",
+    whatsapp: "910000000013",
+    externalUrl: "https://ca-firm-demo.netlify.app/",
+    sections: [
+      {
+        type: "hero",
+        headline: "Clarity for your compliance and growth decisions.",
+        subheadline:
+          "A trust-first digital presence for chartered accountant firms that need to look modern, credible, and consultation-ready.",
+        cta: "Book a Consultation",
+      },
+      {
+        type: "services",
+        title: "What the firm offers",
+        items: [
+          { name: "GST and compliance", desc: "Returns, filings, reconciliations, and ongoing advisory." },
+          { name: "Income tax support", desc: "Personal and business filing with clear next-step guidance." },
+          { name: "Audit and assurance", desc: "Process-ready documentation and professional review." },
+          { name: "Business advisory", desc: "Entity setup, accounting structure, and financial clarity." },
+        ],
+      },
+      {
+        type: "gallery",
+        title: "What the demo highlights",
+        images: ["Trust-led hero layout", "Service overview cards", "Consultation-first contact flow"],
+      },
+      {
+        type: "testimonials",
+        items: [
+          { name: "Ritika S.", text: "Clean, credible, and exactly the tone a modern CA firm needs.", rating: 5 },
+          { name: "Sanjay D.", text: "The services and CTA flow feel clear without becoming corporate sludge.", rating: 5 },
+          { name: "Abhinav M.", text: "A very strong demo for firms that want to look current and trustworthy.", rating: 5 },
+        ],
+      },
+      { type: "contact" },
+    ],
+  },
+  {
     slug: "clinic",
     niche: "Clinic / Doctor",
     tagline: "A clean medical website that builds trust and drives appointment enquiries.",
@@ -168,13 +177,16 @@ export const demos: Demo[] = [
       "A clinic website demo with services, consultation pricing, patient trust cues, and a simple appointment-first structure.",
     accentColor: "#0d7a5f",
     coverEmoji: "🏥",
+    thumbnailSrc: "/clinic-demo-thumbnail.png",
+    thumbnailAlt: "Homepage screenshot of the Wellnest clinic and doctor demo website",
     industry: "Healthcare",
     tags: ["Doctor profile", "Consultation pricing", "Appointments", "Patient trust"],
-    businessName: "Wellnest Clinic",
+    businessName: "Wellnest",
     location: "North Kolkata",
     phone: "+91 00000 00003",
     email: "appointments@wellnestclinic.example",
     whatsapp: "910000000003",
+    externalUrl: "https://doctor-demo-site.netlify.app/",
     sections: [
       {
         type: "hero",
@@ -596,55 +608,6 @@ export const demos: Demo[] = [
           { name: "Sunita B.", text: "Warm and reassuring without losing clarity. Exactly right for pet care.", rating: 5 },
           { name: "Kartik R.", text: "The tone and layout make it easy to trust the clinic.", rating: 5 },
           { name: "Nandita P.", text: "A great example of how to design for anxious pet owners.", rating: 5 },
-        ],
-      },
-      { type: "contact" },
-    ],
-  },
-  {
-    slug: "local-retail",
-    niche: "Local Retail / Shop",
-    tagline: "A catalogue-style site that drives WhatsApp orders and store visits.",
-    description:
-      "A local shop website demo with product category highlights, WhatsApp ordering cues, and simple location-first UX.",
-    accentColor: "#d35400",
-    coverEmoji: "🛒",
-    industry: "Retail",
-    tags: ["Product catalogue", "WhatsApp ordering", "Store info", "Neighbourhood trust"],
-    businessName: "Raja General Store",
-    location: "Neighbourhood Market, Kolkata",
-    phone: "+91 00000 00012",
-    email: "orders@rajageneralstore.example",
-    whatsapp: "910000000012",
-    sections: [
-      {
-        type: "hero",
-        headline: "Your neighbourhood store, now easier to order from.",
-        subheadline:
-          "A straightforward retail site designed to make local shops easier to discover, trust, and order from on mobile.",
-        cta: "Order on WhatsApp",
-      },
-      {
-        type: "services",
-        title: "What we stock",
-        items: [
-          { name: "Groceries and staples", desc: "Everyday kitchen essentials and pantry basics." },
-          { name: "Household items", desc: "Cleaning, utility, and personal-care products." },
-          { name: "Dairy and fresh", desc: "Daily essentials for quick local delivery." },
-          { name: "Snacks and beverages", desc: "Impulse buys, drinks, and packaged favourites." },
-        ],
-      },
-      {
-        type: "gallery",
-        title: "Retail-led moments",
-        images: ["Mobile product categories", "Delivery-friendly CTA strip", "Store information panel"],
-      },
-      {
-        type: "testimonials",
-        items: [
-          { name: "Mira D.", text: "This makes a local store feel much more accessible online.", rating: 5 },
-          { name: "Gopal S.", text: "Especially strong for shops that mostly close sales through WhatsApp.", rating: 5 },
-          { name: "Anita R.", text: "Simple, practical, and very believable for a neighbourhood retailer.", rating: 5 },
         ],
       },
       { type: "contact" },

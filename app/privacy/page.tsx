@@ -44,7 +44,7 @@ export default function PrivacyPage() {
           If you are located in a region with data rights protections, you may
           request access to, correction of, or deletion of your data by emailing
           {" "}
-          <span className="preserve-case">hello@launchroom.in</span>.
+          <span className="preserve-case">infolaunchroom@gmail.com</span>.
         </p>
 
         <h2>Data retention</h2>
@@ -57,8 +57,8 @@ export default function PrivacyPage() {
         <h2>Contact</h2>
         <p>
           For any privacy-related questions, contact{" "}
-          <a className="preserve-case text-accent" href="mailto:hello@launchroom.in">
-            hello@launchroom.in
+          <a className="preserve-case text-accent" href="mailto:infolaunchroom@gmail.com">
+            infolaunchroom@gmail.com
           </a>
           .
         </p>

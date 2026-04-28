@@ -19,6 +19,7 @@ export type PricingAddon = {
 };
 
 export type PricingCurrencyData = {
+  basic: PricingPlan;
   launch: PricingPlan;
   scale: PricingPlan;
   addons: PricingAddon[];
@@ -26,6 +27,21 @@ export type PricingCurrencyData = {
 
 export const pricingData: Record<SupportedCurrency, PricingCurrencyData> = {
   INR: {
+    basic: {
+      name: "BASIC",
+      price: "₹14,999",
+      tagline: "A lean one-page website package for businesses that need a polished web presence fast.",
+      features: [
+        "1-Page Website",
+        "Mobile-Optimized Design",
+        "Fast, Secure Website",
+        "Domain + Hosting Setup",
+        "1 Month Support",
+      ],
+      whatsapp:
+        "Hi, I am interested in the Basic package (₹14,999). Please share more details.",
+      cta: "Get Started",
+    },
     launch: {
       name: "LAUNCH",
       price: "₹24,999",
@@ -77,6 +93,21 @@ export const pricingData: Record<SupportedCurrency, PricingCurrencyData> = {
     ],
   },
   USD: {
+    basic: {
+      name: "BASIC",
+      price: "$499",
+      tagline: "A lean one-page website package for businesses that need a polished web presence fast.",
+      features: [
+        "1-Page Website",
+        "Mobile-Optimized Design",
+        "Fast, Secure Website",
+        "Domain + Hosting Setup",
+        "1 Month Support",
+      ],
+      whatsapp:
+        "Hi, I am interested in the Basic package ($499). Please share more details.",
+      cta: "Get Started",
+    },
     launch: {
       name: "LAUNCH",
       price: "$799",
@@ -140,6 +171,10 @@ function getAddonPrice(currency: SupportedCurrency, name: string) {
 }
 
 export const pricingSummary = {
+  basic: {
+    INR: pricingData.INR.basic.price,
+    USD: pricingData.USD.basic.price,
+  } satisfies CurrencyAmount,
   launch: {
     INR: pricingData.INR.launch.price,
     USD: pricingData.USD.launch.price,

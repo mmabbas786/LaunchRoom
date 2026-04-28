@@ -140,6 +140,10 @@ export function ServicesPageContent() {
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <span className="meta-chip">
+                    Basic{" "}
+                    <span className="preserve-case">{pricingSummary.basic[currency]}</span>
+                  </span>
+                  <span className="meta-chip">
                     Launch{" "}
                     <span className="preserve-case">{pricingSummary.launch[currency]}</span>
                   </span>

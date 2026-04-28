@@ -33,9 +33,9 @@ const paymentTerms = [
   },
   {
     label: "Support",
-    title: "Post-launch help is already built into the plans",
+    title: "Post-launch help is already built into every website plan",
     description:
-      "Launch includes 1 month of support and Scale includes 3 months, covering guidance and fixes related to the delivered scope.",
+      "Basic and Launch include 1 month of support, while Scale includes 3 months, covering guidance and fixes related to the delivered scope.",
   },
 ];
 
@@ -52,6 +52,7 @@ export function PricingPageContent() {
     <>
       <PricingHero
         currency={currency}
+        basicPrice={currentPricing.basic.price}
         launchPrice={currentPricing.launch.price}
         scalePrice={currentPricing.scale.price}
         locationPricingStatus={locationPricingStatus}
@@ -63,16 +64,20 @@ export function PricingPageContent() {
         <AnimatedSection>
           <SectionHeader
             eyebrow="Packages"
-            title="Two website packages shaped for faster approvals and cleaner launches."
+            title="Three website packages shaped for faster approvals and cleaner launches."
           />
           <p className="section-copy">
-            Pick the scope that fits right now. If the project expands later, we can
-            add pages, e-commerce, maintenance, or content support without resetting
-            the foundation.
+            Start with the smallest package that fits the current goal. If the
+            project expands later, we can add pages, e-commerce, maintenance, or
+            content support without resetting the foundation.
           </p>
         </AnimatedSection>
 
-        <div className="equal-height-grid mt-8 lg:grid-cols-2">
+        <div className="equal-height-grid mt-8 xl:grid-cols-3">
+          <AnimatedSection delay={0.04}>
+            <PricingCard plan={currentPricing.basic} currency={currency} />
+          </AnimatedSection>
+
           <AnimatedSection delay={0.05}>
             <PricingCard plan={currentPricing.launch} currency={currency} />
           </AnimatedSection>

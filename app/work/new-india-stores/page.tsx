@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
@@ -9,6 +10,8 @@ import { siteConfig } from "@/lib/site";
 
 const tags = ["Web", "HTML/CSS", "Glassmorphism"];
 const liveProjectUrl = "https://newindiastores.com/";
+const screenshotSrc = "/new-india-stores-thumbnail.png";
+const screenshotAlt = "Homepage screenshot of the New India Stores website";
 
 export const metadata: Metadata = {
   title: "New India Stores — Case Study",
@@ -26,12 +29,19 @@ export const metadata: Metadata = {
       "Single-page glassmorphism website for a Kolkata ship chandling company, built to establish credibility with international maritime buyers.",
     url: `${siteConfig.url}/work/new-india-stores`,
     type: "article",
+    images: [
+      {
+        url: `${siteConfig.url}${screenshotSrc}`,
+        alt: screenshotAlt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "New India Stores — Case Study",
     description:
       "A self-contained HTML/CSS website built for New India Stores and deployed to Hostinger.",
+    images: [`${siteConfig.url}${screenshotSrc}`],
   },
 };
 
@@ -165,12 +175,14 @@ export default function NewIndiaStoresCaseStudyPage() {
 
       <AnimatedSection className="mt-8" delay={0.16}>
         <div className="panel overflow-hidden">
-          <div className="aspect-[16/9] bg-[radial-gradient(circle_at_top,rgba(232,160,32,0.2),transparent_26%),linear-gradient(135deg,#071018,#102133_52%,#060b12)] p-5 sm:p-7">
-            <div className="flex h-full w-full items-center justify-center rounded-[28px] border border-accent-border bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] px-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_20px_44px_rgba(0,0,0,0.28)]">
-              <p className="text-[clamp(26px,3vw,40px)] leading-[1.08] text-text-primary">
-                New India Stores - Screenshot coming soon
-              </p>
-            </div>
+          <div className="relative aspect-[16/9] bg-[radial-gradient(circle_at_top,rgba(232,160,32,0.2),transparent_26%),linear-gradient(135deg,#071018,#102133_52%,#060b12)]">
+            <Image
+              src={screenshotSrc}
+              alt={screenshotAlt}
+              fill
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              className="object-cover object-top"
+            />
           </div>
         </div>
       </AnimatedSection>

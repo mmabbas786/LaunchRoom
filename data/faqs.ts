@@ -36,7 +36,7 @@ export function getServiceFaqs(currency: SupportedCurrency): FAQItem[] {
     {
       question: "What happens after launch?",
       answer:
-        `Launch includes 1 month of support and Scale includes 3 months. Ongoing monthly maintenance starts at ${formatRecurringPrice(pricingSummary.monthlyMaintenance[currency])}, and you receive full source code and credentials at handover.`,
+        `Basic and Launch include 1 month of support, while Scale includes 3 months. Ongoing monthly maintenance starts at ${formatRecurringPrice(pricingSummary.monthlyMaintenance[currency])}, and you receive full source code and credentials at handover.`,
     },
   ];
 }
@@ -62,7 +62,7 @@ export const pricingFaqs: FAQItem[] = [
   {
     question: "Which package is better for a small business website?",
     answer:
-      "Launch is ideal for a focused brochure-style website up to 5 pages. Scale is better when you want a fuller digital presence with branding, analytics, content support, and longer post-launch help.",
+      "Basic is ideal for a one-page website with the essentials in place. Launch is better for a focused brochure-style website up to 5 pages, and Scale fits businesses that want a fuller digital presence with branding, analytics, content support, and longer post-launch help.",
   },
   {
     question: "Can I pay in Indian rupees or US dollars?",
@@ -82,11 +82,11 @@ export const pricingFaqs: FAQItem[] = [
   {
     question: "How do revisions and support work after launch?",
     answer:
-      "Scale includes 2 free revisions and 3 months of support. Launch includes 1 month of support, and extra revisions or monthly maintenance can be added separately when needed.",
+      "Scale includes 2 free revisions and 3 months of support. Basic and Launch include 1 month of support, and extra revisions or monthly maintenance can be added separately when needed.",
   },
   {
-    question: "Can I upgrade from Launch to Scale later?",
+    question: "Can I upgrade from Basic or Launch later?",
     answer:
-      "Yes. If the scope expands during the project, we can upgrade the package and adjust the quote before the added work begins.",
+      "Yes. If the scope expands during the project, we can move from Basic to Launch or Scale, or from Launch to Scale, and adjust the quote before the added work begins.",
   },
 ];
