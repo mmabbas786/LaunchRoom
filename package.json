@@ -12,6 +12,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@types/react-dom": "^19.2.3",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.8",
     "lucide-react": "^0.400.0",
