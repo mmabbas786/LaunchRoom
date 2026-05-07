@@ -643,6 +643,14 @@ textarea {
   background: linear-gradient(135deg, #171009, #5a4320);
 }
 
+.work-thumb-food {
+  background: linear-gradient(135deg, #25120c, #e05c2a);
+}
+
+.work-thumb-clinic {
+  background: linear-gradient(135deg, #0a1b18, #0d7a5f);
+}
+
 .work-emoji {
   font-size: 3.5rem;
 }
