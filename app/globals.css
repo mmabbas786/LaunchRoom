@@ -46,7 +46,7 @@
   body {
     background: var(--bg);
     color: var(--text-primary);
-    @apply font-body antialiased transition-all duration-200;
+    @apply font-body antialiased;
     isolation: isolate;
     letter-spacing: -0.01em;
     text-rendering: optimizeLegibility;

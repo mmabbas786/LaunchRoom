@@ -85,9 +85,29 @@ export default function AboutPage() {
                   platform: "github",
                 },
                 {
-                  href: "https://www.linkedin.com/",
+                  href: "https://www.linkedin.com/in/mirzamehediabbas/",
                   label: "Mirza on LinkedIn",
                   platform: "linkedin",
+                },
+                {
+                  href: "https://www.instagram.com/mmabbasofficial/",
+                  label: "Mirza on Instagram",
+                  platform: "instagram",
+                },
+                {
+                  href: "https://www.threads.net/@mirza.abbas_",
+                  label: "Mirza on Threads",
+                  platform: "threads",
+                },
+                {
+                  href: "https://x.com/mmabbasofficial",
+                  label: "Mirza on X",
+                  platform: "twitter",
+                },
+                {
+                  href: "https://api.whatsapp.com/send/?phone=919163030285&text=Hello%20Mirza,%20I%20want%20to%20discuss%20a%20project.",
+                  label: "Mirza on WhatsApp",
+                  platform: "whatsapp",
                 },
               ]}
             />
@@ -116,7 +136,7 @@ export default function AboutPage() {
               avatarClassName="bg-[linear-gradient(135deg,#f0bd57_0%,#b07811_100%)] text-[#080808]"
               socialLinks={[
                 {
-                  href: "https://www.linkedin.com/",
+                  href: "https://www.linkedin.com/in/mirzamehediabbas/", // Placeholder or LaunchRoom LinkedIn
                   label: "Arsh on LinkedIn",
                   platform: "linkedin",
                 },

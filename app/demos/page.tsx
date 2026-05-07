@@ -94,31 +94,35 @@ export default function DemosPage() {
       </AnimatedSection>
 
       <div className="page-card-grid mt-10 md:grid-cols-2 xl:grid-cols-3">
-        {demos.map((demo, index) => (
-          <AnimatedSection
-            key={demo.slug}
-            className="h-full"
-            delay={0.04 + (index % 3) * 0.03}
-          >
-            <Link
-              href={`/demos/${demo.slug}`}
-              className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-border bg-surface-1 panel-hover"
+        {demos.map((demo, index) => {
+          const isPriority = index < 4;
+
+          return (
+            <AnimatedSection
+              key={demo.slug}
+              className="h-full"
+              delay={0.02 + (index % 3) * 0.02}
             >
-              <div
-                className="relative overflow-hidden border-b border-border px-6 py-8"
-                style={{
-                  background: `linear-gradient(145deg, ${hexToRgba(demo.accentColor, 0.42)} 0%, rgba(10,10,10,0.98) 68%)`,
-                }}
+              <Link
+                href={`/demos/${demo.slug}`}
+                className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-border bg-surface-1 panel-hover"
               >
-                {demo.thumbnailSrc ? (
-                  <Image
-                    src={demo.thumbnailSrc}
-                    alt={demo.thumbnailAlt ?? `${demo.niche} website demo`}
-                    fill
-                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover object-top"
-                  />
-                ) : null}
+                <div
+                  className="relative overflow-hidden border-b border-border px-6 py-8"
+                  style={{
+                    background: `linear-gradient(145deg, ${hexToRgba(demo.accentColor, 0.42)} 0%, rgba(10,10,10,0.98) 68%)`,
+                  }}
+                >
+                  {demo.thumbnailSrc ? (
+                    <Image
+                      src={demo.thumbnailSrc}
+                      alt={demo.thumbnailAlt ?? `${demo.niche} website demo`}
+                      fill
+                      priority={isPriority}
+                      sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover object-top"
+                    />
+                  ) : null}
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,6,6,0.12),rgba(6,6,6,0.74)_100%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.2),transparent_34%)]" />
                 <div className="relative flex min-h-[188px] items-start justify-between gap-5">
@@ -164,8 +168,9 @@ export default function DemosPage() {
               </div>
             </Link>
           </AnimatedSection>
-        ))}
-      </div>
+        );
+      })}
+    </div>
 
       <AnimatedSection className="mt-10" delay={0.08}>
         <div className="panel-accent p-7 text-center sm:p-8 lg:p-10">

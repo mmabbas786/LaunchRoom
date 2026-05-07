@@ -6,13 +6,14 @@ import { siteConfig } from "@/lib/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
-  { label: "LinkedIn", href: "https://www.linkedin.com/", icon: Linkedin },
+  { label: "Instagram", href: "https://www.instagram.com/launchroom.in/", icon: Instagram },
+  { label: "Threads", href: "https://www.threads.net/@launchroom.in", icon: MessageCircle },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/mirzamehediabbas/", icon: Linkedin },
   { label: "GitHub", href: "https://github.com/mmabbas786", icon: Github },
-  { label: "Twitter", href: "https://x.com/", icon: Twitter },
+  { label: "Twitter", href: "https://x.com/mmabbasofficial", icon: Twitter },
   {
     label: "WhatsApp",
-    href: getWhatsAppHref("Hello LaunchRoom, I want to discuss website or app development."),
+    href: "https://api.whatsapp.com/send/?phone=919163030285&text=Hello%20LaunchRoom,%20I%20want%20to%20discuss%20website%20or%20app%20development.",
     icon: MessageCircle,
   },
 ];

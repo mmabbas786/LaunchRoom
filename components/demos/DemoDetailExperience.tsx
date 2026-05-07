@@ -180,6 +180,7 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
               <iframe
                 src={previewHref}
                 title={`${demo.niche} website demo preview`}
+                loading="lazy"
                 className="block h-[calc(100vh-170px)] w-full border-0 bg-[#050505]"
               />
             </div>
@@ -198,10 +199,10 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
               <iframe
                 src={previewHref}
                 title={`${demo.niche} website demo mobile preview`}
+                loading="lazy"
                 className="block h-[78vh] min-h-[680px] w-full border-0 bg-[#050505]"
               />
-            </div>
-          ) : (
+            </div>          ) : (
             <DemoSite demo={demo} navStickyOffsetClass="top-[66px]" compact />
           )}
         </AnimatedSection>

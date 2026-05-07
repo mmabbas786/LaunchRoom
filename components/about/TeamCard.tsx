@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { ExternalLink, Figma, Github, Linkedin } from "lucide-react";
+import { ExternalLink, Figma, Github, Instagram, Linkedin, MessageCircle, Twitter } from "lucide-react";
 
 import { Tag } from "@/components/ui/Tag";
 
-type SocialPlatform = "github" | "linkedin" | "figma" | "external";
+type SocialPlatform = "github" | "linkedin" | "figma" | "instagram" | "threads" | "twitter" | "whatsapp" | "external";
 
 type SocialLink = {
   href: string;
@@ -15,6 +15,10 @@ const socialIcons = {
   github: Github,
   linkedin: Linkedin,
   figma: Figma,
+  instagram: Instagram,
+  threads: MessageCircle, // Use MessageCircle as a placeholder for Threads if not in Lucide
+  twitter: Twitter,
+  whatsapp: MessageCircle,
   external: ExternalLink,
 };
 
