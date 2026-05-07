@@ -62,9 +62,61 @@ export function hexToRgba(hex: string, alpha: number) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export const featuredDemoSlugs = ["ca-firm", "clinic", "law-firm"] as const;
+export const featuredDemoSlugs = ["restaurant", "ca-firm", "clinic", "law-firm"] as const;
 
 export const demos: Demo[] = [
+  {
+    slug: "restaurant",
+    niche: "Restaurant",
+    tagline: "A beautiful menu, bookings flow, and location page that feels ready to launch.",
+    description:
+      "A polished restaurant website demo with menu highlights, WhatsApp booking, testimonials, and a clear contact path.",
+    accentColor: "#e05c2a",
+    coverEmoji: "🍽️",
+    thumbnailSrc: "/food-demo-thumbnail.png",
+    thumbnailAlt: "Homepage screenshot of the Spice & Coal restaurant demo website",
+    industry: "Food & Dining",
+    tags: ["Menu highlights", "Reservations", "WhatsApp orders", "Location section"],
+    businessName: "Spice & Coal",
+    location: "Central Kolkata",
+    phone: "+91 00000 00001",
+    email: "hello@spiceandcoal.example",
+    whatsapp: "910000000001",
+    externalUrl: "https://food-demo-site.netlify.app/",
+    sections: [
+      {
+        type: "hero",
+        headline: "Bold flavours. Honest fire.",
+        subheadline:
+          "Contemporary Indian dining built around open-fire cooking, weekday lunch sets, and easy WhatsApp reservations.",
+        cta: "Book a Table",
+      },
+      {
+        type: "services",
+        title: "Menu highlights",
+        items: [
+          { name: "Dal Makhani", desc: "Slow-cooked black lentils with butter and cream.", price: "₹320" },
+          { name: "Coal-roasted chicken", desc: "House marinade, charred finish, mint chutney.", price: "₹580" },
+          { name: "Peshwari naan", desc: "Soft naan stuffed with almond and coconut.", price: "₹120" },
+          { name: "Kulfi brulee", desc: "Pistachio kulfi with a crackling caramel top.", price: "₹180" },
+        ],
+      },
+      {
+        type: "gallery",
+        title: "Inside the experience",
+        images: ["Open-fire kitchen", "Warm dining room", "Signature dessert pass"],
+      },
+      {
+        type: "testimonials",
+        items: [
+          { name: "Priya M.", text: "The menu feels premium and the reservation flow is wonderfully simple.", rating: 5 },
+          { name: "Rahul S.", text: "Exactly the kind of restaurant site that makes you want to visit tonight.", rating: 5 },
+          { name: "Ananya K.", text: "The visuals, menu cards, and contact details feel launch-ready.", rating: 4 },
+        ],
+      },
+      { type: "contact" },
+    ],
+  },
   {
     slug: "law-firm",
     niche: "Law Firm",
@@ -82,7 +134,7 @@ export const demos: Demo[] = [
     phone: "+91 00000 00002",
     email: "contact@bosepartners.example",
     whatsapp: "910000000002",
-    externalUrl: "https://law-firm-demo-site.netlify.app/",
+    externalUrl: "https://law-demo-site.netlify.app/",
     sections: [
       {
         type: "hero",
@@ -186,7 +238,7 @@ export const demos: Demo[] = [
     phone: "+91 00000 00003",
     email: "appointments@wellnestclinic.example",
     whatsapp: "910000000003",
-    externalUrl: "https://doctor-demo-site.netlify.app/",
+    externalUrl: "https://demo-doctor-clinic-site.netlify.app/",
     sections: [
       {
         type: "hero",
