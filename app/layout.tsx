@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 import "@/app/globals.css";
 
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { VisitorPreferencesProvider } from "@/components/providers/VisitorPreferencesProvider";
