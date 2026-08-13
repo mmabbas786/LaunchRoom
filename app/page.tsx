@@ -2,19 +2,18 @@ import type { Metadata } from "next";
 
 import { HomePageContent } from "@/components/home/HomePageContent";
 import { siteConfig } from "@/lib/site";
-import { generateOrganizationSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
-  title: "LaunchRoom | AI, Tech & Startup Intelligence",
+  title: "LaunchRoom | Website & Web Application Development Studio",
   description:
-    "Independent news, technical analysis, and intelligence covering artificial intelligence, software engineering, cloud infrastructure, cybersecurity, and startups.",
+    "LaunchRoom builds modern, high-converting websites, SaaS web applications, and digital platforms for startups, alongside publishing tech and engineering insights.",
   alternates: {
     canonical: siteConfig.url,
   },
   openGraph: {
-    title: "LaunchRoom | AI, Tech & Startup Intelligence",
+    title: "LaunchRoom | Website & Web Application Development Studio",
     description:
-      "Independent news, technical analysis, and intelligence covering artificial intelligence, software engineering, cloud infrastructure, cybersecurity, and startups.",
+      "LaunchRoom builds modern, high-converting websites, SaaS web applications, and digital platforms for startups, alongside publishing tech and engineering insights.",
     url: siteConfig.url,
     siteName: "LaunchRoom",
     type: "website",
@@ -23,38 +22,42 @@ export const metadata: Metadata = {
         url: `${siteConfig.url}/launchroom-logo.png`,
         width: 1200,
         height: 630,
-        alt: "LaunchRoom | AI, Tech & Startup Intelligence",
+        alt: "LaunchRoom Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LaunchRoom | AI, Tech & Startup Intelligence",
+    title: "LaunchRoom | Website & Web Application Development Studio",
     description:
-      "Independent news, technical analysis, and intelligence covering artificial intelligence, software engineering, cloud infrastructure, cybersecurity, and startups.",
+      "LaunchRoom builds modern, high-converting websites, SaaS web applications, and digital platforms for startups.",
     images: [`${siteConfig.url}/launchroom-logo.png`],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
 };
 
-export default function HomePage() {
-  const orgSchema = generateOrganizationSchema();
+const jsonLdProfessionalService = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "LaunchRoom",
+  image: "https://launchroom.in/launchroom-logo.png",
+  url: "https://launchroom.in",
+  telephone: "+919163030285",
+  email: "infolaunchroom@gmail.com",
+  priceRange: "₹14999 - ₹150000",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "IN",
+  },
+  description:
+    "Website and web application development studio building custom business websites, Next.js applications, and SaaS platforms.",
+};
 
+export default function HomePage() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProfessionalService) }}
       />
       <HomePageContent />
     </>

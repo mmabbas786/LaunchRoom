@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "LaunchRoom",
-  tagline: "AI, Tech & Startup Intelligence",
+  tagline: "Web & SaaS Development Studio | Tech Insights",
   description:
-    "Independent coverage of artificial intelligence, software, cloud computing, cybersecurity, startups, and the companies shaping the future of technology.",
+    "LaunchRoom builds modern websites, SaaS web applications, and digital platforms for startups, while publishing engineering insights on AI, cloud, software, and cybersecurity.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://launchroom.in",
   email: "infolaunchroom@gmail.com",
   phone: "+91 9163030285",
@@ -10,12 +10,9 @@ export const siteConfig = {
   responseTime: "< 24 hours on weekdays",
   studioLabel: "LaunchRoom Studio — Web & SaaS MVP Engineering",
   navLinks: [
-    { href: "/ai", label: "AI" },
-    { href: "/startups", label: "Startups" },
-    { href: "/software", label: "Software" },
-    { href: "/cloud", label: "Cloud" },
-    { href: "/cybersecurity", label: "Cybersecurity" },
-    { href: "/research", label: "Research" },
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ],
@@ -24,4 +21,5 @@ export const siteConfig = {
     href: "https://toolztotal.com",
   },
 };
+
 

@@ -1,23 +1,28 @@
-import { NewsHero } from "@/components/home/NewsHero";
-import { FeaturedStory } from "@/components/home/FeaturedStory";
-import { TrendingNow } from "@/components/home/TrendingNow";
-import { LatestNewsFeed } from "@/components/home/LatestNewsFeed";
-import { CategoryGrid } from "@/components/home/CategoryGrid";
+import { Hero } from "@/components/home/Hero";
+import { ServicesPreview } from "@/components/home/ServicesPreview";
+import { WorkPreview } from "@/components/home/WorkPreview";
+import { DemoLibraryTeaser } from "@/components/home/DemoLibraryTeaser";
+import { WhyUs } from "@/components/home/WhyUs";
 import { ToolzTotalSection } from "@/components/home/ToolzTotalSection";
-import { NewsletterSection } from "@/components/home/NewsletterSection";
-import { LaunchRoomStudioSection } from "@/components/home/LaunchRoomStudioSection";
+import { LatestBlogSection } from "@/components/home/LatestBlogSection";
+import { CTABand } from "@/components/layout/CTABand";
 
 export function HomePageContent() {
   return (
     <main className="min-h-screen">
-      <NewsHero />
-      <FeaturedStory />
-      <TrendingNow />
-      <LatestNewsFeed />
-      <CategoryGrid />
+      <Hero />
+      <ServicesPreview currency="USD" />
+      <WorkPreview />
+      <DemoLibraryTeaser />
+      <WhyUs />
       <ToolzTotalSection />
-      <NewsletterSection />
-      <LaunchRoomStudioSection />
+      <LatestBlogSection />
+      <CTABand
+        heading="Start a project with LaunchRoom."
+        subtext="Tell us what you want to build and we'll help you scope the cleanest version to launch first."
+        buttonText="Start a project"
+        buttonHref="/start"
+      />
     </main>
   );
 }

@@ -1,23 +1,24 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
-import { CATEGORIES, ARTICLES } from "@/data/articles";
+import { BLOG_CATEGORIES, BLOG_ARTICLES } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
 
   const coreRoutes = [
     "",
+    "/services",
+    "/services/website-development",
+    "/services/web-app-development",
+    "/services/nextjs-development",
+    "/services/startup-mvp-development",
+    "/blog",
     "/about",
     "/contact",
     "/privacy-policy",
     "/privacy",
     "/terms",
     "/disclaimer",
-    "/services",
-    "/services/website-development",
-    "/services/web-app-development",
-    "/services/nextjs-development",
-    "/services/startup-mvp-development",
     "/website-development",
     "/web-app-development",
     "/nextjs-development",
@@ -28,22 +29,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "daily" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    priority: route === "" ? 1.0 : route === "/blog" || route === "/services" ? 0.9 : 0.8,
   }));
 
-  const categoryRoutes = CATEGORIES.map((cat) => ({
-    url: `${baseUrl}/${cat.slug}`,
+  const blogCategoryRoutes = BLOG_CATEGORIES.map((cat) => ({
+    url: `${baseUrl}/blog/${cat.slug}`,
     lastModified: new Date(),
     changeFrequency: "daily" as const,
-    priority: 0.9,
+    priority: 0.85,
   }));
 
-  const articleRoutes = ARTICLES.map((art) => ({
-    url: `${baseUrl}/${art.category}/${art.slug}`,
+  const blogArticleRoutes = BLOG_ARTICLES.map((art) => ({
+    url: `${baseUrl}/blog/${art.category}/${art.slug}`,
     lastModified: new Date(art.updatedAt || art.publishedAt),
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
 
-  return [...coreRoutes, ...categoryRoutes, ...articleRoutes];
+  return [...coreRoutes, ...blogCategoryRoutes, ...blogArticleRoutes];
 }

@@ -24,18 +24,13 @@ export function Footer() {
                 height={52}
                 className="h-12 w-12 shrink-0 rounded-[16px] object-cover shadow-[0_12px_30px_rgba(0,0,0,0.22)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_0_1px_rgba(232,160,32,0.34),0_0_0_5px_rgba(232,160,32,0.08),0_18px_40px_rgba(232,160,32,0.22)]"
               />
-              <div className="flex flex-col">
-                <span className="font-display text-[26px] font-extrabold tracking-[-0.06em] text-text-primary leading-none">
-                  Launch<span className="text-accent">Room</span>
-                </span>
-                <span className="text-[11px] font-mono uppercase tracking-[0.14em] text-text-muted mt-1">
-                  AI, Tech & Startup Intelligence
-                </span>
-              </div>
+              <span className="font-display text-[26px] font-extrabold tracking-[-0.06em] text-text-primary">
+                Launch<span className="text-accent">Room</span>
+              </span>
             </Link>
 
             <p className="mt-4 max-w-sm text-[14px] leading-[1.75] text-text-secondary">
-              Independent publication covering artificial intelligence, cloud architecture, cybersecurity threat vectors, software releases, and high-growth startup engineering.
+              LaunchRoom is a digital product engineering studio building custom websites, SaaS web applications, and digital platforms, alongside publishing industry insights on AI, cloud, software, and cybersecurity.
             </p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -59,31 +54,49 @@ export function Footer() {
 
           <div className="grid gap-8 sm:grid-cols-3">
             <div>
-              <p className="card-label">Publication</p>
+              <p className="card-label">Services</p>
               <nav className="mt-4 flex flex-col gap-2.5">
-                <Link href="/ai" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Artificial Intelligence
+                <Link href="/services/website-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Website Development
                 </Link>
-                <Link href="/startups" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Startups & Funding
+                <Link href="/services/web-app-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Web App Engineering
                 </Link>
-                <Link href="/software" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Software Engineering
+                <Link href="/services/nextjs-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Next.js Agency
                 </Link>
-                <Link href="/cloud" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Cloud Infrastructure
-                </Link>
-                <Link href="/cybersecurity" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Cybersecurity
-                </Link>
-                <Link href="/research" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Deep Tech Research
+                <Link href="/services/startup-mvp-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Startup MVP Studio
                 </Link>
               </nav>
             </div>
 
             <div>
-              <p className="card-label">Ecosystem & Studio</p>
+              <p className="card-label">Blog & Insights</p>
+              <nav className="mt-4 flex flex-col gap-2.5">
+                <Link href="/blog" className="text-[14px] font-medium text-accent hover:underline">
+                  All Blog Posts
+                </Link>
+                <Link href="/blog/ai-automation" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  AI & Automation
+                </Link>
+                <Link href="/blog/tech-news" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Tech News
+                </Link>
+                <Link href="/blog/software-saas" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Software & SaaS
+                </Link>
+                <Link href="/blog/cloud-devops" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Cloud & DevOps
+                </Link>
+                <Link href="/blog/cybersecurity" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
+                  Cybersecurity
+                </Link>
+              </nav>
+            </div>
+
+            <div>
+              <p className="card-label">Company & Ecosystem</p>
               <nav className="mt-4 flex flex-col gap-2.5">
                 <a
                   href="https://toolztotal.com"
@@ -94,29 +107,11 @@ export function Footer() {
                   <span>ToolzTotal Ecosystem</span>
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
-                <Link href="/services/website-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  LaunchRoom Studio
-                </Link>
-                <Link href="/services/web-app-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Web App Engineering
-                </Link>
-                <Link href="/services/startup-mvp-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  SaaS MVP Studio
-                </Link>
-                <Link href="/services/nextjs-development" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Next.js Services
-                </Link>
-              </nav>
-            </div>
-
-            <div>
-              <p className="card-label">Company & Legal</p>
-              <nav className="mt-4 flex flex-col gap-2.5">
                 <Link href="/about" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
                   About LaunchRoom
                 </Link>
                 <Link href="/contact" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Contact Newsroom
+                  Contact Us
                 </Link>
                 <Link href="/privacy-policy" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
                   Privacy Policy
@@ -125,7 +120,7 @@ export function Footer() {
                   Terms of Service
                 </Link>
                 <Link href="/disclaimer" className="text-[14px] font-medium text-text-secondary hover:text-text-primary">
-                  Editorial Disclaimer
+                  Disclaimer
                 </Link>
               </nav>
             </div>
@@ -133,10 +128,10 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-4 border-t border-border pt-6 text-[13px] text-text-muted md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} LaunchRoom. All rights reserved. Built for global tech & AI intelligence.</p>
+          <p>© {new Date().getFullYear()} LaunchRoom. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a href="mailto:infolaunchroom@gmail.com" className="hover:text-text-primary">
-              Editorial: infolaunchroom@gmail.com
+              infolaunchroom@gmail.com
             </a>
           </div>
         </div>
@@ -144,4 +139,5 @@ export function Footer() {
     </footer>
   );
 }
+
 

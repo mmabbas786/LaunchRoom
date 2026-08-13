@@ -7,6 +7,7 @@ import { Menu, X, ExternalLink } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -42,7 +43,7 @@ export function Nav() {
             className={cn(
               "flex min-h-[72px] items-center justify-between gap-4 rounded-full border px-4 py-3 transition-all duration-200 sm:px-6",
               scrolled
-                ? "border-border-hover bg-[rgba(8,8,8,0.85)] shadow-[0_18px_54px_rgba(0,0,0,0.42)] backdrop-blur-xl"
+                ? "border-border-hover bg-[rgba(8,8,8,0.88)] shadow-[0_18px_54px_rgba(0,0,0,0.42)] backdrop-blur-xl"
                 : "border-transparent bg-transparent shadow-none",
             )}
           >
@@ -54,27 +55,25 @@ export function Nav() {
                 height={48}
                 className="h-11 w-11 shrink-0 rounded-[14px] object-cover shadow-[0_12px_28px_rgba(0,0,0,0.24)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_0_1px_rgba(232,160,32,0.34),0_0_0_5px_rgba(232,160,32,0.08),0_18px_38px_rgba(232,160,32,0.22)]"
               />
-              <div className="flex flex-col">
-                <span className="font-display text-[22px] font-extrabold tracking-[-0.06em] text-text-primary leading-none sm:text-[24px]">
-                  Launch<span className="text-accent">Room</span>
-                </span>
-                <span className="text-[10px] font-medium tracking-[0.14em] uppercase text-text-muted font-mono hidden sm:inline-block mt-0.5">
-                  Tech Intelligence
-                </span>
-              </div>
+              <span className="font-display text-[24px] font-extrabold tracking-[-0.06em] text-text-primary">
+                Launch<span className="text-accent">Room</span>
+              </span>
             </Link>
 
-            <div className="hidden items-center gap-3 xl:gap-6 lg:flex">
-              <ul className="flex items-center gap-4 xl:gap-6">
+            <div className="hidden items-center gap-6 lg:flex">
+              <ul className="flex items-center gap-7">
                 {siteConfig.navLinks.map((item) => {
-                  const isActive = pathname === item.href;
+                  const isActive =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : (pathname ? pathname.startsWith(item.href) : false);
 
                   return (
                     <li key={item.href}>
                       <Link
                         href={item.href}
                         className={cn(
-                          "relative inline-flex px-1 py-1.5 text-[14px] font-medium text-text-secondary hover:text-text-primary transition-colors",
+                          "relative inline-flex px-1 py-1.5 text-[15px] font-medium text-text-secondary hover:text-text-primary transition-colors",
                           isActive && "text-text-primary font-semibold",
                         )}
                       >
@@ -91,19 +90,16 @@ export function Nav() {
                     href={siteConfig.externalToolsLink.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-accent/20 bg-accent-dim text-[13px] font-medium text-accent hover:border-accent/40 hover:text-text-primary transition-all"
+                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-accent/20 bg-accent-dim text-[13px] font-medium text-accent hover:border-accent/40 hover:text-text-primary transition-all"
                   >
                     <span>{siteConfig.externalToolsLink.label}</span>
                   </a>
                 </li>
               </ul>
 
-              <Link
-                href="/news"
-                className="hidden xl:inline-flex items-center justify-center rounded-full border border-border bg-surface-1 px-4 py-2 text-[13px] font-medium text-text-primary hover:border-accent-border transition-all"
-              >
-                Briefing
-              </Link>
+              <Button href="/start" className="min-h-[44px] px-5 text-[14px]">
+                Start a project
+              </Button>
             </div>
 
             <button
@@ -157,14 +153,9 @@ export function Nav() {
                     height={44}
                     className="h-10 w-10 shrink-0 rounded-[12px] object-cover shadow-[0_10px_24px_rgba(0,0,0,0.22)]"
                   />
-                  <div className="flex flex-col">
-                    <span className="font-display text-[22px] font-extrabold tracking-[-0.06em] text-text-primary">
-                      Launch<span className="text-accent">Room</span>
-                    </span>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-text-muted">
-                      AI & Tech Publication
-                    </span>
-                  </div>
+                  <span className="font-display text-[22px] font-extrabold tracking-[-0.06em] text-text-primary">
+                    Launch<span className="text-accent">Room</span>
+                  </span>
                 </Link>
 
                 <button
@@ -179,7 +170,10 @@ export function Nav() {
 
               <div className="flex flex-1 flex-col gap-2">
                 {siteConfig.navLinks.map((item) => {
-                  const isActive = pathname === item.href;
+                  const isActive =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : (pathname ? pathname.startsWith(item.href) : false);
 
                   return (
                     <Link
@@ -208,18 +202,9 @@ export function Nav() {
                 </a>
               </div>
 
-              <div className="panel-accent mt-6 p-4">
-                <p className="card-label">LaunchRoom Studio</p>
-                <p className="mt-2 text-[13px] leading-[1.6] text-text-secondary">
-                  Custom websites, SaaS MVPs, and web applications for startups and growing businesses.
-                </p>
-                <Link
-                  href="/services/website-development"
-                  className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent hover:underline"
-                >
-                  Explore Studio Services →
-                </Link>
-              </div>
+              <Button href="/start" className="mt-6 w-full justify-center">
+                Start a project
+              </Button>
             </motion.aside>
           </>
         ) : null}
@@ -227,4 +212,5 @@ export function Nav() {
     </>
   );
 }
+
 
