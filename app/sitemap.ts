@@ -1,42 +1,49 @@
 import type { MetadataRoute } from "next";
-
-import { projects } from "@/data/projects";
-import { demos } from "@/lib/demos";
 import { siteConfig } from "@/lib/site";
+import { CATEGORIES, ARTICLES } from "@/data/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
+  const baseUrl = siteConfig.url;
+
+  const coreRoutes = [
     "",
-    "/blog",
-    "/services",
-    "/website-development",
-    "/web-app-development",
-    "/startup-mvp-development",
-    "/nextjs-development",
-    "/pricing",
-    "/work",
-    "/demos",
     "/about",
     "/contact",
-    "/start",
+    "/privacy-policy",
     "/privacy",
     "/terms",
-  ].map((path) => ({
-    url: `${siteConfig.url}${path}`,
+    "/disclaimer",
+    "/services",
+    "/services/website-development",
+    "/services/web-app-development",
+    "/services/nextjs-development",
+    "/services/startup-mvp-development",
+    "/website-development",
+    "/web-app-development",
+    "/nextjs-development",
+    "/startup-mvp-development",
+    "/work",
+    "/pricing",
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: path === "" ? "daily" : "weekly" as const,
-    priority: path === "" ? 1.0 : path.includes("-development") ? 0.9 : 0.8,
+    changeFrequency: "daily" as const,
+    priority: route === "" ? 1.0 : 0.8,
   }));
 
-  const projectRoutes = projects.map((project) => ({
-    url: `${siteConfig.url}/work/${project.slug}`,
+  const categoryRoutes = CATEGORIES.map((cat) => ({
+    url: `${baseUrl}/${cat.slug}`,
     lastModified: new Date(),
+    changeFrequency: "daily" as const,
+    priority: 0.9,
   }));
 
-  const demoRoutes = demos.map((demo) => ({
-    url: `${siteConfig.url}/demos/${demo.slug}`,
-    lastModified: new Date(),
+  const articleRoutes = ARTICLES.map((art) => ({
+    url: `${baseUrl}/${art.category}/${art.slug}`,
+    lastModified: new Date(art.updatedAt || art.publishedAt),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
   }));
 
-  return [...routes, ...projectRoutes, ...demoRoutes];
+  return [...coreRoutes, ...categoryRoutes, ...articleRoutes];
 }

@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 
 import { TeamCard } from "@/components/about/TeamCard";
-import { CTABand } from "@/components/layout/CTABand";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-
 import { siteConfig } from "@/lib/site";
+import Link from "next/link";
+import { ArrowRight, Newspaper, Code2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About LaunchRoom | Software & Web Development Studio",
+  title: "About LaunchRoom | AI, Tech & Startup Intelligence",
   description:
-    "Learn about LaunchRoom: direct developer collaboration, fast execution, and zero agency bloat.",
+    "LaunchRoom is an independent media & technology intelligence publication delivering analysis on AI, software, cloud, and startups.",
   alternates: {
     canonical: `${siteConfig.url}/about`,
   },
   openGraph: {
-    title: "About LaunchRoom Studio",
+    title: "About LaunchRoom Intelligence",
     description:
-      "Direct developer collaboration, fast execution, and zero agency bloat.",
+      "Independent coverage of artificial intelligence, software engineering, cloud computing, cybersecurity, and startups.",
     url: `${siteConfig.url}/about`,
     type: "website",
   },
@@ -27,66 +27,82 @@ export default function AboutPage() {
     <>
       <section className="page-shell section-shell">
         <AnimatedSection>
-          <div className="panel-dark p-7 sm:p-8 lg:p-10">
-            <p className="eyebrow eyebrow-invert">About us</p>
-            <h1 className="page-hero-title mt-5 max-w-[12ch] text-on-dark">
-              No bloat. No middlemen. Just two people who give a damn about what gets
-              built.
+          <div className="panel-dark p-8 sm:p-10 lg:p-12 space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent-border bg-accent-dim px-4 py-1.5 text-[12px] font-mono uppercase text-accent">
+              <Newspaper className="h-3.5 w-3.5" />
+              <span>Independent Intelligence</span>
+            </div>
+
+            <h1 className="page-hero-title font-display font-extrabold text-on-dark max-w-4xl">
+              Independent coverage of the platforms, startups, and intelligence shaping the future of technology.
             </h1>
-            <p className="mt-6 max-w-3xl text-[18px] leading-[1.82] text-on-dark-muted">
-              LaunchRoom exists because good digital work shouldn&apos;t require a
-              big-agency budget, a 12-week timeline, or three rounds of &quot;let me
-              check with the team.&quot; We move fast, we ship clean, and the person you
-              talk to is the person building your product.
+
+            <p className="max-w-3xl text-[18px] leading-[1.8] text-on-dark-muted">
+              LaunchRoom was founded to provide tech executives, software engineers, founders, and security professionals with concise, highly analytical dispatches. We cut through press release fluff to report on core architectural shifts, funding dynamics, and deep technical breakthroughs.
             </p>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="mt-8" delay={0.05}>
-          <article className="page-card-roomy panel">
-            <p className="card-label">Origin story</p>
-            <p className="mt-4 max-w-3xl text-[17px] leading-[1.82] text-text-secondary">
-              Mirza started building long before LaunchRoom had a name — freelance
-              projects, late nights, and a growing frustration with how disconnected
-              most agencies were from the actual work. LaunchRoom became the answer:
-              a studio built around shipping, not selling.
-            </p>
-          </article>
-        </AnimatedSection>
+        <div className="grid gap-6 md:grid-cols-2 mt-8">
+          <AnimatedSection delay={0.05}>
+            <article className="panel p-8 space-y-4 h-full">
+              <p className="card-label">Publication Mission</p>
+              <h2 className="text-[22px] font-bold text-text-primary">Analytical & Newsroom Precision</h2>
+              <p className="text-[15px] leading-[1.75] text-text-secondary">
+                We believe tech journalism should be written by engineers and analysts who understand modern codebases, cloud infrastructure, and venture fundamentals. Our editorial standard prioritizes accuracy, architectural context, and executive relevance.
+              </p>
+            </article>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.1}>
+            <article className="panel-accent p-8 space-y-4 flex flex-col justify-between h-full">
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-[12px] font-mono uppercase text-accent font-bold">
+                  <Code2 className="h-4 w-4" />
+                  <span>Secondary Business</span>
+                </div>
+                <h2 className="text-[22px] font-bold text-text-primary">LaunchRoom Studio</h2>
+                <p className="text-[15px] leading-[1.75] text-text-secondary">
+                  Alongside our news publication, LaunchRoom Studio provides custom web application, SaaS MVP, and Next.js engineering for select startups and enterprise teams worldwide.
+                </p>
+              </div>
+
+              <Link
+                href="/services/website-development"
+                className="inline-flex items-center gap-2 text-[14px] font-medium text-accent hover:underline pt-4"
+              >
+                <span>Explore LaunchRoom Studio Services</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </article>
+          </AnimatedSection>
+        </div>
       </section>
 
       <div className="page-shell">
         <section className="section-shell-tight">
           <AnimatedSection>
-            <p className="eyebrow">Team</p>
-            <h2 className="section-title">Meet the team</h2>
+            <p className="eyebrow">Editorial Team</p>
+            <h2 className="section-title">Founding Team & Leadership</h2>
           </AnimatedSection>
 
           <AnimatedSection className="page-card-grid mt-8 md:grid-cols-2" delay={0.05}>
             <TeamCard
-              name="Mirza"
-              role="Founder & Lead Developer"
+              name="Mirza Mehedi Abbas"
+              role="Founder & Editor-in-Chief"
               bio={
                 <>
                   <p>
-                    Mirza is LaunchRoom. He scopes the project, writes the code, and
-                    ships it — no layers, no delegation, no surprises. When you work
-                    with LaunchRoom, you&apos;re working directly with the developer who
-                    cares whether it actually works.
-                  </p>
-                  <p>
-                    He&apos;s built for founders who want speed without chaos and quality
-                    without the agency markup.
+                    Mirza leads editorial direction and technical analysis at LaunchRoom. With deep roots in software engineering, Next.js architecture, and AI models, he writes analytical briefings on AI breakthroughs, developer tooling, and cloud infrastructure.
                   </p>
                 </>
               }
               skills={[
-                "React",
-                "Next.js",
-                "Flutter",
+                "AI Models",
+                "Next.js Architecture",
                 "TypeScript",
-                "Node.js",
-                "Supabase",
+                "Cloud Systems",
+                "Technical Editorials",
               ]}
               avatarLabel="M"
               avatarClassName="bg-[linear-gradient(135deg,#f4c86d_0%,#e8a020_48%,#8f5d10_100%)] text-[#080808]"
@@ -102,73 +118,40 @@ export default function AboutPage() {
                   platform: "linkedin",
                 },
                 {
-                  href: "https://www.instagram.com/mmabbasofficial/",
-                  label: "Mirza on Instagram",
-                  platform: "instagram",
-                },
-                {
-                  href: "https://www.threads.net/@mirza.abbas_",
-                  label: "Mirza on Threads",
-                  platform: "threads",
-                },
-                {
                   href: "https://x.com/mmabbasofficial",
                   label: "Mirza on X",
                   platform: "twitter",
-                },
-                {
-                  href: "https://api.whatsapp.com/send/?phone=919163030285&text=Hello%20Mirza,%20I%20want%20to%20discuss%20a%20project.",
-                  label: "Mirza on WhatsApp",
-                  platform: "whatsapp",
                 },
               ]}
             />
             <TeamCard
               name="Arsh"
-              role="Co-founder & Business Lead"
+              role="Co-founder & Operations Director"
               bio={
                 <>
                   <p>
-                    Arsh is why projects don&apos;t fall apart on the business side. He
-                    handles discovery, scoping, timelines, and client communication —
-                    making sure every engagement starts with clarity and ends with a
-                    clean handover.
-                  </p>
-                  <p>
-                    The reason LaunchRoom runs smoothly behind the scenes.
+                    Arsh oversees publication operations, brand partnerships, content syndication, and client engagement for LaunchRoom Studio.
                   </p>
                 </>
               }
               skills={[
-                "Client Discovery",
-                "Project Scoping",
-                "Brand & Design Direction",
+                "Editorial Operations",
+                "Media Strategy",
+                "Studio Partnerships",
               ]}
               avatarLabel="A"
               avatarClassName="bg-[linear-gradient(135deg,#f0bd57_0%,#b07811_100%)] text-[#080808]"
               socialLinks={[
                 {
-                  href: "https://www.linkedin.com/in/mirzamehediabbas/", // Placeholder or LaunchRoom LinkedIn
+                  href: "https://www.linkedin.com/in/mirzamehediabbas/",
                   label: "Arsh on LinkedIn",
                   platform: "linkedin",
-                },
-                {
-                  href: "https://www.figma.com/",
-                  label: "Arsh on Figma",
-                  platform: "figma",
                 },
               ]}
             />
           </AnimatedSection>
         </section>
       </div>
-
-      <CTABand
-        heading="Start a project with LaunchRoom."
-        subtext="Tell us what you want to build and we&apos;ll help you scope the cleanest version to launch first."
-        buttonText="Start a project"
-        buttonHref="/start"
-      />
     </>
   );
 }

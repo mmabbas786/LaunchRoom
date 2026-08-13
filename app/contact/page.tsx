@@ -1,71 +1,65 @@
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/contact/ContactForm";
-import { ProjectWhatsAppSelector } from "@/components/contact/ProjectWhatsAppSelector";
-import { Button } from "@/components/ui/Button";
 import { ISTClock } from "@/components/contact/ISTClock";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { quickContactFaqs } from "@/data/faqs";
 import { siteConfig } from "@/lib/site";
-import { getWhatsAppHref } from "@/lib/whatsapp";
+import { Mail, MessageCircle, Newspaper } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact LaunchRoom Studio",
+  title: "Contact Newsroom & Studio | LaunchRoom",
   description:
-    "Contact LaunchRoom for website development, Android apps, retainers, and project proposals. Fast responses on email & WhatsApp.",
+    "Get in touch with LaunchRoom's newsroom for press releases, technical analysis tips, or LaunchRoom Studio web development inquiries.",
   alternates: {
     canonical: `${siteConfig.url}/contact`,
   },
   openGraph: {
-    title: "Contact LaunchRoom Studio",
+    title: "Contact LaunchRoom",
     description:
-      "Reach out to LaunchRoom for custom websites, mobile apps, and project proposals.",
+      "Reach out to LaunchRoom for editorial dispatches, press releases, or custom web engineering.",
     url: `${siteConfig.url}/contact`,
     type: "website",
   },
 };
-
-const whatsappHref = getWhatsAppHref(
-  "Hello LaunchRoom, I want to discuss website or app development.",
-);
 
 export default function ContactPage() {
   return (
     <div className="page-shell">
       <section className="section-shell">
         <AnimatedSection className="grid items-start gap-5 xl:grid-cols-[1.08fr_0.92fr]">
-          <div className="panel-dark p-7 sm:p-9 lg:p-12">
-            <p className="eyebrow eyebrow-invert">
-              Contact
-            </p>
-            <h1 className="page-hero-title mt-6 max-w-[8ch] text-on-dark">
-              Let's talk about what needs to launch.
+          <div className="panel-dark p-7 sm:p-9 lg:p-12 space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent-border bg-accent-dim px-4 py-1.5 text-[12px] font-mono uppercase text-accent">
+              <Newspaper className="h-3.5 w-3.5" />
+              <span>Newsroom & Studio Contact</span>
+            </div>
+
+            <h1 className="page-hero-title font-display font-extrabold text-on-dark">
+              Get in touch with LaunchRoom.
             </h1>
-            <p className="mt-6 max-w-3xl text-[19px] leading-[1.82] text-on-dark-muted">
-              Reach out for websites, Android apps, retainers, and launch support.
-              We respond quickly and we keep the first conversation practical.
+
+            <p className="max-w-3xl text-[18px] leading-[1.8] text-on-dark-muted">
+              Whether you have an editorial tip, press release, research whitepaper, or wish to engage LaunchRoom Studio for engineering services, we respond promptly.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <span className="meta-chip meta-chip-dark">
-                {siteConfig.location}
-              </span>
-              <span className="meta-chip meta-chip-dark">
-                {siteConfig.responseTime}
-              </span>
+
+            <div className="flex flex-wrap gap-3">
+              <span className="meta-chip meta-chip-dark">{siteConfig.location}</span>
+              <span className="meta-chip meta-chip-dark">Editorial Response &lt; 24h</span>
             </div>
           </div>
 
           <div className="page-card-grid sm:grid-cols-2">
             <InfoCard
-              label="Email"
+              label="Editorial Desk"
               value={siteConfig.email}
               href={`mailto:${siteConfig.email}`}
+              icon={Mail}
               preserveValueCase
             />
             <InfoCard
-              label="WhatsApp"
+              label="Studio Direct"
               value={siteConfig.phone}
-              href={whatsappHref}
+              href="https://api.whatsapp.com/send/?phone=919163030285&text=Hello%20LaunchRoom,%20I%20want%20to%20get%20in%20touch."
+              icon={MessageCircle}
               accent
             />
             <div className="sm:col-span-2">
@@ -78,69 +72,30 @@ export default function ContactPage() {
       <section className="pb-20 lg:pb-28">
         <div className="grid items-start gap-6 xl:grid-cols-[0.9fr_1.1fr]">
           <AnimatedSection className="space-y-5">
-            <div className="page-card-roomy panel h-auto">
-              <p className="card-label">What to include</p>
-              <ul className="mt-5 space-y-3">
+            <div className="page-card-roomy panel h-auto space-y-4">
+              <p className="card-label">Newsroom Guidelines</p>
+              <h2 className="text-[22px] font-bold text-text-primary">Press & Editorial Submissions</h2>
+              <ul className="space-y-3">
                 {[
-                  "What you want to build",
-                  "Your budget range",
-                  "When you want to launch",
-                  "Any references you like",
+                  "AI benchmark results & research whitepapers",
+                  "Startup seed / Series A funding announcements",
+                  "Open source developer tool launches",
+                  "Security vulnerability advisories",
+                  "LaunchRoom Studio project briefs",
                 ].map((item) => (
-                  <li key={item} className="flex gap-3 text-[17px] leading-[1.76] text-text-secondary">
+                  <li key={item} className="flex gap-3 text-[15px] leading-[1.7] text-text-secondary">
                     <span className="text-accent">→</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-
-            <div className="page-card-roomy panel-lime h-auto">
-              <p className="card-label text-on-dark-muted">Availability</p>
-              <p className="mt-4 text-[18px] leading-[1.8] text-on-dark-muted">
-                Mon-Sat, 10 AM to 8 PM IST. For urgent matters, WhatsApp is usually
-                the fastest route.
-              </p>
-            </div>
           </AnimatedSection>
 
           <AnimatedSection className="space-y-5" delay={0.05}>
-            <div className="page-card-roomy panel-accent h-auto">
-              <p className="card-label text-text-primary">Primary contact</p>
-              <h2 className="mt-4 text-[clamp(28px,3vw,40px)] leading-[1.06] text-text-primary">
-                Need the fastest reply?
-              </h2>
-              <p className="mt-4 text-[17px] leading-[1.8] text-text-secondary">
-                Pick website development, app development, or both. We&apos;ll open
-                WhatsApp with the right inquiry message already filled in.
-              </p>
-              <ProjectWhatsAppSelector />
-              <div className="mt-6">
-                <Button href="/start" variant="outline" className="w-full justify-center sm:w-auto">
-                  Send a full brief instead
-                </Button>
-              </div>
-            </div>
-
             <ContactForm />
           </AnimatedSection>
         </div>
-
-        <AnimatedSection className="horizontal-rail mt-8" delay={0.08}>
-          {quickContactFaqs.map((item, index) => (
-            <article
-              key={item.question}
-              className={[
-                "horizontal-card w-[min(100%,320px)] p-6 sm:w-[360px]",
-                index === 1 ? "panel-accent" : index === 2 ? "panel-lime" : "panel",
-              ].join(" ")}
-            >
-              <p className="card-label">Quick answer</p>
-              <h3 className="mt-4 text-[25px] leading-[1.08]">{item.question}</h3>
-              <p className="mt-4 text-[16px] leading-[1.76]">{item.answer}</p>
-            </article>
-          ))}
-        </AnimatedSection>
       </section>
     </div>
   );
@@ -152,32 +107,39 @@ function InfoCard({
   href,
   accent = false,
   preserveValueCase = false,
+  icon: Icon,
 }: {
   label: string;
   value: string;
   href?: string;
   accent?: boolean;
   preserveValueCase?: boolean;
+  icon: React.ComponentType<{ className?: string }>;
 }) {
   const className = accent ? "page-card panel-accent" : "page-card panel";
   const textClass = accent ? "text-text-primary" : "text-text-primary";
   const valueClassName = preserveValueCase ? "preserve-case" : "";
 
   return (
-    <div className={`${className} flex h-full flex-col`}>
-      <p className={`card-label ${accent ? "text-text-primary" : ""}`}>{label}</p>
-      {href ? (
-        <a
-          href={href}
-          target={href.startsWith("https://") ? "_blank" : undefined}
-          rel={href.startsWith("https://") ? "noopener noreferrer" : undefined}
-          className={`mt-3 inline-flex text-[18px] font-semibold ${textClass} ${valueClassName}`}
-        >
-          {value}
-        </a>
-      ) : (
-        <p className={`mt-3 text-[18px] font-semibold ${textClass} ${valueClassName}`}>{value}</p>
-      )}
+    <div className={`${className} flex h-full flex-col justify-between p-6`}>
+      <div>
+        <div className="flex items-center justify-between">
+          <p className="card-label">{label}</p>
+          <Icon className="h-4 w-4 text-accent" />
+        </div>
+        {href ? (
+          <a
+            href={href}
+            target={href.startsWith("https://") ? "_blank" : undefined}
+            rel={href.startsWith("https://") ? "noopener noreferrer" : undefined}
+            className={`mt-3 inline-flex text-[16px] font-semibold hover:underline ${textClass} ${valueClassName}`}
+          >
+            {value}
+          </a>
+        ) : (
+          <p className={`mt-3 text-[16px] font-semibold ${textClass} ${valueClassName}`}>{value}</p>
+        )}
+      </div>
     </div>
   );
 }
