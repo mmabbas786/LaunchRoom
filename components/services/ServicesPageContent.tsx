@@ -25,13 +25,13 @@ export function ServicesPageContent() {
     <>
       <PageHeroGrid
         label="Services"
-        heading="Clear services for websites, apps, and ongoing support."
+        heading="Clear services for websites, web applications, and ongoing support."
         description="Everything here is structured to help you understand scope quickly, compare options easily, and move into a quote without guesswork."
         ctaButtons={
           <div className="space-y-4">
             <div className="flex flex-wrap gap-3">
               <span className="meta-chip meta-chip-dark">Websites</span>
-              <span className="meta-chip meta-chip-dark">Mobile apps</span>
+              <span className="meta-chip meta-chip-dark">Web applications</span>
               <span className="meta-chip meta-chip-dark">Maintenance retainers</span>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -103,7 +103,7 @@ export function ServicesPageContent() {
             title="Pick the service that matches where your project is right now."
           />
           <p className="section-copy">
-            Start with a business website, ship an app, or keep an existing product
+            Start with a business website, build a SaaS web app, or keep an existing product
             maintained. Each service below shows what is included, how long it
             usually takes, and where pricing begins.
           </p>

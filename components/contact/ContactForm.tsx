@@ -89,8 +89,9 @@ export function ContactForm() {
         <Field label="Subject" error={errors.subject?.message}>
           <select {...register("subject")}>
             <option>New website</option>
-            <option>Mobile app</option>
-            <option>Retainer</option>
+            <option>Web application / SaaS</option>
+            <option>Next.js development</option>
+            <option>Startup MVP</option>
             <option>Other</option>
           </select>
         </Field>
