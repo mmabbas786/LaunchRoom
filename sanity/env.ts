@@ -5,6 +5,6 @@ export const dataset =
   process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
 export const projectId =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "placeholder-project-id";
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "86z4ipp6";
 
 export const useCdn = false;

@@ -1,5 +1,6 @@
 import { BLOG_ARTICLES, BLOG_CATEGORIES, type BlogArticle, type BlogCategory } from "@/data/blog";
 import { client } from "@/sanity/lib/client";
+import { projectId } from "@/sanity/env";
 import { urlForImage } from "@/sanity/lib/image";
 import {
   categoriesQuery,
@@ -35,8 +36,9 @@ export type SanityPost = {
 
 function hasSanityConfigured(): boolean {
   return Boolean(
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
-      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== "placeholder-project-id",
+    (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
+      process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== "placeholder-project-id") ||
+      (projectId && projectId !== "placeholder-project-id"),
   );
 }
 
