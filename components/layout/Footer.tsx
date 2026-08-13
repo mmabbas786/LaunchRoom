@@ -129,8 +129,8 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-4 border-t border-border pt-6 text-[13px] text-text-muted md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} LaunchRoom. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <a href="mailto:infolaunchroom@gmail.com" className="hover:text-text-primary">
+          <div className="flex items-center gap-4 min-w-0">
+            <a href="mailto:infolaunchroom@gmail.com" className="hover:text-text-primary break-all">
               infolaunchroom@gmail.com
             </a>
           </div>

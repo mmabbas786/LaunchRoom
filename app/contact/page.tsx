@@ -132,12 +132,12 @@ function InfoCard({
             href={href}
             target={href.startsWith("https://") ? "_blank" : undefined}
             rel={href.startsWith("https://") ? "noopener noreferrer" : undefined}
-            className={`mt-3 inline-flex text-[16px] font-semibold hover:underline ${textClass} ${valueClassName}`}
+            className={`mt-3 inline-flex text-[15px] sm:text-[16px] font-semibold hover:underline break-all ${textClass} ${valueClassName}`}
           >
             {value}
           </a>
         ) : (
-          <p className={`mt-3 text-[16px] font-semibold ${textClass} ${valueClassName}`}>{value}</p>
+          <p className={`mt-3 text-[15px] sm:text-[16px] font-semibold break-all ${textClass} ${valueClassName}`}>{value}</p>
         )}
       </div>
     </div>
