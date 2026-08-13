@@ -12,5 +12,15 @@ export default defineConfig({
   dataset,
   title: "LaunchRoom Editorial Studio",
   schema,
-  plugins: [structureTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title("Editorial Content")
+          .items([
+            S.documentTypeListItem("post").title("Posts"),
+            S.documentTypeListItem("category").title("Categories"),
+          ]),
+    }),
+  ],
 });
