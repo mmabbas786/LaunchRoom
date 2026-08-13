@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BlogLandingContent } from "@/components/blog/BlogLandingContent";
+import { getBlogArticles, getBlogCategories } from "@/lib/sanity/service";
 import { siteConfig } from "@/lib/site";
 import { generateBreadcrumbSchema } from "@/lib/jsonld";
 
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const articles = await getBlogArticles();
+  const categories = await getBlogCategories();
+
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
     { name: "Blog", url: `${siteConfig.url}/blog` },
@@ -31,7 +35,7 @@ export default function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <BlogLandingContent />
+      <BlogLandingContent articles={articles} categories={categories} />
     </main>
   );
 }

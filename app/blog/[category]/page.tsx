@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { BLOG_CATEGORIES, getBlogArticlesByCategory, BLOG_ARTICLES, BlogArticle } from "@/data/blog";
+import { BLOG_CATEGORIES, BLOG_ARTICLES, BlogArticle } from "@/data/blog";
+import { getBlogArticlesByCategory, getBlogCategories } from "@/lib/sanity/service";
 import { siteConfig } from "@/lib/site";
 import { generateBreadcrumbSchema } from "@/lib/jsonld";
 import { ArrowRight, Clock } from "lucide-react";
@@ -13,14 +14,16 @@ interface BlogCategoryPageProps {
 }
 
 export async function generateStaticParams() {
-  return BLOG_CATEGORIES.map((cat) => ({
+  const categories = await getBlogCategories();
+  return categories.map((cat) => ({
     category: cat.slug,
   }));
 }
 
 export async function generateMetadata({ params }: BlogCategoryPageProps): Promise<Metadata> {
   const { category } = await params;
-  const catObj = BLOG_CATEGORIES.find((c) => c.slug === category);
+  const categories = await getBlogCategories();
+  const catObj = categories.find((c) => c.slug === category);
 
   if (!catObj) {
     return {
@@ -28,8 +31,9 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
     };
   }
 
-  const title = `${catObj.label} Articles & Insights | LaunchRoom Blog`;
-  const description = `${catObj.description} Technical tear-downs and engineering briefs on ${catObj.label.toLowerCase()}.`;
+  const label = catObj.name || catObj.description || catObj.slug;
+  const title = `${label} Articles & Insights | LaunchRoom Blog`;
+  const description = `${catObj.description || label} Technical tear-downs and engineering briefs on ${label.toLowerCase()}.`;
 
   return {
     title,
@@ -48,19 +52,21 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
 
 export default async function BlogCategoryPage({ params }: BlogCategoryPageProps) {
   const { category } = await params;
-  const catObj = BLOG_CATEGORIES.find((c) => c.slug === category);
+  const categories = await getBlogCategories();
+  const catObj = categories.find((c) => c.slug === category);
 
   if (!catObj) {
     notFound();
   }
 
-  const categoryArticles = getBlogArticlesByCategory(category);
+  const label = catObj.name || catObj.slug;
+  const categoryArticles = await getBlogArticlesByCategory(category);
   const displayArticles = categoryArticles.length > 0 ? categoryArticles : BLOG_ARTICLES.slice(0, 3);
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
     { name: "Blog", url: `${siteConfig.url}/blog` },
-    { name: catObj.label, url: `${siteConfig.url}/blog/${catObj.slug}` },
+    { name: label, url: `${siteConfig.url}/blog/${catObj.slug}` },
   ]);
 
   return (
@@ -76,11 +82,11 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
             <span>/</span>
             <Link href="/blog" className="hover:text-accent">Blog</Link>
             <span>/</span>
-            <span className="text-accent">{catObj.label}</span>
+            <span className="text-accent">{label}</span>
           </div>
 
           <h1 className="page-hero-title font-display font-extrabold text-text-primary">
-            {catObj.label}
+            {label}
           </h1>
 
           <p className="max-w-2xl text-[18px] text-text-secondary">
@@ -99,6 +105,10 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
 }
 
 function BlogCategoryCard({ article }: { article: BlogArticle }) {
+  const catLabel = article.categoryLabel || article.categoryName || article.category;
+  const time = article.readTime || article.readingTime || "5 min read";
+  const date = article.relativeTime || article.publishedAt;
+
   return (
     <Link
       href={`/blog/${article.category}/${article.slug}`}
@@ -107,11 +117,11 @@ function BlogCategoryCard({ article }: { article: BlogArticle }) {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <span className="meta-chip text-[10px] text-accent border-accent/20">
-            {article.categoryLabel}
+            {catLabel}
           </span>
           <span className="flex items-center gap-1 font-mono text-[12px] text-text-muted">
             <Clock className="h-3 w-3" />
-            {article.readTime}
+            {time}
           </span>
         </div>
 
@@ -125,7 +135,7 @@ function BlogCategoryCard({ article }: { article: BlogArticle }) {
       </div>
 
       <div className="flex items-center justify-between pt-4 border-t border-border/50 text-[13px] text-text-muted font-mono">
-        <span>{article.relativeTime}</span>
+        <span>{date}</span>
         <span className="inline-flex items-center gap-1 text-accent group-hover:underline">
           Read Post <ArrowRight className="h-3.5 w-3.5" />
         </span>

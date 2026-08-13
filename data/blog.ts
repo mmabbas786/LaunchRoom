@@ -1,6 +1,7 @@
 export interface BlogCategory {
   slug: string;
   label: string;
+  name?: string;
   description: string;
 }
 
@@ -10,15 +11,18 @@ export interface TocItem {
 }
 
 export interface BlogArticle {
+  id?: string;
   slug: string;
   title: string;
   excerpt: string;
   category: string;
   categoryLabel: string;
+  categoryName?: string;
   publishedAt: string;
   updatedAt?: string;
   relativeTime: string;
   readTime: string;
+  readingTime?: string;
   author: {
     name: string;
     role: string;
@@ -29,8 +33,12 @@ export interface BlogArticle {
     alt: string;
     caption?: string;
     gradient: string;
-  };
+  } | string;
+  imageAlt?: string;
   tableOfContents: TocItem[];
+  toc?: Array<{ id: string; text: string }>;
+  portableTextBody?: any;
+  tags?: string[];
   content: {
     introduction: string;
     sections: {
@@ -44,7 +52,7 @@ export interface BlogArticle {
       question: string;
       answer: string;
     }[];
-  };
+  } | Array<{ heading: string; body: string }>;
   toolzTotalTool?: {
     name: string;
     description: string;

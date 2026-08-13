@@ -5,29 +5,38 @@ import Link from "next/link";
 import { Search, Clock, ArrowRight, BookOpen, Layers } from "lucide-react";
 import { BLOG_CATEGORIES, BLOG_ARTICLES, BlogArticle } from "@/data/blog";
 
-export function BlogLandingContent() {
+export function BlogLandingContent({
+  articles = BLOG_ARTICLES,
+  categories = BLOG_CATEGORIES,
+}: {
+  articles?: BlogArticle[];
+  categories?: Array<{ slug: string; name?: string; label?: string }>;
+}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  const articleList = articles.length > 0 ? articles : BLOG_ARTICLES;
+
   const featuredArticle = useMemo(() => {
-    return BLOG_ARTICLES.find((a) => a.featured) || BLOG_ARTICLES[0];
-  }, []);
+    return articleList.find((a) => a.featured) || articleList[0];
+  }, [articleList]);
 
   const filteredArticles = useMemo(() => {
-    return BLOG_ARTICLES.filter((article) => {
+    return articleList.filter((article) => {
       const matchesCategory =
         selectedCategory === "all" || article.category === selectedCategory;
 
       const query = searchQuery.toLowerCase().trim();
+      const catLabel = article.categoryLabel || article.categoryName || article.category;
       const matchesSearch =
         !query ||
         article.title.toLowerCase().includes(query) ||
         article.excerpt.toLowerCase().includes(query) ||
-        article.categoryLabel.toLowerCase().includes(query);
+        catLabel.toLowerCase().includes(query);
 
       return matchesCategory && matchesSearch;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [articleList, searchQuery, selectedCategory]);
 
   return (
     <div className="page-shell space-y-12">
@@ -76,10 +85,11 @@ export function BlogLandingContent() {
                 : "border border-border bg-surface-1 text-text-secondary hover:text-text-primary"
             }`}
           >
-            All Articles ({BLOG_ARTICLES.length})
+            All Articles ({articleList.length})
           </button>
-          {BLOG_CATEGORIES.map((cat) => {
-            const count = BLOG_ARTICLES.filter((a) => a.category === cat.slug).length;
+          {categories.map((cat) => {
+            const label = cat.name || cat.label || cat.slug;
+            const count = articleList.filter((a) => a.category === cat.slug).length;
             const isSelected = selectedCategory === cat.slug;
 
             return (
@@ -92,7 +102,7 @@ export function BlogLandingContent() {
                     : "border border-border bg-surface-1 text-text-secondary hover:text-text-primary"
                 }`}
               >
-                {cat.label} ({count})
+                {label} ({count})
               </button>
             );
           })}
