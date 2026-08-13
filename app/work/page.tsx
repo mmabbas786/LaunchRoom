@@ -7,10 +7,22 @@ import { PageHeroGrid } from "@/components/ui/PageHeroGrid";
 import { ProjectGrid } from "@/components/work/ProjectGrid";
 import { projects } from "@/data/projects";
 
+import { siteConfig } from "@/lib/site";
+
 export const metadata: Metadata = {
-  title: "Our Work — LaunchRoom",
+  title: "Client Case Studies & Work Portfolio",
   description:
-    "Explore LaunchRoom client website case studies, live links, and delivery details.",
+    "Explore LaunchRoom client website case studies, live site links, app launches, and build delivery details.",
+  alternates: {
+    canonical: `${siteConfig.url}/work`,
+  },
+  openGraph: {
+    title: "Client Case Studies & Portfolio | LaunchRoom",
+    description:
+      "Explore LaunchRoom client website case studies, live site links, app launches, and build delivery details.",
+    url: `${siteConfig.url}/work`,
+    type: "website",
+  },
 };
 
 export default function WorkPage() {
@@ -21,8 +33,8 @@ export default function WorkPage() {
       value: projects.filter((project) => project.category === "Web").length,
     },
     {
-      label: "Apps",
-      value: projects.filter((project) => project.category === "Apps").length,
+      label: "Web Applications",
+      value: projects.filter((project) => project.category === "Web Applications").length,
     },
     {
       label: "Ongoing",

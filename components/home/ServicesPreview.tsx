@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 
 const icons = {
   web: MonitorSmartphone,
-  apps: Layers3,
+  webapps: Layers3,
   retainer: ShieldCheck,
 };
 

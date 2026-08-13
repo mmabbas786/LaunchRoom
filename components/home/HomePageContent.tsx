@@ -27,7 +27,7 @@ export function HomePageContent() {
       <WorkPreview />
       <CTABand
         heading="Get started with LaunchRoom today."
-        subtext="Need a new website, app interface, redesign, or ongoing support? We can help you shape the next release."
+        subtext="Need a new website, web app, redesign, or ongoing support? We can help you shape the next release."
         buttonText="Start a project"
         buttonHref="/start"
       />

@@ -12,14 +12,14 @@ const whatsappOptions = [
     href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Website")),
   },
   {
-    label: "App",
-    description: "App development inquiry",
-    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Mobile App")),
+    label: "Web App / SaaS",
+    description: "Custom web app inquiry",
+    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Web Application / SaaS")),
   },
   {
-    label: "Both",
-    description: "Website + app inquiry",
-    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Both website + app")),
+    label: "Startup MVP",
+    description: "Rapid MVP launch inquiry",
+    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Startup MVP")),
   },
 ];
 

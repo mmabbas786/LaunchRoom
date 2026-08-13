@@ -3,10 +3,22 @@ import type { Metadata } from "next";
 import { StartPageContent } from "@/components/start/StartPageContent";
 import { getDemoBySlug } from "@/lib/demos";
 
+import { siteConfig } from "@/lib/site";
+
 export const metadata: Metadata = {
-  title: "Start a Project — LaunchRoom",
+  title: "Start Your Project Brief",
   description:
-    "Share your project brief with LaunchRoom and open a WhatsApp-ready message with all the key details filled in.",
+    "Share your project brief with LaunchRoom and get a clear scope, timeline, and starting quote without agency drag.",
+  alternates: {
+    canonical: `${siteConfig.url}/start`,
+  },
+  openGraph: {
+    title: "Start Your Project Brief | LaunchRoom",
+    description:
+      "Share your project brief with LaunchRoom and get a clear scope, timeline, and starting quote.",
+    url: `${siteConfig.url}/start`,
+    type: "website",
+  },
 };
 
 type SearchParams = Promise<{

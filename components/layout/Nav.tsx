@@ -173,9 +173,9 @@ export function Nav() {
               </div>
 
               <div className="panel-accent mb-6 p-5">
-                <p className="card-label">Web &amp; App Studio</p>
+                <p className="card-label">Web Development Studio</p>
                 <p className="mt-3 text-[15px] leading-[1.75] text-text-secondary">
-                  LaunchRoom builds premium websites, app interfaces, and clean
+                  LaunchRoom builds premium websites, SaaS web applications, and clean
                   digital systems for businesses that need to ship with confidence.
                 </p>
               </div>

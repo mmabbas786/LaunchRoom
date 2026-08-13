@@ -16,7 +16,7 @@ export function getServiceFaqs(currency: SupportedCurrency): FAQItem[] {
     {
       question: "How long does a typical project take?",
       answer:
-        "A standard 5-page website takes 1-2 weeks. A CMS-powered business site takes 2-3 weeks. Android apps take 3-6 weeks. Complex projects are scoped individually.",
+        "A standard 5-page website takes 1-2 weeks. A fuller business site takes 2-3 weeks. Custom web applications & SaaS MVPs take 2-5 weeks. Complex projects are scoped individually.",
     },
     {
       question: "Do you sign NDAs?",
@@ -50,7 +50,7 @@ export const quickContactFaqs: FAQItem[] = [
   {
     question: "What's your typical timeline?",
     answer:
-      "Websites: 1-3 weeks. Apps: 3-6 weeks. Scoped per project.",
+      "Websites: 1-3 weeks. Web Apps & SaaS MVPs: 2-5 weeks. Scoped per project.",
   },
   {
     question: "Do you sign NDAs?",

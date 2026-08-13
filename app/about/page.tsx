@@ -4,10 +4,22 @@ import { TeamCard } from "@/components/about/TeamCard";
 import { CTABand } from "@/components/layout/CTABand";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
+import { siteConfig } from "@/lib/site";
+
 export const metadata: Metadata = {
-  title: "About Us - LaunchRoom",
+  title: "About LaunchRoom | Software & Web Development Studio",
   description:
-    "No bloat. No middlemen. Just two people who give a damn about what gets built.",
+    "Learn about LaunchRoom: direct developer collaboration, fast execution, and zero agency bloat.",
+  alternates: {
+    canonical: `${siteConfig.url}/about`,
+  },
+  openGraph: {
+    title: "About LaunchRoom Studio",
+    description:
+      "Direct developer collaboration, fast execution, and zero agency bloat.",
+    url: `${siteConfig.url}/about`,
+    type: "website",
+  },
 };
 
 export default function AboutPage() {

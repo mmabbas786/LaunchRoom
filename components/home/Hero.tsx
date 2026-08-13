@@ -68,7 +68,7 @@ export function Hero() {
             variants={item}
             custom={0.26}
           >
-            Websites, Mobile Apps, And Digital Products For Startups And Growing
+            Websites, Web Apps, SaaS Platforms, And Digital Products For Startups And Growing
             Businesses. Modern, Fast, Clean, And Launch Ready.
           </motion.p>
 

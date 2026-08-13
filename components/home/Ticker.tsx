@@ -8,12 +8,12 @@ import {
 } from "lucide-react";
 
 const items = [
-  { label: "Next.js", icon: Globe },
-  { label: "React Native", icon: Smartphone },
-  { label: "Flutter", icon: Rocket },
+  { label: "Next.js 16", icon: Globe },
+  { label: "React 19", icon: Code2 },
+  { label: "Tailwind CSS", icon: Rocket },
   { label: "Supabase", icon: Database },
   { label: "TypeScript", icon: Code2 },
-  { label: "Launch Support", icon: ShieldCheck },
+  { label: "Vercel Edge", icon: ShieldCheck },
 ];
 
 export function Ticker() {

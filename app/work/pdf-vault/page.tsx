@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ChevronLeft,
-  ExternalLink,
   FileOutput,
   FilePenLine,
   Files,
@@ -15,25 +14,23 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Tag } from "@/components/ui/Tag";
-import { pdfVaultFeatures } from "@/data/apps";
-import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "PDF Vault Case Study",
+  title: "PDF Vault SaaS Case Study",
   description:
-    "Case study for PDF Vault, LaunchRoom's 6-in-1 Android PDF toolkit built with Flutter and monetised with AdMob.",
+    "Case study for PDF Vault, a web-based PDF utility platform built with Next.js.",
 };
 
-const featureIcons = {
-  Compress: Minimize2,
-  Merge: Files,
-  Split: SplitSquareVertical,
-  Scan: ScanLine,
-  Sign: FilePenLine,
-  Convert: FileOutput,
-} satisfies Record<(typeof pdfVaultFeatures)[number], typeof Minimize2>;
+const pdfVaultFeatures = [
+  { name: "Compress", icon: Minimize2 },
+  { name: "Merge", icon: Files },
+  { name: "Split", icon: SplitSquareVertical },
+  { name: "Scan", icon: ScanLine },
+  { name: "Sign", icon: FilePenLine },
+  { name: "Convert", icon: FileOutput },
+];
 
-const tags = ["Android", "Flutter", "Utility"];
+const tags = ["Next.js", "Web App", "SaaS Utility"];
 
 export default function PdfVaultCaseStudyPage() {
   return (
@@ -50,23 +47,17 @@ export default function PdfVaultCaseStudyPage() {
 
       <section className="mt-6 grid gap-5 xl:grid-cols-[1.08fr_0.92fr]">
         <AnimatedSection className="panel-dark p-7 sm:p-9 lg:p-12">
-          <a
-            href={siteConfig.playStoreUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-accent-border bg-accent-dim px-4 py-2 text-[13px] font-semibold text-text-primary hover:-translate-y-0.5 hover:border-accent"
-          >
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent-border bg-accent-dim px-4 py-2 text-[13px] font-semibold text-text-primary">
             <Badge variant="success" className="min-h-0 px-0 py-0 border-0 bg-transparent text-support">
-              Live on Play Store
+              Case Study
             </Badge>
-            <ExternalLink className="h-4 w-4 text-accent" />
-          </a>
+          </div>
           <h1 className="page-hero-title mt-6 max-w-[8ch] text-on-dark">
             PDF Vault
           </h1>
           <p className="mt-6 max-w-3xl text-[19px] leading-[1.82] text-on-dark-muted">
-            6-in-1 Android PDF toolkit built to stay useful, lightweight, and easy
-            to access without forcing users through bloated or paywalled flows.
+            6-in-1 Web PDF toolkit built to stay useful, lightweight, and easy
+            to access without forcing users through bloated software flows.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             {tags.map((tag) => (
@@ -83,10 +74,10 @@ export default function PdfVaultCaseStudyPage() {
         <AnimatedSection className="panel p-7 sm:p-8" delay={0.05}>
           <p className="card-label">Project snapshot</p>
           <div className="equal-height-grid mt-5 sm:grid-cols-2">
-            <MetaCard label="Platform" value="Android" />
-            <MetaCard label="Stack" value="Flutter · Android · AdMob" />
-            <MetaCard label="Monetisation" value="AdMob integration" />
-            <MetaCard label="Result" value="Live on Play Store" />
+            <MetaCard label="Platform" value="Web Platform" />
+            <MetaCard label="Stack" value="Next.js · TypeScript · Tailwind" />
+            <MetaCard label="Type" value="SaaS Utility Tool" />
+            <MetaCard label="Result" value="Production Ready" />
           </div>
         </AnimatedSection>
       </section>
@@ -95,27 +86,26 @@ export default function PdfVaultCaseStudyPage() {
         <AnimatedSection className="page-card-roomy panel" delay={0.08}>
           <p className="card-label">Problem</p>
           <p className="mt-4 text-[17px] leading-[1.84]">
-            Most PDF utility apps feel bloated, cluttered with ads, or locked
-            behind aggressive paywalls. Users usually just need a handful of core
-            tasks without friction.
+            Most web PDF utility tools feel bloated, cluttered with aggressive ads,
+            or locked behind paywalls. Users usually just need a handful of core
+            tasks done fast.
           </p>
         </AnimatedSection>
 
         <AnimatedSection className="page-card-roomy panel-accent" delay={0.1}>
           <p className="card-label text-text-primary">Solution</p>
           <p className="mt-4 text-[17px] leading-[1.84] text-text-secondary">
-            PDF Vault was scoped around six practical tools only: compress, merge,
-            split, scan, sign, and convert. Flutter kept iteration fast while the
-            app stayed focused on real Android workflows.
+            PDF Vault was scoped around six practical web tools: compress, merge,
+            split, scan, sign, and convert. Built with Next.js for client-side speed
+            and instant response.
           </p>
         </AnimatedSection>
 
         <AnimatedSection className="page-card-roomy panel-lime" delay={0.12}>
           <p className="card-label text-on-dark-muted">Outcome</p>
           <p className="mt-4 text-[17px] leading-[1.84] text-on-dark-muted">
-            The product shipped to the Play Store as a monetisation-ready utility
-            app, giving LaunchRoom direct proof of Android delivery, release, and
-            maintenance experience.
+            Delivered as a modular web application that demonstrates LaunchRoom&apos;s
+            ability to build clean, fast, and utility-driven software.
           </p>
         </AnimatedSection>
       </section>
@@ -124,20 +114,20 @@ export default function PdfVaultCaseStudyPage() {
         <div className="panel p-7 sm:p-8">
           <p className="card-label">Feature grid</p>
           <div className="page-card-grid mt-6 md:grid-cols-2 xl:grid-cols-3">
-            {pdfVaultFeatures.map((feature) => {
-              const Icon = featureIcons[feature];
+            {pdfVaultFeatures.map((item) => {
+              const Icon = item.icon;
 
               return (
                 <article
-                  key={feature}
+                  key={item.name}
                   className="page-card rounded-[22px] border border-border bg-surface-2 shadow-[0_16px_30px_rgba(0,0,0,0.22)]"
                 >
                   <span className="inline-flex h-14 w-14 items-center justify-center rounded-[18px] border border-accent-border bg-accent-dim text-accent shadow-[0_18px_34px_rgba(0,0,0,0.18)]">
                     <Icon className="h-6 w-6" />
                   </span>
-                  <h3 className="mt-6 text-[24px] leading-[1.12]">{feature}</h3>
+                  <h3 className="mt-6 text-[24px] leading-[1.12]">{item.name}</h3>
                   <p className="mt-3 text-[15px] leading-[1.82]">
-                    One focused tool inside a tighter Android utility flow.
+                    One focused tool inside a fast web utility workflow.
                   </p>
                 </article>
               );
@@ -146,26 +136,13 @@ export default function PdfVaultCaseStudyPage() {
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-8" delay={0.16}>
-        <div className="panel flex min-h-[420px] items-center justify-center p-8">
-          <div className="relative mx-auto flex h-[360px] w-[200px] items-center justify-center rounded-[42px] border border-accent-border bg-[linear-gradient(180deg,#0d0d0d,#151515)] p-4 shadow-[0_24px_54px_rgba(0,0,0,0.38)]">
-            <div className="absolute top-3 h-1.5 w-16 rounded-full bg-[rgba(255,255,255,0.12)]" />
-            <div className="flex h-full w-full items-center justify-center rounded-[30px] border border-border bg-[radial-gradient(circle_at_top,rgba(232,160,32,0.18),transparent_26%),linear-gradient(180deg,#111,#1b1b1b)] px-6 text-center">
-              <p className="text-[28px] leading-[1.08] text-text-primary">
-                PDF Vault
-              </p>
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
       <AnimatedSection className="mt-10 panel p-7 sm:p-8" delay={0.18}>
         <p className="card-label">CTA</p>
         <h2 className="mt-4 text-[clamp(30px,3vw,42px)] leading-[1.06]">
-          Have an app idea? Let&apos;s build it.
+          Have a web application idea? Let&apos;s build it.
         </h2>
         <div className="mt-6">
-          <Button href="/start">Let&apos;s build it</Button>
+          <Button href="/start">Start your project</Button>
         </div>
       </AnimatedSection>
     </div>

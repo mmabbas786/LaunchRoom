@@ -19,19 +19,19 @@ import { startBudgetOptionsByCurrency, startSchema } from "@/lib/validation";
 const projectTypeOptions = [
   {
     value: "Website",
-    description: "Landing page, business site, e-commerce",
+    description: "Landing page, business site, brochure website",
   },
   {
-    value: "Mobile App",
-    description: "Android app, Play Store launch",
+    value: "Web Application / SaaS",
+    description: "Custom web app, client portal, administrative dashboard",
   },
   {
-    value: "Both website + app",
-    description: "A combined product and web presence",
+    value: "Startup MVP",
+    description: "Rapid 2-4 week product build for early-stage founders",
   },
   {
     value: "Not sure yet",
-    description: "You need help deciding what to build first",
+    description: "You need help deciding the best version to build first",
   },
 ] as const;
 

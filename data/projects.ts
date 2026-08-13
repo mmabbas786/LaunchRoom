@@ -1,4 +1,4 @@
-export type ProjectCategory = "All" | "Web" | "Apps" | "Ongoing";
+export type ProjectCategory = "All" | "Web" | "Web Applications" | "Ongoing";
 
 export type Project = {
   slug: string;

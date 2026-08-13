@@ -6,7 +6,7 @@ export const contactSchema = z.object({
   name: z.string().min(2, "Please enter your name."),
   email: z.string().email("Please enter a valid email address."),
   company: z.string().optional(),
-  subject: z.enum(["New website", "Mobile app", "Retainer", "Other"]),
+  subject: z.enum(["New website", "Web application", "Retainer", "Other"]),
   message: z.string().min(20, "Please share at least a little more detail."),
 });
 
@@ -27,11 +27,11 @@ export const startBudgetOptionsByCurrency: Record<
     },
     {
       value: "INR 50,000-INR 1,00,000",
-      description: "For larger website builds or app scope",
+      description: "For custom web application builds",
     },
     {
       value: "INR 1,00,000+",
-      description: "For bigger apps or product work",
+      description: "For SaaS platforms or full digital product scope",
     },
     {
       value: "Let's discuss",
@@ -49,11 +49,11 @@ export const startBudgetOptionsByCurrency: Record<
     },
     {
       value: "$1,500-$3,000",
-      description: "For larger website builds or app scope",
+      description: "For custom web application builds",
     },
     {
       value: "$3,000+",
-      description: "For bigger apps or product work",
+      description: "For SaaS platforms or full digital product scope",
     },
     {
       value: "Let's discuss",
@@ -79,8 +79,8 @@ export type StartBudget = (typeof startBudgetValues)[number];
 export const startSchema = z.object({
   projectType: z.enum([
     "Website",
-    "Mobile App",
-    "Both website + app",
+    "Web Application / SaaS",
+    "Startup MVP",
     "Not sure yet",
   ]),
   budget: z.enum(startBudgetValues),

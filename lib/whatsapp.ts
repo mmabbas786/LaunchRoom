@@ -13,10 +13,10 @@ export function getProjectInquiryLabel(projectType: StartInput["projectType"]) {
   switch (projectType) {
     case "Website":
       return "Website inquiry";
-    case "Mobile App":
-      return "App inquiry";
-    case "Both website + app":
-      return "Website + app inquiry";
+    case "Web Application / SaaS":
+      return "Web app inquiry";
+    case "Startup MVP":
+      return "Startup MVP inquiry";
     default:
       return "Project inquiry";
   }
@@ -26,12 +26,12 @@ export function buildProjectInquiryWhatsAppMessage(projectType: StartInput["proj
   switch (projectType) {
     case "Website":
       return "Hello LaunchRoom, I want to discuss website development.";
-    case "Mobile App":
-      return "Hello LaunchRoom, I want to discuss app development.";
-    case "Both website + app":
-      return "Hello LaunchRoom, I want to discuss website and app development.";
+    case "Web Application / SaaS":
+      return "Hello LaunchRoom, I want to discuss web application & SaaS development.";
+    case "Startup MVP":
+      return "Hello LaunchRoom, I want to discuss building a Startup MVP.";
     default:
-      return "Hello LaunchRoom, I need help deciding whether to start with a website, an app, or both.";
+      return "Hello LaunchRoom, I need help deciding whether to start with a website or a web application.";
   }
 }
 

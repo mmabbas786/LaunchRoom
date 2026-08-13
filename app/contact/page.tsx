@@ -10,9 +10,19 @@ import { siteConfig } from "@/lib/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
-  title: "Contact — LaunchRoom",
+  title: "Contact LaunchRoom Studio",
   description:
-    "Contact LaunchRoom for websites, Android apps, retainers, and project proposals.",
+    "Contact LaunchRoom for website development, Android apps, retainers, and project proposals. Fast responses on email & WhatsApp.",
+  alternates: {
+    canonical: `${siteConfig.url}/contact`,
+  },
+  openGraph: {
+    title: "Contact LaunchRoom Studio",
+    description:
+      "Reach out to LaunchRoom for custom websites, mobile apps, and project proposals.",
+    url: `${siteConfig.url}/contact`,
+    type: "website",
+  },
 };
 
 const whatsappHref = getWhatsAppHref(

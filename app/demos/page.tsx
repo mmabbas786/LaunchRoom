@@ -8,10 +8,22 @@ import { Button } from "@/components/ui/Button";
 import { Tag } from "@/components/ui/Tag";
 import { demos, hexToRgba } from "@/lib/demos";
 
+import { siteConfig } from "@/lib/site";
+
 export const metadata: Metadata = {
-  title: "Demo Websites by Niche",
+  title: "Live Niche Website Demos",
   description:
-    "See LaunchRoom's live website demos for clinics, law firms, CA firms, gyms, and more. Find your niche and start a project with context already attached.",
+    "Explore LaunchRoom's live website demos for clinics, law firms, CA consultants, restaurants, and local businesses.",
+  alternates: {
+    canonical: `${siteConfig.url}/demos`,
+  },
+  openGraph: {
+    title: "Live Niche Website Demos | LaunchRoom",
+    description:
+      "Explore LaunchRoom's live website demos for clinics, law firms, CA consultants, restaurants, and local businesses.",
+    url: `${siteConfig.url}/demos`,
+    type: "website",
+  },
 };
 
 const statCards = [

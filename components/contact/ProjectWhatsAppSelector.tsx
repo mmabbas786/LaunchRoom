@@ -15,14 +15,14 @@ const inquiryOptions: Array<{
     projectType: "Website",
   },
   {
-    label: "App",
-    description: "Open WhatsApp with an app development inquiry.",
-    projectType: "Mobile App",
+    label: "Web App / SaaS",
+    description: "Open WhatsApp with a custom web app inquiry.",
+    projectType: "Web Application / SaaS",
   },
   {
-    label: "Both",
-    description: "Open WhatsApp with a combined website and app inquiry.",
-    projectType: "Both website + app",
+    label: "Startup MVP",
+    description: "Open WhatsApp with a rapid MVP launch inquiry.",
+    projectType: "Startup MVP",
   },
 ];
 

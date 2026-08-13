@@ -9,6 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/blog",
     "/services",
+    "/website-development",
+    "/web-app-development",
+    "/startup-mvp-development",
+    "/nextjs-development",
     "/pricing",
     "/work",
     "/demos",
@@ -20,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((path) => ({
     url: `${siteConfig.url}${path}`,
     lastModified: new Date(),
+    changeFrequency: path === "" ? "daily" : "weekly" as const,
+    priority: path === "" ? 1.0 : path.includes("-development") ? 0.9 : 0.8,
   }));
 
   const projectRoutes = projects.map((project) => ({

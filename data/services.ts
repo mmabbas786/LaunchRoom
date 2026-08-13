@@ -2,7 +2,7 @@ import { pricingSummary } from "@/data/pricing";
 import type { CurrencyAmount } from "@/data/pricing";
 
 export type Service = {
-  id: "web" | "apps" | "retainer";
+  id: "web" | "webapps" | "retainer";
   number: string;
   name: string;
   shortDescription: string;
@@ -26,37 +26,37 @@ export const services: Service[] = [
     includes: [
       "Strategy & wireframing",
       "Custom design in Figma",
-      "Next.js or plain HTML development",
-      "SEO on-page setup",
-      "Google Analytics",
-      "Contact form integration",
-      "Deployment (Vercel / Hostinger / Netlify)",
+      "Next.js or modern HTML5 development",
+      "SEO on-page setup & Schema.org markup",
+      "Google Analytics GA4 integration",
+      "Contact form & lead routing",
+      "Vercel / Netlify cloud deployment",
       "1-3 months post-launch support",
     ],
     timeline: "1-3 weeks",
     startingPrice: pricingSummary.basic,
   },
   {
-    id: "apps",
+    id: "webapps",
     number: "02",
-    name: "Mobile Apps (Android/IOS)",
+    name: "Web Applications & SaaS",
     shortDescription:
-      "Android apps built with Flutter. From idea to Play Store, fully managed.",
+      "Custom web platforms, customer portals, and interactive dashboards built with Next.js and TypeScript.",
     description: [
-      "LaunchRoom builds Android/IOS apps for startups, experiments, and businesses that need something practical on the Play Store without hiring a big team.",
-      "We help with product framing, UI, development, release setup, monetisation, and handover. The goal is to launch a version people can actually use and iterate on, not to overbuild before day one.",
+      "LaunchRoom builds scalable, high-performance web applications for startups and businesses needing custom functionality, portals, or SaaS products.",
+      "We handle frontend UX engineering, API development, database architecture, authentication, and cloud infrastructure deployment.",
     ],
     includes: [
-      "UI/UX design",
-      "Flutter development",
-      "Play Store account setup & submission",
-      "AdMob integration",
-      "In-app purchases (RevenueCat)",
-      "Push notifications",
-      "Source code handover",
-      "3 months post-launch support",
+      "Custom UI/UX & Interactive Design",
+      "Next.js App Router & React 19 Development",
+      "Database & Auth Integration (Supabase / Firebase)",
+      "Stripe / Payment Gateway Integration",
+      "Admin Dashboards & Customer Portals",
+      "API Development & Webhooks",
+      "Source Code Handover & GitHub Setup",
+      "3 months post-launch technical support",
     ],
-    timeline: "3-6 weeks",
+    timeline: "2-5 weeks",
     startingPrice: {
       INR: "Custom quote",
       USD: "Custom quote",

@@ -68,7 +68,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:gap-12">
+          <div className="grid gap-8 sm:grid-cols-3 lg:gap-12">
             <div>
               <p className="card-label">Explore</p>
               <nav className="mt-4 flex flex-col gap-3">
@@ -85,6 +85,24 @@ export function Footer() {
             </div>
 
             <div>
+              <p className="card-label">Solutions</p>
+              <nav className="mt-4 flex flex-col gap-3">
+                <Link href="/website-development" className="text-[15px] font-medium text-text-secondary hover:text-text-primary">
+                  Website Development
+                </Link>
+                <Link href="/web-app-development" className="text-[15px] font-medium text-text-secondary hover:text-text-primary">
+                  Web App Development
+                </Link>
+                <Link href="/startup-mvp-development" className="text-[15px] font-medium text-text-secondary hover:text-text-primary">
+                  Startup MVP Studio
+                </Link>
+                <Link href="/nextjs-development" className="text-[15px] font-medium text-text-secondary hover:text-text-primary">
+                  Next.js Agency
+                </Link>
+              </nav>
+            </div>
+
+            <div>
               <p className="card-label">Reach us</p>
               <div className="mt-4 flex flex-col gap-3">
                 <a
@@ -94,7 +112,7 @@ export function Footer() {
                   {siteConfig.email}
                 </a>
                 <a
-                  href={getWhatsAppHref("Hello LaunchRoom, I want to discuss website or app development.")}
+                  href={getWhatsAppHref("Hello LaunchRoom, I want to discuss website development.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[15px] font-medium text-text-secondary hover:text-text-primary"

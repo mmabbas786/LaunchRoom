@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "@/app/globals.css";
 
@@ -12,29 +13,89 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "LaunchRoom Tech Solutions, India",
+    default: "LaunchRoom | Website & Web Application Development Studio",
     template: "%s | LaunchRoom",
   },
-  description: siteConfig.description,
+  description:
+    "LaunchRoom builds modern websites, SaaS web applications, and custom digital portals for startups and growing businesses.",
   keywords: [
-    "web development kolkata",
-    "android app development india",
-    "freelance developer india",
-    "agency kolkata",
-    "next.js developer india",
+    "website development",
+    "web application development",
+    "custom website builder",
+    "startup mvp development",
+    "next.js development agency",
+    "react developer india",
+    "saas web development studio",
+    "web agency kolkata",
+    "launchroom",
   ],
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
     type: "website",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    title: "LaunchRoom | Website & Web Application Development Studio",
+    description:
+      "LaunchRoom builds modern websites, SaaS web applications, and custom digital portals for startups and growing businesses.",
+    images: [
+      {
+        url: `${siteConfig.url}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "LaunchRoom Website & Web Application Development Studio",
+      },
+    ],
   },
   icons: {
     icon: "/favicon-round.svg",
     apple: "/launchroom-logo.png",
   },
-  twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: "LaunchRoom | Website & Web Application Development Studio",
+    description:
+      "LaunchRoom builds modern websites, SaaS web applications, and custom digital portals for startups and growing businesses.",
+    images: [`${siteConfig.url}/og-image.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+const jsonLdOrganization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "LaunchRoom",
+  url: "https://launchroom.in",
+  logo: "https://launchroom.in/launchroom-logo.png",
+  sameAs: [
+    "https://www.instagram.com/launchroom.in/",
+    "https://www.linkedin.com/in/mirzamehediabbas/",
+    "https://github.com/mmabbas786",
+    "https://x.com/mmabbasofficial",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "infolaunchroom@gmail.com",
+    contactType: "customer support",
+  },
+};
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "LaunchRoom",
+  url: "https://launchroom.in",
 };
 
 export default function RootLayout({
@@ -49,6 +110,14 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Chonburi&family=Domine:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
           rel="stylesheet"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
       </head>
       <body className="min-h-screen bg-bg text-text-primary">
         <VisitorPreferencesProvider>
@@ -56,6 +125,7 @@ export default function RootLayout({
         </VisitorPreferencesProvider>
         <Analytics />
         <SpeedInsights />
+        <GoogleAnalytics gaId="G-B18EVDXMSG" />
       </body>
     </html>
   );
