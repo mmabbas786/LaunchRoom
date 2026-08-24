@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Editorial & Publication Disclaimer | LaunchRoom",
   description: "Editorial integrity, independent journalism guidelines, and sponsorship disclosure for LaunchRoom.",
+  alternates: {
+    canonical: `${siteConfig.url}/disclaimer`,
+  },
+  openGraph: {
+    title: "Editorial & Publication Disclaimer | LaunchRoom",
+    description: "Editorial integrity, independent journalism guidelines, and sponsorship disclosure for LaunchRoom.",
+    url: `${siteConfig.url}/disclaimer`,
+    type: "website",
+  },
 };
 
 export default function DisclaimerPage() {

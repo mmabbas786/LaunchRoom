@@ -29,9 +29,6 @@ export const metadata: Metadata = {
     "web agency kolkata",
     "launchroom",
   ],
-  alternates: {
-    canonical: siteConfig.url,
-  },
   openGraph: {
     type: "website",
     url: siteConfig.url,

@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | LaunchRoom",
   description: "LaunchRoom privacy policy details regarding data collection, analytics, cookies, and user protection.",
+  alternates: {
+    canonical: `${siteConfig.url}/privacy-policy`,
+  },
+  openGraph: {
+    title: "Privacy Policy | LaunchRoom",
+    description: "LaunchRoom privacy policy details regarding data collection, analytics, cookies, and user protection.",
+    url: `${siteConfig.url}/privacy-policy`,
+    type: "website",
+  },
 };
 
 export default function PrivacyPolicyPage() {

@@ -18,6 +18,8 @@ export function generateStaticParams() {
     .map((project) => ({ slug: project.slug }));
 }
 
+import { siteConfig } from "@/lib/site";
+
 export async function generateMetadata({
   params,
 }: RouteProps): Promise<Metadata> {
@@ -28,9 +30,25 @@ export async function generateMetadata({
     return { title: "Project not found" };
   }
 
+  const url = `${siteConfig.url}/work/${project.slug}`;
+
   return {
-    title: `${project.name} — LaunchRoom`,
+    title: `${project.name} — LaunchRoom Case Study`,
     description: project.summary,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${project.name} — LaunchRoom Case Study`,
+      description: project.summary,
+      url,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} — LaunchRoom Case Study`,
+      description: project.summary,
+    },
   };
 }
 

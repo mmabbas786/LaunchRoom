@@ -2,11 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Code2, Globe, Rocket, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "LaunchRoom Studio | Web & SaaS Engineering Services",
+  title: "Engineering & Web Development Services | LaunchRoom Studio",
   description:
     "LaunchRoom Studio builds custom high-performance websites, Next.js applications, and SaaS MVPs for startups and growing businesses.",
+  alternates: {
+    canonical: `${siteConfig.url}/services`,
+  },
+  openGraph: {
+    title: "Engineering & Web Development Services | LaunchRoom Studio",
+    description:
+      "LaunchRoom Studio builds custom high-performance websites, Next.js applications, and SaaS MVPs for startups and growing businesses.",
+    url: `${siteConfig.url}/services`,
+    type: "website",
+  },
 };
 
 const services = [

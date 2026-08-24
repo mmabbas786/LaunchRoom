@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     "HTML CSS glassmorphism website",
     "LaunchRoom web case study",
   ],
+  alternates: {
+    canonical: `${siteConfig.url}/work/new-india-stores`,
+  },
   openGraph: {
     title: "New India Stores — Case Study",
     description:

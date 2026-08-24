@@ -14,11 +14,28 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Tag } from "@/components/ui/Tag";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "PDF Vault SaaS Case Study",
+  title: "PDF Vault SaaS Case Study | LaunchRoom",
   description:
-    "Case study for PDF Vault, a web-based PDF utility platform built with Next.js.",
+    "Case study for PDF Vault, a lightweight, fast web-based 6-in-1 PDF utility platform engineered with Next.js.",
+  alternates: {
+    canonical: `${siteConfig.url}/work/pdf-vault`,
+  },
+  openGraph: {
+    title: "PDF Vault SaaS Case Study | LaunchRoom",
+    description:
+      "Case study for PDF Vault, a lightweight, fast web-based 6-in-1 PDF utility platform engineered with Next.js.",
+    url: `${siteConfig.url}/work/pdf-vault`,
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PDF Vault SaaS Case Study | LaunchRoom",
+    description:
+      "Case study for PDF Vault, a lightweight, fast web-based 6-in-1 PDF utility platform engineered with Next.js.",
+  },
 };
 
 const pdfVaultFeatures = [

@@ -39,6 +39,9 @@ export interface BlogArticle {
   toc?: Array<{ id: string; text: string }>;
   portableTextBody?: any;
   tags?: string[];
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: any;
   content: {
     introduction: string;
     sections: {

@@ -39,17 +39,19 @@ export async function generateMetadata({ params }: BlogArticlePageProps): Promis
 
   const url = `${siteConfig.url}/blog/${category}/${slug}`;
   const catLabel = article.categoryLabel || article.categoryName || article.category;
+  const metaTitle = article.seoTitle || `${article.title} | LaunchRoom Blog`;
+  const metaDescription = article.seoDescription || article.excerpt;
   const imageUrl = typeof article.featuredImage === "string" ? article.featuredImage : `${siteConfig.url}/launchroom-logo.png`;
 
   return {
-    title: `${article.title} | LaunchRoom Blog`,
-    description: article.excerpt,
+    title: metaTitle,
+    description: metaDescription,
     alternates: {
       canonical: url,
     },
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
+      title: metaTitle,
+      description: metaDescription,
       url,
       type: "article",
       publishedTime: article.publishedAt,
@@ -61,14 +63,14 @@ export async function generateMetadata({ params }: BlogArticlePageProps): Promis
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: article.title,
+          alt: article.imageAlt || article.title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: article.title,
-      description: article.excerpt,
+      title: metaTitle,
+      description: metaDescription,
       images: [imageUrl],
     },
   };

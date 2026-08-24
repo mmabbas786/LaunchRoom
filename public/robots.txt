@@ -1,6 +1,8 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /studio
+Disallow: /demos/*/preview
 
 # Host
 Host: https://launchroom.in

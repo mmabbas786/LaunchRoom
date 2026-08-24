@@ -21,8 +21,11 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
   }
 
   return {
-    title: `${demo.niche} Website Demo`,
+    title: `${demo.niche} Website Demo | LaunchRoom`,
     description: demo.description,
+    alternates: {
+      canonical: `${siteConfig.url}/demos/${demo.slug}`,
+    },
     openGraph: {
       title: `${demo.niche} Website Demo`,
       description: demo.description,
