@@ -1,108 +1,154 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, Code2, Globe, MapPin, ShieldCheck, Sparkles, Zap } from "lucide-react";
 
 import { TeamCard } from "@/components/about/TeamCard";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/site";
-import Link from "next/link";
-import { ArrowRight, Newspaper, Code2 } from "lucide-react";
+import { generateBreadcrumbSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
-  title: "About LaunchRoom | AI, Tech & Startup Intelligence",
+  title: "About LaunchRoom | Website Development Studio in Kolkata, India",
   description:
-    "LaunchRoom is an independent media & technology intelligence publication delivering analysis on AI, software, cloud, and startups.",
+    "LaunchRoom is a website development studio based in Kolkata, West Bengal. We build high-converting business websites, booking platforms, and custom web applications for clients across India.",
   alternates: {
     canonical: `${siteConfig.url}/about`,
   },
   openGraph: {
-    title: "About LaunchRoom Intelligence",
+    title: "About LaunchRoom | Website Development Studio",
     description:
-      "Independent coverage of artificial intelligence, software engineering, cloud computing, cybersecurity, and startups.",
+      "Learn about LaunchRoom's mission, team, and approach to building fast, high-converting websites for businesses across India.",
     url: `${siteConfig.url}/about`,
     type: "website",
   },
 };
 
+const studioPrinciples = [
+  {
+    title: "No Developer Jargon",
+    desc: "You do not need to understand Next.js, API schemas, or server infrastructure. We communicate in plain business terms and guide you to the simplest, most effective website to launch.",
+    icon: Sparkles,
+  },
+  {
+    title: "Sub-Second Performance",
+    desc: "We write clean, lightweight code instead of bloated WordPress templates. Every website is built mobile-first and optimized for maximum speed and Core Web Vitals compliance.",
+    icon: Zap,
+  },
+  {
+    title: "End-to-End Delivery",
+    desc: "From initial page architecture and Figma design to custom domain DNS connection, SSL certificates, and Google Search Console indexing, we handle the entire launch pipeline.",
+    icon: Globe,
+  },
+  {
+    title: "100% Code & Asset Ownership",
+    desc: "Zero vendor lock-in. You receive complete intellectual property ownership, clean source code repositories, and full administrative access upon final delivery.",
+    icon: ShieldCheck,
+  },
+];
+
 export default function AboutPage() {
+  const breadcrumbs = generateBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "About", url: `${siteConfig.url}/about` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+
       <section className="page-shell section-shell">
         <AnimatedSection>
           <div className="panel-dark p-8 sm:p-10 lg:p-12 space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-accent-border bg-accent-dim px-4 py-1.5 text-[12px] font-mono uppercase text-accent">
-              <Newspaper className="h-3.5 w-3.5" />
-              <span>Independent Intelligence</span>
+              <MapPin className="h-3.5 w-3.5" />
+              <span>Based in Kolkata • Serving India &amp; Global Clients</span>
             </div>
 
             <h1 className="page-hero-title font-display font-extrabold text-on-dark max-w-4xl">
-              Independent coverage of the platforms, startups, and intelligence shaping the future of technology.
+              Website development services built around real business outcomes.
             </h1>
 
             <p className="max-w-3xl text-[18px] leading-[1.8] text-on-dark-muted">
-              LaunchRoom was founded to provide tech executives, software engineers, founders, and security professionals with concise, highly analytical dispatches. We cut through press release fluff to report on core architectural shifts, funding dynamics, and deep technical breakthroughs.
+              LaunchRoom is a website development studio founded in Kolkata, West Bengal. We build fast,
+              credible, and high-converting websites for businesses, creators, and startups across India—without
+              agency overhead, bloated templates, or technical friction.
             </p>
+
+            <div className="pt-2 flex flex-wrap gap-4">
+              <Button href="/start">
+                Start a Project Brief <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button href="/work" variant="outline">
+                View Our Client Work
+              </Button>
+            </div>
           </div>
         </AnimatedSection>
 
-        <div className="grid gap-6 md:grid-cols-2 mt-8">
-          <AnimatedSection delay={0.05}>
-            <article className="panel p-8 space-y-4 h-full">
-              <p className="card-label">Publication Mission</p>
-              <h2 className="text-[22px] font-bold text-text-primary">Analytical & Newsroom Precision</h2>
-              <p className="text-[15px] leading-[1.75] text-text-secondary">
-                We believe tech journalism should be written by engineers and analysts who understand modern codebases, cloud infrastructure, and venture fundamentals. Our editorial standard prioritizes accuracy, architectural context, and executive relevance.
-              </p>
-            </article>
+        {/* Principles Grid */}
+        <div className="mt-12">
+          <AnimatedSection className="text-center max-w-3xl mx-auto">
+            <p className="eyebrow mx-auto">Our Philosophy</p>
+            <h2 className="section-title mx-auto mt-3">
+              How we build websites differently
+            </h2>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.1}>
-            <article className="panel-accent p-8 space-y-4 flex flex-col justify-between h-full">
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-[12px] font-mono uppercase text-accent font-bold">
-                  <Code2 className="h-4 w-4" />
-                  <span>Secondary Business</span>
-                </div>
-                <h2 className="text-[22px] font-bold text-text-primary">LaunchRoom Studio</h2>
-                <p className="text-[15px] leading-[1.75] text-text-secondary">
-                  Alongside our news publication, LaunchRoom Studio provides custom web application, SaaS MVP, and Next.js engineering for select startups and enterprise teams worldwide.
-                </p>
-              </div>
-
-              <Link
-                href="/services/website-development"
-                className="inline-flex items-center gap-2 text-[14px] font-medium text-accent hover:underline pt-4"
-              >
-                <span>Explore LaunchRoom Studio Services</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-          </AnimatedSection>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-8">
+            {studioPrinciples.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <AnimatedSection key={item.title} delay={idx * 0.04}>
+                  <article className="panel p-6 sm:p-7 space-y-3 h-full flex flex-col justify-between">
+                    <div>
+                      <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-dim border border-accent-border text-accent">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="text-lg font-bold text-text-primary mt-4">{item.title}</h3>
+                      <p className="text-[14px] leading-[1.7] text-text-secondary mt-2">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </article>
+                </AnimatedSection>
+              );
+            })}
+          </div>
         </div>
       </section>
 
+      {/* Leadership & Founding Team */}
       <div className="page-shell">
         <section className="section-shell-tight">
           <AnimatedSection>
-            <p className="eyebrow">Editorial Team</p>
-            <h2 className="section-title">Founding Team & Leadership</h2>
+            <p className="eyebrow">Leadership</p>
+            <h2 className="section-title">Founding Team &amp; Studio Leads</h2>
+            <p className="mt-3 text-[16px] text-text-secondary max-w-2xl">
+              LaunchRoom is operated by engineers and designers who work directly with clients to ship clean, reliable websites.
+            </p>
           </AnimatedSection>
 
           <AnimatedSection className="page-card-grid mt-8 md:grid-cols-2" delay={0.05}>
             <TeamCard
               name="Mirza Mehedi Abbas"
-              role="Founder & Editor-in-Chief"
+              role="Founder &amp; Engineering Lead"
               bio={
                 <>
                   <p>
-                    Mirza leads editorial direction and technical analysis at LaunchRoom. With deep roots in software engineering, Next.js architecture, and AI models, he writes analytical briefings on AI breakthroughs, developer tooling, and cloud infrastructure.
+                    Mirza leads technical architecture, frontend engineering, and client delivery at LaunchRoom. Based in Kolkata, he oversees website design, Next.js development, cloud infrastructure deployment, and conversion optimization for clients across India.
                   </p>
                 </>
               }
               skills={[
-                "AI Models",
-                "Next.js Architecture",
-                "TypeScript",
-                "Cloud Systems",
-                "Technical Editorials",
+                "Website Architecture",
+                "Frontend UX Design",
+                "Next.js & TypeScript",
+                "Cloud Deployment & DNS",
+                "SEO & Conversion Strategy",
               ]}
               avatarLabel="M"
               avatarClassName="bg-[linear-gradient(135deg,#f4c86d_0%,#e8a020_48%,#8f5d10_100%)] text-[#080808]"
@@ -126,18 +172,19 @@ export default function AboutPage() {
             />
             <TeamCard
               name="Arsh"
-              role="Co-founder & Operations Director"
+              role="Co-founder &amp; Operations Director"
               bio={
                 <>
                   <p>
-                    Arsh oversees publication operations, brand partnerships, content syndication, and client engagement for LaunchRoom Studio.
+                    Arsh oversees client onboarding, project roadmaps, communication schedules, and delivery milestones, ensuring projects launch on time and on budget.
                   </p>
                 </>
               }
               skills={[
-                "Editorial Operations",
-                "Media Strategy",
-                "Studio Partnerships",
+                "Studio Operations",
+                "Client Onboarding",
+                "Project Roadmapping",
+                "Quality Assurance",
               ]}
               avatarLabel="A"
               avatarClassName="bg-[linear-gradient(135deg,#f0bd57_0%,#b07811_100%)] text-[#080808]"

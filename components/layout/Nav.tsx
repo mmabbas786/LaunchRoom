@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Menu, X, ExternalLink } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -85,16 +85,6 @@ export function Nav() {
                     </li>
                   );
                 })}
-                <li>
-                  <a
-                    href={siteConfig.externalToolsLink.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-accent/20 bg-accent-dim text-[13px] font-medium text-accent hover:border-accent/40 hover:text-text-primary transition-all"
-                  >
-                    <span>{siteConfig.externalToolsLink.label}</span>
-                  </a>
-                </li>
               </ul>
 
               <Button href="/start" className="min-h-[44px] px-5 text-[14px]">
@@ -190,16 +180,6 @@ export function Nav() {
                     </Link>
                   );
                 })}
-
-                <a
-                  href={siteConfig.externalToolsLink.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 flex items-center justify-between rounded-[16px] border border-accent-border bg-accent-dim px-4 py-3 text-base font-medium text-accent hover:text-text-primary"
-                >
-                  <span>{siteConfig.externalToolsLink.label}</span>
-                  <ExternalLink className="h-4 w-4" />
-                </a>
               </div>
 
               <Button href="/start" className="mt-6 w-full justify-center">

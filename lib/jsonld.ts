@@ -1,67 +1,43 @@
 import { siteConfig } from "./site";
 
-export interface ArticleSchemaProps {
-  title: string;
-  description: string;
-  url: string;
-  publishedAt: string;
-  updatedAt?: string;
-  authorName: string;
-  category: string;
-  imageUrl?: string;
-}
-
 export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "NewsMediaOrganization",
+    "@type": "ProfessionalService",
     name: "LaunchRoom",
-    alternateName: "LaunchRoom Tech Intelligence",
+    alternateName: "LaunchRoom Studio",
     url: siteConfig.url,
     logo: `${siteConfig.url}/launchroom-logo.png`,
     sameAs: [
       "https://x.com/mmabbasofficial",
       "https://www.linkedin.com/in/mirzamehediabbas/",
       "https://github.com/mmabbas786",
-      "https://toolztotal.com",
+    ],
+    telephone: siteConfig.phone,
+    email: siteConfig.email,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Kolkata",
+      addressRegion: "West Bengal",
+      addressCountry: "IN",
+    },
+    areaServed: [
+      {
+        "@type": "Country",
+        name: "India",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "West Bengal",
+      },
     ],
     contactPoint: {
       "@type": "ContactPoint",
+      telephone: siteConfig.phone,
       email: siteConfig.email,
-      contactType: "editorial",
+      contactType: "customer service",
     },
     description: siteConfig.description,
-  };
-}
-
-export function generateNewsArticleSchema(props: ArticleSchemaProps) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": props.url,
-    },
-    headline: props.title,
-    description: props.description,
-    image: props.imageUrl || `${siteConfig.url}/launchroom-logo.png`,
-    datePublished: props.publishedAt,
-    dateModified: props.updatedAt || props.publishedAt,
-    articleSection: props.category,
-    author: {
-      "@type": "Person",
-      name: props.authorName,
-      url: `${siteConfig.url}/about`,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "LaunchRoom",
-      url: siteConfig.url,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteConfig.url}/launchroom-logo.png`,
-      },
-    },
   };
 }
 

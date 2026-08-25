@@ -12,8 +12,6 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@next/third-parties": "^16.3.0",
-    "@portabletext/react": "^8.0.0",
-    "@sanity/image-url": "^2.1.1",
     "@types/react-dom": "^19.2.3",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
@@ -21,14 +19,11 @@
     "framer-motion": "^11.3.8",
     "lucide-react": "^0.400.0",
     "next": "16.2.2",
-    "next-sanity": "^13.3.2",
     "next-sitemap": "^4.2.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.53.0",
     "resend": "^3.5.0",
-    "sanity": "^6.9.2",
-    "styled-components": "^6.5.2",
     "swr": "^2.5.1",
     "tailwind-merge": "^2.5.2",
     "zod": "^3.23.8"

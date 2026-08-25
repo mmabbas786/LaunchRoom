@@ -15,23 +15,56 @@ import {
 } from "@/lib/whatsapp";
 import type { StartInput } from "@/lib/validation";
 import { startBudgetOptionsByCurrency, startSchema } from "@/lib/validation";
+import { trackIntakeStepCompleted, trackIntakeCompleted, trackWhatsAppClick } from "@/lib/analytics";
 
 const projectTypeOptions = [
   {
-    value: "Website",
-    description: "Landing page, business site, brochure website",
+    value: "Business website",
+    description: "Company site, corporate presence, local business, brand showcase",
   },
   {
-    value: "Web Application / SaaS",
-    description: "Custom web app, client portal, administrative dashboard",
+    value: "Portfolio website",
+    description: "Creative portfolio, agency showcase, executive or personal site",
+  },
+  {
+    value: "Booking website",
+    description: "Appointments, reservations, consultation bookings & schedules",
+  },
+  {
+    value: "E-commerce website",
+    description: "Online store, product catalogue, cart & payment gateway checkout",
+  },
+  {
+    value: "Landing page",
+    description: "High-converting single page for a product, campaign, or lead funnel",
+  },
+  {
+    value: "Custom website",
+    description: "Tailored web tools, quotation calculators, client portals, custom workflows",
+  },
+  {
+    value: "Web application",
+    description: "Client portal, interactive tools, authenticated user platform",
+  },
+  {
+    value: "SaaS",
+    description: "Software product with subscription tiers, billing, and accounts",
   },
   {
     value: "Startup MVP",
-    description: "Rapid 2-4 week product build for early-stage founders",
+    description: "Rapid 2-4 week product sprint to test your core value proposition",
+  },
+  {
+    value: "Website maintenance",
+    description: "Monthly retainers, security monitoring, updates, and speed audits",
+  },
+  {
+    value: "Hosting/deployment",
+    description: "Domain DNS setup, SSL certificates, cloud hosting & CI/CD",
   },
   {
     value: "Not sure yet",
-    description: "You need help deciding the best version to build first",
+    description: "You have an idea and want our advice on the simplest version to build",
   },
 ] as const;
 
@@ -45,20 +78,20 @@ const timelineOptions = [
 function getSteps(currency: SupportedCurrency) {
   return [
     {
-      title: "What do you need built?",
-      description: "Choose the best fit for the project you have in mind.",
+      title: "What are you trying to build?",
+      description: "Choose the best description. You do not need to know any technical details.",
       field: "projectType" as const,
       options: projectTypeOptions,
     },
     {
-      title: "What's your budget?",
-      description: "This helps us scope the right version first.",
+      title: "What is your target budget range?",
+      description: "This helps us recommend the most effective scope for your first version.",
       field: "budget" as const,
       options: startBudgetOptionsByCurrency[currency],
     },
     {
-      title: "When do you need it?",
-      description: "Timeline helps us plan availability and delivery approach.",
+      title: "When would you like to launch?",
+      description: "Timeline helps us plan engineering bandwidth and delivery approach.",
       field: "timeline" as const,
       options: timelineOptions,
     },
@@ -68,6 +101,7 @@ function getSteps(currency: SupportedCurrency) {
 const detailFields: Array<keyof StartInput> = [
   "projectName",
   "brief",
+  "hasExistingWebsite",
   "brandAssets",
   "referenceUrl",
 ];
@@ -79,7 +113,7 @@ type DemoPrefill = {
 } | null;
 
 function buildPrefilledBrief(prefillDemo: Exclude<DemoPrefill, null>) {
-  return `I'm interested in a website with the same level of polish, clarity, and conversion flow as the ${prefillDemo.niche.toLowerCase()} demo. Please tailor that direction for my business and suggest the strongest first version to launch.`;
+  return `I am interested in a website with the same level of polish, clarity, and conversion flow as the ${prefillDemo.niche.toLowerCase()} demo. Please tailor that direction for my business and suggest the strongest first version to launch.`;
 }
 
 function getDefaultValues(
@@ -87,7 +121,8 @@ function getDefaultValues(
   prefillDemo: DemoPrefill = null,
 ): StartInput {
   return {
-    projectType: "Website",
+    projectType: prefillDemo ? "Business website" : "Business website",
+    hasExistingWebsite: "No",
     budget: startBudgetOptionsByCurrency[currency][1]?.value ?? "Let's discuss",
     timeline: "1 month",
     projectName: prefillDemo ? `${prefillDemo.niche} website` : "",
@@ -161,13 +196,19 @@ export function IntakeForm({
   const nextStep = async () => {
     if (step <= 3) {
       const valid = await trigger([steps[step - 1].field]);
-      if (valid) setStep((value) => value + 1);
+      if (valid) {
+        trackIntakeStepCompleted(step, steps[step - 1].field);
+        setStep((value) => value + 1);
+      }
       return;
     }
 
     if (step === 4) {
       const valid = await trigger(detailFields);
-      if (valid) setStep(5);
+      if (valid) {
+        trackIntakeStepCompleted(4, "projectDetails");
+        setStep(5);
+      }
     }
   };
 
@@ -176,6 +217,9 @@ export function IntakeForm({
   const onWhatsApp = handleSubmit((values) => {
     const href = getWhatsAppHref(buildStartWhatsAppMessage(values));
     setWhatsappHref(href);
+
+    trackIntakeCompleted(values.projectType, currency);
+    trackWhatsAppClick("start_intake_submit");
 
     window.open(href, "_blank", "noopener,noreferrer");
     setStatus("whatsapp");

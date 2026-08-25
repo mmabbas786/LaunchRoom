@@ -4,16 +4,24 @@ import { HomePageContent } from "@/components/home/HomePageContent";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "LaunchRoom | Website & Web Application Development Studio",
+  title: "LaunchRoom | Website Development Services | Custom Websites India",
   description:
-    "LaunchRoom builds modern, high-converting websites, SaaS web applications, and digital platforms for startups, alongside publishing tech and engineering insights.",
+    "LaunchRoom is a website development studio based in Kolkata, building high-converting business websites, booking platforms, and custom web solutions for clients across India.",
+  keywords: [
+    "website development services",
+    "website development company",
+    "website design Kolkata",
+    "website development India",
+    "custom website development",
+    "business website builder",
+  ],
   alternates: {
     canonical: siteConfig.url,
   },
   openGraph: {
-    title: "LaunchRoom | Website & Web Application Development Studio",
+    title: "LaunchRoom | Website Development Services | Custom Websites India",
     description:
-      "LaunchRoom builds modern, high-converting websites, SaaS web applications, and digital platforms for startups, alongside publishing tech and engineering insights.",
+      "Custom website development for businesses, professionals, and startups. Based in Kolkata, serving clients across India.",
     url: siteConfig.url,
     siteName: "LaunchRoom",
     type: "website",
@@ -22,15 +30,15 @@ export const metadata: Metadata = {
         url: `${siteConfig.url}/launchroom-logo.png`,
         width: 1200,
         height: 630,
-        alt: "LaunchRoom Studio",
+        alt: "LaunchRoom — Website Development Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LaunchRoom | Website & Web Application Development Studio",
+    title: "LaunchRoom | Website Development Services",
     description:
-      "LaunchRoom builds modern, high-converting websites, SaaS web applications, and digital platforms for startups.",
+      "Custom website development for businesses, professionals, and startups across India.",
     images: [`${siteConfig.url}/launchroom-logo.png`],
   },
 };
@@ -46,10 +54,22 @@ const jsonLdProfessionalService = {
   priceRange: "₹14999 - ₹150000",
   address: {
     "@type": "PostalAddress",
+    addressLocality: "Kolkata",
+    addressRegion: "West Bengal",
     addressCountry: "IN",
   },
+  areaServed: [
+    {
+      "@type": "Country",
+      name: "India",
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "West Bengal",
+    },
+  ],
   description:
-    "Website and web application development studio building custom business websites, Next.js applications, and SaaS platforms.",
+    "Website development studio based in Kolkata, West Bengal, building custom business websites, booking platforms, e-commerce stores, and web applications across India.",
 };
 
 export default function HomePage() {

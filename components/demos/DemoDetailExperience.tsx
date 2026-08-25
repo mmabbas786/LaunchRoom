@@ -11,19 +11,7 @@ import { Tag } from "@/components/ui/Tag";
 import type { Demo } from "@/lib/demos";
 import { hexToRgba } from "@/lib/demos";
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
-function emitDemoEvent(eventName: string, payload: Record<string, string>) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  window.gtag?.("event", eventName, payload);
-}
+import { trackDemoView, trackDemoStartProject } from "@/lib/analytics";
 
 export function DemoDetailExperience({ demo }: { demo: Demo }) {
   const startHref = `/start?niche=${demo.slug}&ref=demo`;
@@ -31,17 +19,12 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
   const usesExternalPreview = Boolean(demo.externalUrl);
 
   useEffect(() => {
-    emitDemoEvent("demo_view", {
-      niche: demo.slug,
-      business_name: demo.businessName,
-    });
-  }, [demo.businessName, demo.slug]);
+    trackDemoView(demo.slug, demo.industry);
+  }, [demo.industry, demo.slug]);
 
-  const trackCta = (source: string) =>
-    emitDemoEvent("demo_cta_click", {
-      niche: demo.slug,
-      source,
-    });
+  const trackCta = (placement: string) => {
+    trackDemoStartProject(demo.slug);
+  };
 
   return (
     <div className="pb-24 xl:pb-0">
@@ -72,7 +55,7 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
           <AnimatedSection className="grid gap-6 xl:sticky xl:top-[94px] xl:self-start">
             <div className="panel-dark p-7 sm:p-8 lg:p-9">
               <Badge variant="success" className="border-gold/20 bg-gold/10 text-gold">
-                Niche Demo Library
+                Demo Concept · Sample Build
               </Badge>
               <h1 className="page-hero-title mt-5 max-w-[11ch] text-on-dark">
                 {demo.niche} website demo
@@ -148,13 +131,27 @@ export function DemoDetailExperience({ demo }: { demo: Demo }) {
               </AnimatedSection>
             </div>
 
-            <AnimatedSection className="panel p-7 sm:p-8" delay={0.1}>
-              <p className="card-label">Why this matters</p>
-              <p className="mt-4 text-[16px] leading-[1.84] text-text-secondary">
-                Instead of asking clients to imagine what LaunchRoom can build, this
-                system lets them click through a believable version of their niche,
-                then start a project with that exact context attached.
+            <AnimatedSection className="panel p-7 sm:p-8 space-y-4" delay={0.1}>
+              <p className="card-label">Next steps</p>
+              <p className="text-[15px] leading-[1.8] text-text-secondary">
+                Like this design concept for your business? We can customize this layout, branding, and workflow for your launch.
               </p>
+              <div className="flex flex-col gap-2.5 pt-2 border-t border-border">
+                <Link
+                  href="/services/website-development"
+                  className="text-xs font-mono text-accent hover:underline flex items-center justify-between"
+                >
+                  <span>Explore Website Development Service</span>
+                  <span>→</span>
+                </Link>
+                <Link
+                  href="/work"
+                  className="text-xs font-mono text-text-secondary hover:text-text-primary flex items-center justify-between"
+                >
+                  <span>View Live Client Case Studies</span>
+                  <span>→</span>
+                </Link>
+              </div>
             </AnimatedSection>
           </AnimatedSection>
 

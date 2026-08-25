@@ -6,11 +6,12 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/site";
 import { getWhatsAppHref } from "@/lib/whatsapp";
+import { generateBreadcrumbSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
-  title: "Next.js Development Agency & Experts | High Performance Web Studio | LaunchRoom",
+  title: "Next.js Development Agency & Technical Experts | LaunchRoom Studio",
   description:
-    "LaunchRoom is a specialized Next.js development agency. We build server-rendered, SEO-optimized React websites and enterprise web applications with Vercel App Router.",
+    "LaunchRoom specializes in Next.js App Router, React 19, and Vercel infrastructure engineering for high-performance websites and SaaS applications.",
   keywords: [
     "Next.js development agency",
     "Next.js developer India",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     canonical: `${siteConfig.url}/services/nextjs-development`,
   },
   openGraph: {
-    title: "Next.js Development Agency & Experts | LaunchRoom Studio",
+    title: "Next.js Development Agency & Technical Experts | LaunchRoom Studio",
     description:
       "Expert Next.js App Router engineering, SSR/SSG architecture, and Vercel cloud deployment.",
     url: `${siteConfig.url}/services/nextjs-development`,
@@ -38,11 +39,11 @@ const jsonLdService = {
   provider: {
     "@type": "Organization",
     name: "LaunchRoom",
-    url: "https://launchroom.in",
+    url: siteConfig.url,
   },
   areaServed: "Worldwide",
   description:
-    "Next.js development, React App Router migration, performance optimization, and Vercel infrastructure setup.",
+    "Next.js development, React App Router migration, performance optimization, and Vercel infrastructure setup by LaunchRoom Studio.",
 };
 
 const advantages = [
@@ -53,18 +54,18 @@ const advantages = [
   },
   {
     icon: Server,
-    title: "App Router & SSR / SSG",
-    description: "Hybrid rendering models that combine static speed with real-time server rendering flexibility.",
+    title: "App Router & Hybrid Rendering",
+    description: "Server-side rendering (SSR), static generation (SSG), and partial pre-rendering tailored for speed and SEO.",
   },
   {
     icon: Globe,
-    title: "Instant Global CDN Edge",
-    description: "Deploys automatically to Vercel's global edge network for fast response worldwide.",
+    title: "Instant Global Edge CDN",
+    description: "Deploys automatically to Vercel's global edge network for sub-second response times worldwide.",
   },
   {
     icon: ShieldCheck,
-    title: "Clean Modern TypeScript",
-    description: "Strict TypeScript typing preventing runtime errors and ensuring maintainability.",
+    title: "Strict TypeScript Safety",
+    description: "Strict TypeScript typing preventing runtime errors and ensuring maintainability as codebases scale.",
   },
 ];
 
@@ -73,11 +74,21 @@ export default function NextJsDevelopmentPage() {
     "Hello LaunchRoom, I want to discuss Next.js Development for my project.",
   );
 
+  const breadcrumbs = generateBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Services", url: `${siteConfig.url}/services` },
+    { name: "Next.js Development", url: `${siteConfig.url}/services/nextjs-development` },
+  ]);
+
   return (
     <div className="page-shell">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
 
       {/* Breadcrumb Navigation */}
@@ -92,18 +103,18 @@ export default function NextJsDevelopmentPage() {
       <section className="section-shell">
         <AnimatedSection className="panel-dark p-8 sm:p-12 lg:p-16">
           <div className="max-w-3xl">
-            <span className="eyebrow eyebrow-invert">Next.js Development Studio</span>
+            <span className="eyebrow eyebrow-invert">Technical Capability</span>
             <h1 className="page-hero-title mt-6 text-on-dark">
-              Custom Next.js engineering built for ultimate speed &amp; top SEO ranks.
+              Next.js engineering built for ultimate speed, SEO, and developer agility.
             </h1>
             <p className="mt-6 text-[19px] leading-[1.8] text-on-dark-muted">
-              We leverage the full power of Next.js App Router, React 19, Server Components, and Tailwind CSS
-              to build digital experiences that load instantly and scale effortlessly.
+              We leverage the full capabilities of Next.js App Router, React 19, Server Components, and Tailwind CSS
+              to power high-converting business websites and scalable SaaS applications.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Button href="/start">
-                Hire Next.js Team <ArrowRight className="ml-2 h-4 w-4" />
+                Start Next.js Project <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button href={whatsappUrl} variant="outline">
                 Discuss on WhatsApp
@@ -114,9 +125,12 @@ export default function NextJsDevelopmentPage() {
       </section>
 
       <section className="pb-20">
-        <AnimatedSection className="text-center">
+        <AnimatedSection className="text-center max-w-3xl mx-auto">
           <p className="eyebrow">Technical Mastery</p>
-          <h2 className="section-title mt-4">Why Next.js is our framework of choice</h2>
+          <h2 className="section-title mt-4">Why Next.js powers our client projects</h2>
+          <p className="mt-4 text-[17px] leading-[1.75] text-text-secondary">
+            Next.js provides the ideal balance between search engine visibility, fast load times, and dynamic software capabilities.
+          </p>
         </AnimatedSection>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -141,12 +155,12 @@ export default function NextJsDevelopmentPage() {
         <AnimatedSection className="panel-accent p-8 sm:p-12">
           <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
             <div>
-              <p className="card-label text-text-primary">Next.js Services</p>
+              <p className="card-label text-text-primary">Next.js Capabilities</p>
               <h2 className="mt-3 text-[clamp(28px,3.5vw,42px)] font-extrabold leading-[1.1]">
-                Greenfield Next.js builds &amp; legacy React upgrades.
+                Greenfield Next.js builds &amp; legacy upgrades.
               </h2>
               <p className="mt-4 text-[17px] leading-[1.75] text-text-secondary">
-                Whether starting fresh or migrating an existing CRA / WordPress site to Next.js, we ensure zero downtime and improved SEO ranks.
+                Whether starting fresh or migrating an existing React / WordPress site to Next.js, we ensure zero downtime, sub-second load times, and improved search engine indexation.
               </p>
 
               <ul className="mt-6 space-y-3">
@@ -164,23 +178,26 @@ export default function NextJsDevelopmentPage() {
                 ))}
               </ul>
 
-              <div className="mt-8">
-                <Button href="/work">See Shipped Projects</Button>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Button href="/services/website-development">Website Development</Button>
+                <Button href="/services/web-app-development" variant="outline">
+                  Web App Engineering
+                </Button>
               </div>
             </div>
 
             <div className="rounded-[24px] border border-border bg-surface-1 p-6 sm:p-8">
               <h3 className="text-xl font-bold text-text-primary">Our Next.js Stack</h3>
               <div className="mt-5 space-y-4">
-                <div className="rounded-[16px] border border-border p-4">
+                <div className="rounded-[16px] border border-border p-4 bg-surface-2">
                   <p className="font-semibold text-text-primary">Frontend Logic</p>
                   <p className="mt-1 text-sm text-text-secondary">Next.js 16+, React 19, TypeScript, Framer Motion</p>
                 </div>
-                <div className="rounded-[16px] border border-border p-4">
+                <div className="rounded-[16px] border border-border p-4 bg-surface-2">
                   <p className="font-semibold text-text-primary">Styling &amp; UX</p>
                   <p className="mt-1 text-sm text-text-secondary">Tailwind CSS, Lucide Icons, Custom Design Tokens</p>
                 </div>
-                <div className="rounded-[16px] border border-border p-4">
+                <div className="rounded-[16px] border border-border p-4 bg-surface-2">
                   <p className="font-semibold text-text-primary">Analytics &amp; Cloud</p>
                   <p className="mt-1 text-sm text-text-secondary">Google Analytics GA4, Vercel Speed Insights, Resend API</p>
                 </div>

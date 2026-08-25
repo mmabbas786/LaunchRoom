@@ -6,11 +6,28 @@ export const contactSchema = z.object({
   name: z.string().min(2, "Please enter your name."),
   email: z.string().email("Please enter a valid email address."),
   company: z.string().optional(),
-  subject: z.enum(["New website", "Web application", "Retainer", "Other"]),
+  subject: z.string().min(2, "Please choose a subject."),
   message: z.string().min(20, "Please share at least a little more detail."),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
+
+export const startProjectTypes = [
+  "Business website",
+  "Portfolio website",
+  "Booking website",
+  "E-commerce website",
+  "Landing page",
+  "Custom website",
+  "Web application",
+  "SaaS",
+  "Startup MVP",
+  "Website maintenance",
+  "Hosting/deployment",
+  "Not sure yet",
+] as const;
+
+export type StartProjectType = (typeof startProjectTypes)[number];
 
 export const startBudgetOptionsByCurrency: Record<
   SupportedCurrency,
@@ -35,7 +52,7 @@ export const startBudgetOptionsByCurrency: Record<
     },
     {
       value: "Let's discuss",
-      description: "You want to talk through options",
+      description: "You want to talk through options & scope",
     },
   ],
   USD: [
@@ -57,7 +74,7 @@ export const startBudgetOptionsByCurrency: Record<
     },
     {
       value: "Let's discuss",
-      description: "You want to talk through options",
+      description: "You want to talk through options & scope",
     },
   ],
 };
@@ -77,12 +94,8 @@ export const startBudgetValues = [
 export type StartBudget = (typeof startBudgetValues)[number];
 
 export const startSchema = z.object({
-  projectType: z.enum([
-    "Website",
-    "Web Application / SaaS",
-    "Startup MVP",
-    "Not sure yet",
-  ]),
+  projectType: z.enum(startProjectTypes),
+  hasExistingWebsite: z.enum(["Yes", "No", "Needs redesign"]).default("No"),
   budget: z.enum(startBudgetValues),
   timeline: z.enum([
     "ASAP (within 2 weeks)",
@@ -93,7 +106,7 @@ export const startSchema = z.object({
   projectName: z.string().min(2, "Please add a project name or working title."),
   brief: z
     .string()
-    .min(50, "Please share at least 50 characters so we can scope this properly."),
+    .min(30, "Please share at least 30 characters so we can understand what you want to build."),
   brandAssets: z.enum(["Yes", "No", "Partial"]),
   referenceUrl: z
     .string()
@@ -108,12 +121,15 @@ export const startSchema = z.object({
     "United Kingdom",
     "Germany",
     "Canada",
+    "United States",
+    "Australia",
     "Other",
   ]),
   referralSource: z.enum([
     "Google",
     "Referral",
     "Demo library",
+    "Insights article",
     "Social media",
     "Upwork",
     "Fiverr",

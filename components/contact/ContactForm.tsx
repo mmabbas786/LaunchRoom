@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/Button";
 import type { ContactInput } from "@/lib/validation";
 import { contactSchema } from "@/lib/validation";
+import { trackEvent } from "@/lib/analytics";
 
 type SubmitState = "idle" | "success" | "error";
 
@@ -52,6 +53,7 @@ export function ContactForm() {
         throw new Error(result.error || "Request failed");
       }
 
+      trackEvent("contact_submit", { subject: values.subject });
       setState("success");
       reset();
     } catch (error) {

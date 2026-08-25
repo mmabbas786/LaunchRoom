@@ -55,4 +55,33 @@ export const projects: Project[] = [
     liveUrl: "https://newindiastores.com/",
     liveLabel: "Visit live website",
   },
+  {
+    slug: "pdf-vault",
+    name: "PDF Vault",
+    category: "Web Applications",
+    desc: "A lightweight, fast 6-in-1 browser-based PDF utility platform engineered with Next.js and client-side processing.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Web App"],
+    thumbGradient: "linear-gradient(135deg,#1f1a10,#3d2f14)",
+    thumbEmoji: "📄",
+    client: "LaunchRoom Internal Utility",
+    timeline: "2 weeks",
+    role: "Product design & frontend engineering",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    overview:
+      "PDF Vault is a web-based productivity application that allows users to compress, merge, split, scan, sign, and convert PDF documents directly in their browser.",
+    problem:
+      "Most existing online PDF tools are bloated with ad scripts, upload size restrictions, and privacy concerns when handling sensitive documents.",
+    solution:
+      "We engineered a clean, dark-mode web application that processes files efficiently with zero server data retention and instant response times.",
+    results: [
+      "6 core utility modules in one unified interface",
+      "Sub-second client-side interaction speed",
+      "Zero server file storage for strict user privacy",
+      "100% responsive across mobile and desktop devices",
+    ],
+    summary:
+      "A high-speed 6-in-1 PDF processing web tool built with Next.js.",
+    liveUrl: null,
+    liveLabel: "View Case Study",
+  },
 ];

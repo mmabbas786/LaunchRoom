@@ -1,14 +1,13 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
-import { getBlogArticles, getBlogCategories } from "@/lib/sanity/service";
 import { demos } from "@/lib/demos";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
-  const staticReleaseDate = new Date("2026-08-13T00:00:00.000Z");
+  const staticReleaseDate = new Date("2026-08-25T00:00:00.000Z");
 
-  // Canonical core commercial, studio, and company routes
-  const coreRoutes: MetadataRoute.Sitemap = [
+  // Canonical commercial studio routes
+  const coreCommercialRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: staticReleaseDate,
@@ -25,22 +24,82 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/services/website-development`,
       lastModified: staticReleaseDate,
       changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/services/business-website-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/booking-website-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/portfolio-website-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/landing-page-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/ecommerce-website-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/custom-web-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services/website-maintenance`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
       priority: 0.85,
     },
     {
       url: `${baseUrl}/services/web-app-development`,
       lastModified: staticReleaseDate,
       changeFrequency: "weekly",
-      priority: 0.85,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/services/saas-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/services/startup-mvp-development`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/services/hosting-deployment`,
+      lastModified: staticReleaseDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/services/nextjs-development`,
       lastModified: staticReleaseDate,
       changeFrequency: "weekly",
-      priority: 0.85,
+      priority: 0.75,
     },
     {
-      url: `${baseUrl}/services/startup-mvp-development`,
+      url: `${baseUrl}/demos`,
       lastModified: staticReleaseDate,
       changeFrequency: "weekly",
       priority: 0.85,
@@ -64,13 +123,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.75,
     },
     {
-      url: `${baseUrl}/pricing`,
+      url: `${baseUrl}/start`,
       lastModified: staticReleaseDate,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.85,
     },
     {
-      url: `${baseUrl}/demos`,
+      url: `${baseUrl}/pricing`,
       lastModified: staticReleaseDate,
       changeFrequency: "weekly",
       priority: 0.8,
@@ -105,49 +164,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.4,
     },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: staticReleaseDate,
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
   ];
 
-  // Canonical demo niche landing pages (EXCLUDES raw noindex /preview iframe routes)
+  // Canonical demo niche landing pages
   const demoRoutes: MetadataRoute.Sitemap = demos.map((demo) => ({
     url: `${baseUrl}/demos/${demo.slug}`,
-    lastModified: staticReleaseDate,
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
-
-  // Categories dynamically fetched from Sanity / data layer
-  const categories = await getBlogCategories();
-  const blogCategoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${baseUrl}/blog/${cat.slug}`,
     lastModified: staticReleaseDate,
     changeFrequency: "weekly",
     priority: 0.75,
   }));
 
-  // Articles dynamically fetched from Sanity / data layer with genuine document timestamps
-  const articles = await getBlogArticles();
-  const blogArticleRoutes: MetadataRoute.Sitemap = articles.map((art) => {
-    const rawDate = art.updatedAt || art.publishedAt;
-    const lastMod = rawDate ? new Date(rawDate) : staticReleaseDate;
-
-    return {
-      url: `${baseUrl}/blog/${art.category}/${art.slug}`,
-      lastModified: isNaN(lastMod.getTime()) ? staticReleaseDate : lastMod,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    };
-  });
-
-  return [
-    ...coreRoutes,
-    ...demoRoutes,
-    ...blogCategoryRoutes,
-    ...blogArticleRoutes,
-  ];
+  return [...coreCommercialRoutes, ...demoRoutes];
 }

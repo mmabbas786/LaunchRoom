@@ -1,10 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles, Wand2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Wand2 } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
-import { services } from "@/data/services";
 import { demos } from "@/lib/demos";
 import { siteConfig } from "@/lib/site";
 
@@ -17,13 +16,11 @@ const item = {
   }),
 };
 
-const websiteService = services.find((service) => service.id === "web");
-
 const stats = [
-  { value: "2", label: "Founders" },
-  { value: `${demos.length}`, label: "Niche Demos Built" },
-  { value: websiteService?.timeline ?? "1-3 weeks", label: "Website Launch Range" },
-  { value: "<24h", label: "Weekday Reply Goal" },
+  { value: "1-2 Wks", label: "Typical Website Launch" },
+  { value: `${demos.length}`, label: "Live Niche Demos" },
+  { value: "100%", label: "Code & Asset Ownership" },
+  { value: "< 24h", label: "Direct Founder Response" },
 ];
 
 export function Hero() {
@@ -48,28 +45,28 @@ export function Hero() {
             variants={item}
             custom={0.1}
           >
-            {siteConfig.studioLabel}
+            Website Development Studio • Kolkata &amp; Pan-India
           </motion.p>
 
           <motion.h1
-            className="hero-title mx-auto mt-6 max-w-[15ch] text-text-primary"
+            className="hero-title mx-auto mt-6 max-w-[17ch] text-text-primary"
             initial="hidden"
             animate="show"
             variants={item}
             custom={0.18}
           >
-            Welcome to the Launch<span className="text-accent">Room</span>
+            Custom website development for <span className="text-accent">businesses, professionals &amp; startups.</span>
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-5 max-w-2xl text-[15px] leading-[1.85] text-text-secondary md:text-[16px]"
+            className="mx-auto mt-5 max-w-2xl text-[16px] leading-[1.85] text-text-secondary md:text-[17px]"
             initial="hidden"
             animate="show"
             variants={item}
             custom={0.26}
           >
-            Websites, Web Apps, SaaS Platforms, And Digital Products For Startups And Growing
-            Businesses. Modern, Fast, Clean, And Launch Ready.
+            Tell us what your business needs. LaunchRoom helps you plan, design, build, and launch
+            high-converting websites without requiring technical specifications or coding knowledge.
           </motion.p>
 
           <motion.div
@@ -79,9 +76,14 @@ export function Hero() {
             variants={item}
             custom={0.34}
           >
-            <Button href="/start">Start a Project</Button>
+            <Button href="/start">
+              Start a Project <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button href="/demos" variant="ghost">
+              Explore Demos
+            </Button>
             <Button href="/work" variant="ghost">
-              See Our Work
+              View Our Work
             </Button>
           </motion.div>
         </div>
@@ -96,42 +98,6 @@ export function Hero() {
           <div className="absolute left-1/2 top-10 h-48 w-48 -translate-x-1/2 rounded-full bg-[rgba(232,160,32,0.18)] blur-[90px]" />
 
           <div className="relative">
-            <div className="absolute left-0 top-14 hidden w-56 -translate-x-6 rounded-[20px] border border-border bg-[rgba(255,255,255,0.03)] p-4 backdrop-blur-sm xl:block">
-              <p className="card-label">Launch Checklist</p>
-              <div className="mt-4 space-y-3">
-                {["Positioning", "Conversion Flow", "Deployment"].map((label) => (
-                  <div
-                    key={label}
-                    className="flex items-center justify-between rounded-[16px] border border-border bg-surface-1 px-4 py-3 text-[13px] font-medium text-text-secondary"
-                  >
-                    <span>{label}</span>
-                    <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="absolute right-0 top-20 hidden w-60 translate-x-6 rounded-[20px] border border-border bg-[rgba(255,255,255,0.03)] p-4 backdrop-blur-sm xl:block">
-              <p className="card-label">Studio Signal</p>
-              <div className="mt-5 rounded-[18px] border border-border bg-surface-1 p-4">
-                <p className="text-[12px] font-medium uppercase tracking-[0.12em] text-text-muted">
-                  Conversion-Ready
-                </p>
-                <p className="mt-2 text-[30px] font-extrabold tracking-[-0.06em] text-accent">
-                  +32%
-                </p>
-                <div className="mt-4 grid grid-cols-6 items-end gap-2">
-                  {[22, 42, 36, 56, 48, 74].map((height) => (
-                    <div
-                      key={height}
-                      className="rounded-full bg-[linear-gradient(180deg,#f4c86d_0%,#e8a020_54%,#8f5d10_100%)]"
-                      style={{ height }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
             <div className="mx-auto max-w-3xl rounded-[28px] border border-accent-border bg-[linear-gradient(180deg,rgba(232,160,32,0.08),rgba(255,255,255,0)),#0f0f10] p-4 shadow-[0_26px_90px_rgba(0,0,0,0.5)] sm:p-6">
               <div className="rounded-[24px] border border-border bg-surface-1 p-4 sm:p-5">
                 <div className="flex items-center justify-between gap-4">
@@ -140,29 +106,36 @@ export function Hero() {
                     <span className="h-2.5 w-2.5 rounded-full bg-[#f0c15f]" />
                     <span className="h-2.5 w-2.5 rounded-full bg-[#7fdd91]" />
                   </div>
-                  <span className="preserve-case rounded-full border border-accent-border bg-accent-dim px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-accent">
-                    launchroom.in
+                  <span className="preserve-case rounded-full border border-accent-border bg-accent-dim px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-accent font-mono">
+                    LaunchRoom Website Studio
                   </span>
                 </div>
 
-                <div className="mt-6 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-                  <div className="rounded-[22px] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)),#121212] p-5">
-                    <p className="card-label">Premium Interface Systems</p>
-                    <h2 className="mt-3 text-[clamp(26px,3vw,36px)] leading-[1.05] text-text-primary">
-                      Modern Websites That Look Custom, Not Templated.
-                    </h2>
-                    <div className="mt-6 space-y-3">
+                <div className="mt-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+                  <div className="rounded-[22px] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)),#121212] p-5 flex flex-col justify-between">
+                    <div>
+                      <p className="card-label">Client-First Approach</p>
+                      <h2 className="mt-3 text-[clamp(24px,2.6vw,32px)] leading-[1.1] text-text-primary">
+                        Tell us what you need. We handle the rest.
+                      </h2>
+                      <p className="mt-3 text-[14px] leading-[1.7] text-text-secondary">
+                        Whether you need a business site, a booking calendar, an online store, or a portfolio, we guide you through the simplest version to build.
+                      </p>
+                    </div>
+
+                    <div className="mt-6 space-y-2.5">
                       {[
-                        "Position The Offer Clearly",
-                        "Design Confidence Into The Layout",
-                        "Ship Fast With Clean Development",
+                        "No technical specifications needed to start",
+                        "Custom UI design & mobile-first responsiveness",
+                        "End-to-end launch (Domain, DNS, SSL & Google)",
+                        "100% full source code & asset handover",
                       ].map((line) => (
                         <div
                           key={line}
-                          className="flex items-center justify-between rounded-[16px] border border-border bg-surface-2 px-4 py-3 text-[14px] font-medium text-text-secondary"
+                          className="flex items-center gap-2.5 rounded-[14px] border border-border bg-surface-2 px-3.5 py-2.5 text-[13px] font-medium text-text-secondary"
                         >
+                          <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
                           <span>{line}</span>
-                          <ArrowUpRight className="h-4 w-4 text-accent" />
                         </div>
                       ))}
                     </div>
@@ -170,28 +143,27 @@ export function Hero() {
 
                   <div className="grid gap-4">
                     <div className="rounded-[22px] border border-border bg-[linear-gradient(180deg,rgba(232,160,32,0.08),rgba(255,255,255,0)),#121212] p-5">
-                      <p className="card-label">Design Stack</p>
-                      <div className="mt-4 grid gap-3">
+                      <p className="card-label">What We Build</p>
+                      <div className="mt-3 space-y-2">
                         {[
-                          ["UI Systems", "Gold-Accented Dark Visuals"],
-                          ["Build Flow", "Next.js, Tailwind, Motion"],
-                          ["Support", "QA, Launch, And Post-Launch Updates"],
+                          ["Business Websites", "Credibility, service menus & lead capture"],
+                          ["Booking Websites", "Salons, clinics & automated appointments"],
+                          ["Portfolios & Stores", "Creators, architects & product checkouts"],
                         ].map(([title, desc]) => (
-                          <div key={title} className="rounded-[16px] border border-border bg-surface-2 px-4 py-3">
-                            <p className="text-[14px] font-medium text-text-primary">{title}</p>
-                            <p className="mt-1 text-[13px] leading-[1.65] text-text-secondary">
-                              {desc}
-                            </p>
+                          <div key={title} className="rounded-[14px] border border-border bg-surface-2 p-3">
+                            <p className="text-[13px] font-bold text-text-primary">{title}</p>
+                            <p className="text-[12px] text-text-secondary mt-0.5">{desc}</p>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="rounded-[22px] border border-border bg-surface-2 p-5">
-                      <p className="card-label">Response Window</p>
-                      <p className="mt-3 text-[28px] font-extrabold tracking-[-0.06em] text-text-primary">
-                        Within 24 Hours
-                      </p>
+                    <div className="rounded-[22px] border border-border bg-surface-2 p-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-mono uppercase text-text-muted">Kolkata Studio • India-wide</p>
+                        <p className="text-[15px] font-bold text-text-primary mt-0.5">Direct Founder Delivery</p>
+                      </div>
+                      <ShieldCheck className="h-6 w-6 text-accent shrink-0" />
                     </div>
                   </div>
                 </div>
@@ -201,7 +173,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="relative z-10 mt-8 grid gap-4 md:grid-cols-4"
+          className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4"
           initial="hidden"
           animate="show"
           variants={item}
@@ -209,7 +181,7 @@ export function Hero() {
         >
           {stats.map((stat) => (
             <div key={stat.label} className="panel-lime px-5 py-5 text-center">
-              <div className="font-display text-[34px] font-extrabold tracking-[-0.06em] text-accent">
+              <div className="font-display text-[30px] sm:text-[34px] font-extrabold tracking-[-0.06em] text-accent">
                 {stat.value}
               </div>
               <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.14em] text-text-muted">

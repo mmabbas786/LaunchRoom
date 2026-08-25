@@ -7,14 +7,14 @@ import { getWhatsAppHref, buildProjectInquiryWhatsAppMessage } from "@/lib/whats
 
 const whatsappOptions = [
   {
-    label: "Website",
+    label: "Business Website",
     description: "Website development inquiry",
-    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Website")),
+    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Business website")),
   },
   {
     label: "Web App / SaaS",
-    description: "Custom web app inquiry",
-    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Web Application / SaaS")),
+    description: "Custom web app & SaaS inquiry",
+    href: getWhatsAppHref(buildProjectInquiryWhatsAppMessage("Web application")),
   },
   {
     label: "Startup MVP",

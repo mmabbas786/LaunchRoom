@@ -1,4 +1,4 @@
-import type { StartInput } from "@/lib/validation";
+import type { StartProjectType } from "@/lib/validation";
 import {
   buildProjectInquiryWhatsAppMessage,
   getWhatsAppHref,
@@ -7,21 +7,21 @@ import {
 const inquiryOptions: Array<{
   label: string;
   description: string;
-  projectType: StartInput["projectType"];
+  projectType: StartProjectType;
 }> = [
   {
-    label: "Website",
+    label: "Business Website",
     description: "Open WhatsApp with a website development inquiry.",
-    projectType: "Website",
+    projectType: "Business website",
   },
   {
     label: "Web App / SaaS",
-    description: "Open WhatsApp with a custom web app inquiry.",
-    projectType: "Web Application / SaaS",
+    description: "Open WhatsApp with a custom web app or SaaS platform inquiry.",
+    projectType: "Web application",
   },
   {
     label: "Startup MVP",
-    description: "Open WhatsApp with a rapid MVP launch inquiry.",
+    description: "Open WhatsApp with a rapid 2-4 week MVP launch inquiry.",
     projectType: "Startup MVP",
   },
 ];

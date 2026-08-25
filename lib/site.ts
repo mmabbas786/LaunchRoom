@@ -1,25 +1,22 @@
 export const siteConfig = {
   name: "LaunchRoom",
-  tagline: "Web & SaaS Development Studio | Tech Insights",
+  tagline: "Custom Website Development Services for Businesses & Startups",
   description:
-    "LaunchRoom builds modern websites, SaaS web applications, and digital platforms for startups, while publishing engineering insights on AI, cloud, software, and cybersecurity.",
+    "LaunchRoom is a website development studio based in Kolkata, building high-converting business websites, custom web applications, booking systems, and digital solutions for clients across India.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://launchroom.in",
   email: "infolaunchroom@gmail.com",
   phone: "+91 9163030285",
-  location: "Global / India",
-  responseTime: "< 24 hours on weekdays",
-  studioLabel: "LaunchRoom Studio — Web & SaaS MVP Engineering",
+  location: "Kolkata, West Bengal, India / Nationwide",
+  responseTime: "Within 24 hours",
+  studioLabel: "LaunchRoom — Website Development Studio",
   navLinks: [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
-    { href: "/blog", label: "Blog" },
+    { href: "/demos", label: "Demos" },
+    { href: "/work", label: "Work" },
+    { href: "/pricing", label: "Pricing" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ],
-  externalToolsLink: {
-    label: "ToolzTotal ↗",
-    href: "https://toolztotal.com",
-  },
 };
-
 
